@@ -32,6 +32,8 @@ abstract class Parcel {
     }
     
     public abstract String parcelsize(String Size);
+    
+    public abstract String parcelprice(String Type, String Size, String Weight);
 
     public void setId(Integer id) {
         this.id = id;

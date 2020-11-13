@@ -638,8 +638,8 @@ public class ManagingStaff extends User{
         
         do { 
             System.out.println("Please select a delivery type:");
-            System.out.println("1) By Air");
-            System.out.println("2) By Land");            
+            System.out.println("1) International");
+            System.out.println("2) Domestic");            
             try {
                 choice = Integer.parseInt(keyboard.nextLine());
                 if (choice < 0 || choice > 2) {
@@ -708,11 +708,14 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
                                 pw.printf(bk.parcelsize("Small") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
+                                pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.println("International");
                                 } else if (bk.deliverytype.equals("2")){
                                     pw.println("Domestic");
                                 }
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
                         SParcel sp = new SParcel(Integer.parseInt(id),
@@ -733,12 +736,15 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
                                 pw.printf(bk.parcelsize("Large") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
+                                pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.println("International");
                                 } else if (bk.deliverytype.equals("2")){
                                     pw.println("Domestic");
                                 }
-                        }
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                        } 
                     }
                     
                     file.close();

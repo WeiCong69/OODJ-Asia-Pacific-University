@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //kadhar babi
+//kadhar anjing
 public class ManagingStaff extends User{
     public static Scanner x;
     ArrayList<String> order = new ArrayList<>();

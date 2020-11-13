@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,6 +79,56 @@ public static List getFileData(String fileName){
                 return tempArr;
 }
 
+public static List getFeedbackFileData(String fileName){
+            FileWriter file = null;
+            ArrayList<List<String>> tempArr = new ArrayList<List<String>>();            
+            try{
+            String temp;            
+            File myfile = new File(fileName);
+            Scanner sc = new Scanner(myfile);            
+            file = new FileWriter(fileName, true);
+            while (sc.hasNext()){
+                temp = sc.nextLine();
+                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                if (items.get(5).equals(Login.Username)){
+                tempArr.add(items);
+                }
+            }                              
+                   sc.close();
+                   file.close();
+                      return tempArr;
+                } catch (IOException ex) {
+                    System.out.println(ex.toString());
+         }
+
+                return tempArr;
+}
+
+public static List getNotReplyData(String fileName){
+            FileWriter file = null;
+            ArrayList<List<String>> tempArr = new ArrayList<List<String>>();            
+            try{
+            String temp;            
+            File myfile = new File(fileName);
+            Scanner sc = new Scanner(myfile);            
+            file = new FileWriter(fileName, true);
+            while (sc.hasNext()){
+                temp = sc.nextLine();
+                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                if (items.get(4).equals("Waiting Reply")){
+                tempArr.add(items);
+                }
+            }                              
+                   sc.close();
+                   file.close();
+                      return tempArr;
+                } catch (IOException ex) {
+                    System.out.println(ex.toString());
+         }
+
+                return tempArr;
+} 
+
 public static void getSelectionList(List<List<String>> a,int index){        
     int exit=a.size();
     for (int i = 0; i <a.size(); i++) {
@@ -112,6 +163,37 @@ public static int getMenuChoice(int value) {
         } while (choice < 0 || choice > value);
         return choice;
     }
+
+public static void getReplyList(List<List<String>> a,int index){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+        if (a.get(i).get(4).equals("Waiting Reply")){
+                System.out.println(i+". "+a.get(i).get(index));
+        }
+    }
+    System.out.println(exit+". Exit selection");
+} 
+
+public static void getIndiFeedback(List<List<String>> a,int index){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+        if (a.get(i).get(5).equals(Login.Username)){
+                System.out.println(i+". "+a.get(i).get(index));
+        }
+    }
+    System.out.println(exit+". Exit selection");
+} 
+
+public static void getIndiReply(List<List<String>> a,int index){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+        if (a.get(i).get(4).equals("Waiting Reply")){
+                System.out.println(i+". "+a.get(i).get(index));
+        }
+    }
+    System.out.println(exit+". Exit selection");
+}
+
 public static void writeToFile(String[] params,String FileName){
         StringBuilder write = new StringBuilder();
             for (int i = 0; i < params.length; i++) {
@@ -138,5 +220,22 @@ public static void writeToFile(String[] params,String FileName){
              Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }     
     }
+
+public static String addLinebreaks(String input, int maxLineLength) {
+    StringTokenizer tok = new StringTokenizer(input, " ");
+    StringBuilder output = new StringBuilder(input.length());
+    int lineLen = 0;
+    while (tok.hasMoreTokens()) {
+        String word = tok.nextToken();
+
+        if (lineLen + word.length() > maxLineLength) {
+            output.append("\n");
+            lineLen = 0;
+        }
+        output.append(" " + word);
+        lineLen += word.length();
+    }
+    return output.toString();
+}
 
 }

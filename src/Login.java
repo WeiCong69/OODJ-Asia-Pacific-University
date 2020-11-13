@@ -1,0 +1,114 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Login {
+    
+    boolean exit;
+    boolean exitOrder;
+    public static String Username;
+    public static String Password;
+    public static String Address;
+    public static String Phone;
+    public static String Name;
+ 
+//    public void runMenu(){
+//        StaticFunction.printHeader();
+//        while (!exit) {
+//            printMenu();
+//            int choice = StaticFunction.getMenuChoice(1);
+//            performAction(choice);
+//        }        
+//    }
+//    
+//    private void printMenu() {
+//        StaticFunction.displayHeader("Please select a service");
+//        System.out.println("1) Login");
+//        System.out.println("0) Exit Program");
+//    }
+//    
+//    private void performAction(int choice) {
+//        switch (choice) {
+//            case 0:
+//                System.out.println("Thank you for using our application.");
+//                System.exit(0);
+//                break;
+//            case 1:
+//               break;
+//            default:
+//                System.out.println("Please enter the numbers in this menu only");
+//        }
+//    }
+//    
+//    public void performOrderAction(int choice){
+//        switch (choice) {
+//            case 0:
+//                exitOrder=false;
+//                runMenu();
+//                break;
+//            case 1: 
+//                System.out.println("1");
+//               break;
+//            default:
+//                System.out.println("Unknown error has occured.");
+//        }
+//    }
+        
+    
+    public static void main(String[] args) {
+        StaticFunction.printHeader();
+        System.out.println("-------------------");
+        Username = StaticFunction.getUserInput("Please enter username\n0) Exit Application");
+        if (Username.equals("0")){
+            System.out.println("Thank you for using our application.");
+            System.exit(0);
+        }
+        System.out.println("-------------------");
+        Password = StaticFunction.getUserInput("Please enter password");
+        String Managing = "Managing Staff";
+        String Delivery = "Delivery Staff";
+        String FrontDesk = "Front Desk Staff";
+        boolean found = false;
+        
+        try{
+        File myfile = new File("User.txt");
+        Scanner sc = new Scanner(myfile);
+        String temp;
+        
+        while(sc.hasNext() && !found){
+            temp = sc.nextLine();
+            String []tempArr = temp.split(","); //"," see from the file to seperate username and password to match with the textfield input
+            if(Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Managing.equals(tempArr[5])){
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
+                System.out.println("Login Successfully. Welcome Back " + Login.Username);
+                found = true;
+                sc.close();
+                ManagingStaffMenu msm = new ManagingStaffMenu();
+                msm.runMenu();
+            }
+            else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Delivery.equals(tempArr[5])){
+                System.out.println("Login Successfully. Welcome Back " + Login.Username);
+                found = true;
+                sc.close();
+                DeliveryStaffMenu msm = new DeliveryStaffMenu();
+                msm.runMenu();
+            }
+            else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && FrontDesk.equals(tempArr[5])){
+                System.out.println("Login Successfully. Welcome Back " + Login.Username);
+                found = true;
+                sc.close();
+                FrontDeskStaffMenu msm = new FrontDeskStaffMenu();
+                msm.runMenu();
+            }
+            
+        }
+        if (!found){ //if not found
+            System.out.println("Login unsuccessful. Please contact managing staff or try again!");
+            main(new String[0]);
+            }
+        }        
+        catch(FileNotFoundException ex){}
+    }
+        Login login = new Login();
+//        login.runMenu();
+    }

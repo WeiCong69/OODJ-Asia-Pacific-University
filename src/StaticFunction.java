@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class StaticFunction {
+    //testing
+    //sadljbasjdsba
     
     public static String getUserInput(String question){
         //get username from user

@@ -194,7 +194,7 @@ public static void getIndiReply(List<List<String>> a,int index){
         }
     }
     System.out.println(exit+". Exit selection");
-}
+} 
 
 public static void writeToFile(String[] params,String FileName){
         StringBuilder write = new StringBuilder();

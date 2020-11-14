@@ -2,3 +2,4 @@
 395556,no 7 jalan angsana 5,45.0,Large Size,135.0,Pending,International
 710551,1234,1234.0,Large Size,3702.0,Pending,International
 917563,444,444.0,Large Size,888.0,Pending,Domesti
+760898,111,111.0,Large Size,222.0,Pending,Domestic

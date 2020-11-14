@@ -687,9 +687,9 @@ public class ManagingStaff extends User{
             boolean found = false;            
             try{
             String temp;            
-            File myfile = new File("Order.txt");
+            File myfile = new File("Parcel.txt");
             Scanner sc = new Scanner(myfile);            
-            file = new FileWriter("Order.txt", true);            
+            file = new FileWriter("Parcel.txt", true);            
             while (sc.hasNext() && !found){
                 temp = sc.nextLine();
                 String []tempArr = temp.split(",");

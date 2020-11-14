@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//kadhar babi
+//kadhar anjing
+// kaddhar puki
 public class ManagingStaff extends User{
     public static Scanner x;
     ArrayList<String> order = new ArrayList<>();
@@ -51,10 +53,8 @@ public class ManagingStaff extends User{
 
 
 
-    public void editUser(){
-        
+    public void editUser(){       
         List<List<String>> list=StaticFunction.getFileData("User.txt");
-        StaticFunction.getSelectionList(list,0);
         int counter=1;
         int test=0;
         try {                    
@@ -64,18 +64,26 @@ public class ManagingStaff extends User{
             String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
             do{
             if(counter==1){
+                StaticFunction.getSelectionList(list,0);
                 choice=StaticFunction.getUserInput("Please select a user");
                 if(Integer.parseInt(choice)<list.size()){                          
                    counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    return;
                 }else{
-                    continue;
+                    continue;                    
                 }
             }
             if(counter==2){
-                   for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
+                for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
                        System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
-                   }                
+                }
+                System.out.println("3. Exit from editting profile");
                 choice1=StaticFunction.getUserInput("Please select a component to be changed:");
+                if(Integer.parseInt(choice1)==3){
+                    counter--;
+                    continue;
+                }
                 test= Integer.parseInt(choice1)+2;
                 System.out.println(col.length);
                 if(test<col.length){
@@ -129,6 +137,36 @@ public class ManagingStaff extends User{
                 StaticFunction.writeToFile(params,"DeletedUser.txt");
             }
     }
+    
+    public void deleteFeedback(){
+        try{
+        List<List<String>> list=StaticFunction.getFileData("Feedback.txt");
+        StaticFunction.getSelectionList(list,1);
+        String choice=StaticFunction.getUserInput("Please select a feedback");
+        if(Integer.parseInt(choice)==list.size()){
+            return;
+        } else {
+            System.out.println("Not valid selection");
+            deleteFeedback();
+        }
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this feedback"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+            if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+                System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
+                deleteFeedback1(list.get(Integer.parseInt(choice)).get(0).toString(),"Feedback.txt");
+                String[] params={
+                    list.get(Integer.parseInt(choice)).get(0).toString(),
+                    list.get(Integer.parseInt(choice)).get(1).toString(),
+                    list.get(Integer.parseInt(choice)).get(2).toString(),
+                    list.get(Integer.parseInt(choice)).get(3).toString(),
+                    list.get(Integer.parseInt(choice)).get(4).toString(),
+                    list.get(Integer.parseInt(choice)).get(5).toString(),
+                    list.get(Integer.parseInt(choice)).get(6).toString()};
+                StaticFunction.writeToFile(params,"DeletedFeedback.txt");
+            }
+    } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Numbers only please.");
+     } 
+    } 
 
     public void restoreUser(){         
         List<List<String>> list=StaticFunction.getFileData("DeletedUser.txt");
@@ -145,7 +183,38 @@ public class ManagingStaff extends User{
                 String[] params={list.get(Integer.parseInt(choice)).get(0).toString(),list.get(Integer.parseInt(choice)).get(1).toString(),list.get(Integer.parseInt(choice)).get(2).toString(),list.get(Integer.parseInt(choice)).get(3).toString(),list.get(Integer.parseInt(choice)).get(4).toString(),list.get(Integer.parseInt(choice)).get(5).toString()};
                 StaticFunction.writeToFile(params,"User.txt");
             }
-    }    
+    }   
+    
+    public void restoreFeedback(){
+        try{        
+        List<List<String>> list=StaticFunction.getFileData("DeletedFeedback.txt");
+        StaticFunction.getSelectionList(list,0);
+        System.out.println("List of feedback in Recycle Bin");
+        String choice=StaticFunction.getUserInput("Please select a feedback");
+        if(Integer.parseInt(choice)==list.size()){
+            return;
+        } else {
+            System.out.println("Not valid selection");
+            restoreFeedback();
+        }        
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this feedback"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+            if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+                System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
+                deleteFeedback1(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedFeedback.txt");
+                String[] params={
+                    list.get(Integer.parseInt(choice)).get(0).toString(),
+                    list.get(Integer.parseInt(choice)).get(1).toString(),
+                    list.get(Integer.parseInt(choice)).get(2).toString(),
+                    list.get(Integer.parseInt(choice)).get(3).toString(),
+                    list.get(Integer.parseInt(choice)).get(4).toString(),
+                    list.get(Integer.parseInt(choice)).get(5).toString(),
+                    list.get(Integer.parseInt(choice)).get(6).toString()};
+                StaticFunction.writeToFile(params,"Feedback.txt");
+            }
+    } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Numbers only please.");
+     } 
+    }
     
     public void registerNewUser(){
         Scanner keyboard = new Scanner(System.in);
@@ -285,6 +354,55 @@ public class ManagingStaff extends User{
             System.out.println("Changes made successfully");
     }
     
+    public void editFeedbackFile(String[] list,String id,String index,String newValue){
+            LinkedHashMap<String, String> test2= new LinkedHashMap<String,String>();                
+            String filepath = "Feedback.txt";
+            String tempFile = "Temp.txt";
+            File oldFile = new File (filepath);
+            File newFile = new File (tempFile);           
+            //testing. to be replaced with data viewed
+            //String ID,Password,Name,Address,Phone,Role;
+//            ID=Password=Name=Address=Phone=Role="";
+            try {
+                FileWriter fw = new FileWriter(tempFile,true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                x = new Scanner(new File (filepath));
+                x.useDelimiter("[,\n]");
+                while (x.hasNext()){
+                    for(String i: list){
+                        test2.put(i,x.next());
+                    }                    
+                    if(test2.get("ID").equals(id)){
+                        switch(index){
+                                case "1":
+                                    pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + newValue + "," + test2.get("Delivery Staff") + "," + this.loginid + "\n");                       
+                                break;
+                                default:
+                                    System.out.println("switch case not working");
+                                    pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + test2.get("Reply") + "," + test2.get("Delivery Staff") + "," + test2.get("Managing Staff") + "\n");                       
+                        }                                    
+                    }else{
+                         pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + test2.get("Reply") + "," + test2.get("Delivery Staff") + "," + test2.get("Managing Staff") + "\n");                       
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }catch(IOException e)
+            {
+                System.out.println(e);
+                x.close();
+//                oldFile.delete();
+//                File dump = new File(filepath);
+//                newFile.renameTo(dump);
+            }
+            System.out.println("Changes made successfully");
+    }
+    
     private void deleteUser(String id,String fileName){
                 String filepath = fileName;
                 String tempFile = "Temp.txt";
@@ -334,7 +452,60 @@ public class ManagingStaff extends User{
             }
        System.out.println("Changes made successfully");
 
-    }    
+    }   
+    
+    private void deleteFeedback1(String id,String fileName){
+                String filepath = fileName;
+                String tempFile = "Temp.txt";
+                
+                File oldFile = new File (filepath);
+                File newFile = new File (tempFile);
+                           
+                String ID = "";
+                String Subject = "";
+                String Content = "";
+                String FeedbackType = "";
+                String Reply = "";  
+                String Delivery = "";
+                String Managing = "";
+                
+        try {
+                
+                FileWriter fw = new FileWriter(tempFile,true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                x = new Scanner(new File (filepath));
+                x.useDelimiter("[,\n]");
+                
+                while (x.hasNext()){
+                    ID = x.next();
+                    Subject = x.next(); 
+                    Content = x.next();
+                    FeedbackType = x.next();
+                    Reply = x.next();
+                    Delivery = x.next();
+                    Managing = x.next();
+                    if(!ID.equals(id)){
+                        pw.printf(ID + "," + Subject + "," + Content + "," + FeedbackType + "," + Reply + "," + Delivery +  "," + Managing + "\n");
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();               
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }catch(IOException e)
+            {
+                System.out.println(e);
+                x.close();
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }
+       System.out.println("Changes made successfully");
+
+    }   
 
     public void viewFeedback(){
         String username = Login.Username;
@@ -420,14 +591,17 @@ public class ManagingStaff extends User{
                 System.out.println("1. Update Name");
                 System.out.println("2. Update Address");
                 System.out.println("3. Update Phone Number");
+                System.out.println("4. Exit");
                 choice=Integer.parseInt(StaticFunction.getUserInput("Please select a component"));
-                if(choice>0 || choice <3){
+                if(choice>-1 || choice <5){
                     switch(choice){
                         case 0:
                             String oldPass=StaticFunction.getUserInput("PLease enter old password:");
                             if(oldPass.equals(this.password)){
                                 String newPass=StaticFunction.getUserInput("Password Verified!Please key in new password");
                                 editUserFile(col,this.loginid,"Password",newPass);                            
+                            }else{
+                                System.out.println("Password does not match");
                             }
                             break;
                         case 1:
@@ -442,6 +616,9 @@ public class ManagingStaff extends User{
                             String newPhone=StaticFunction.getUserInput("Current Phone ->"+this.phone+"\nPlease enter new Phone Number.\n");
                             editUserFile(col,this.loginid,"Phone",newPhone);
                             break;
+                      case 4:
+                            System.out.println("Edit Profile exit sucessfully");
+                            return;
                       default:
                           System.out.println("Some error has occur.Please choose again");
                           continue;
@@ -463,6 +640,136 @@ public class ManagingStaff extends User{
         }        
     }
     
+    public void addOrder(){
+        try{
+        Scanner keyboard = new Scanner(System.in);
+        int choice = -1;
+        int choice1 = -1;
+        String id = StaticFunction.randomnumbers();
+        String Address = StaticFunction.getUserInput("Enter address");
+        int Weight = Integer.parseInt(StaticFunction.getUserInput("Enter weight"));
+        
+        do { 
+            System.out.println("Please select a delivery type:");
+            System.out.println("1) International");
+            System.out.println("2) Domestic");            
+            try {
+                choice = Integer.parseInt(keyboard.nextLine());
+                if (choice < 0 || choice > 2) {
+                    System.out.println("Choice outside of range. Please choose again.");
+                    //registerNewUser();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Numbers only please.");
+            }            
+        } while (choice < 0 || choice > 2);
+        
+        do { 
+            System.out.println("Please parcel size:");
+            System.out.println("1) Small");
+            System.out.println("2) Large");            
+            try {
+                choice1 = Integer.parseInt(keyboard.nextLine());
+                if (choice1 < 0 || choice1 > 2) {
+                    System.out.println("Choice outside of range. Please choose again.");
+                    //registerNewUser();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Numbers only please.");
+            }            
+        } while (choice1 < 0 || choice1 > 2);
+        
+        int deliverytype = choice;
+        int deliverysize = choice1;
+        
+        // to check if theres duplicated username. Make user reenter the username if duplicate is found.
+            FileWriter file = null;
+            boolean found = false;            
+            try{
+            String temp;            
+            File myfile = new File("Order.txt");
+            Scanner sc = new Scanner(myfile);            
+            file = new FileWriter("Order.txt", true);            
+            while (sc.hasNext() && !found){
+                temp = sc.nextLine();
+                String []tempArr = temp.split(",");
+                if(id.equals(tempArr[0])){
+                    found = true;
+                    while(id.equals(tempArr[0])){
+                        id = StaticFunction.randomnumbers();                        
+                    } 
+                }  
+            }       
+                    PrintWriter pw = new PrintWriter(file);
+            
+                    if (Integer.toString(deliverysize).equals("1")){
+                        SParcel sp = new SParcel(Integer.parseInt(id),
+                                Address,
+                                Weight,
+                                Integer.toString(deliverytype), 
+                                Integer.toString(deliverysize));
+                    
+                        ArrayList<SParcel> parcel = new ArrayList<SParcel>();
+                        parcel.add(sp);
 
+                        Order order = new Order((ArrayList<SParcel>) parcel);
+
+                        ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
+
+                            for(Parcel bk : TotalParcelInOrder){
+                                pw.printf(bk.id + ",");
+                                pw.printf(bk.address + ",");
+                                pw.printf(bk.weight + ",");
+                                pw.printf(bk.parcelsize("Small") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
+                                pw.printf("Pending" + ",");
+                                if (bk.deliverytype.equals("1")){
+                                    pw.println("International");
+                                } else if (bk.deliverytype.equals("2")){
+                                    pw.println("Domestic");
+                                }
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                        }
+                    } else if (Integer.toString(deliverysize).equals("2")){
+                        SParcel sp = new SParcel(Integer.parseInt(id),
+                                Address,
+                                Weight,
+                                Integer.toString(deliverytype), 
+                                Integer.toString(deliverysize));
+                    
+                        ArrayList<SParcel> parcel = new ArrayList<SParcel>();
+                        parcel.add(sp);
+
+                        Order order = new Order((ArrayList<SParcel>) parcel);
+
+                        ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
+
+                            for(Parcel bk : TotalParcelInOrder){
+                                pw.printf(bk.id + ",");
+                                pw.printf(bk.address + ",");
+                                pw.printf(bk.weight + ",");
+                                pw.printf(bk.parcelsize("Large") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
+                                pw.printf("Pending" + ",");
+                                if (bk.deliverytype.equals("1")){
+                                    pw.println("International");
+                                } else if (bk.deliverytype.equals("2")){
+                                    pw.println("Domestic");
+                                }
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                        } 
+                    }
+                    
+                    file.close();
+                    pw.close();
+                    sc.close();
+                } catch (IOException ex) {
+             Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }      
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid selection. Numbers only please.");
+                    addOrder();
+                }
+    }
 
     }

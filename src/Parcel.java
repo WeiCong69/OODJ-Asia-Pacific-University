@@ -1,4 +1,4 @@
-public class Parcel {
+abstract class Parcel {
     public String getAddress() {
         return address;
     }
@@ -22,14 +22,41 @@ public class Parcel {
     public void setDeliverytype(String deliverytype) {
         this.deliverytype = deliverytype;
     }
-    
-    private Integer id;
-    private String address;
-    private double weight;
-    private String deliverytype;
-    
-    public static void main(String[] args) {
-        
+
+    public Parcel(Integer id, String address, double weight, String deliverytype, String deliverysize) {
+        this.id = id;
+        this.address = address;
+        this.weight = weight;
+        this.deliverytype = deliverytype;
+        this.deliverysize = deliverysize;
     }
     
+    public abstract String parcelsize(String Size);
+    
+    public abstract String parcelprice(String Type, String Size, String Weight);
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    
+    Integer id;
+    String address;
+    double weight;
+    String deliverytype;
+    String deliverysize;
+
+    public void setDeliverysize(String deliverysize) {
+        this.deliverysize = deliverysize;
+    }
+
+    public String getDeliverysize() {
+        return deliverysize;
+    }
+    
+    public static void main(String[] args) {
+    }
 }

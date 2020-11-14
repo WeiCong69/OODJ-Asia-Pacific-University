@@ -1,16 +1,5 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ManagingStaffMenu {
      boolean exit;
@@ -53,7 +42,7 @@ public class ManagingStaffMenu {
         StaticFunction.printHeader();
         while (!exit) {
             printMenu();
-            int choice = StaticFunction.getMenuChoice(10);
+            int choice = StaticFunction.getMenuChoice(12);
             performAction(choice);
         }        
     }
@@ -75,26 +64,16 @@ public class ManagingStaffMenu {
         System.out.println("-------------------");        
         System.out.println("7) View Feedback");
         System.out.println("8) Reply to Feedback");
-        System.out.println("9) Edit Personal Profile");
+        System.out.println("9) Delete Feedback");
+        System.out.println("10) Restore Feedback");
+        System.out.println("MANAGE PROFILE");
+        System.out.println("-------------------"); 
+        System.out.println("11) Edit Personal Profile");
+        System.out.println("12) Restore User Account");
         System.out.println("0) Exit Program");
     }
 
-    private int getMenuChoice() {
-        Scanner keyboard = new Scanner(System.in);
-        int choice = -1;
-        do {
-            System.out.print("Enter your choice: ");
-            try {
-                choice = Integer.parseInt(keyboard.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Numbers only please.");
-            }
-            if (choice < 0 || choice > 9) {
-                System.out.println("Choice outside of range. Please chose again.");
-            }
-        } while (choice < 0 || choice > 9);
-        return choice;
-    }
+
     
     private void performAction(int choice) {
         switch (choice) {
@@ -103,7 +82,7 @@ public class ManagingStaffMenu {
                 System.exit(0);
                 break;
             case 1: 
-              runOrderMenu();
+                msf.addOrder();
                break;
             case 2:
                 //makeADeposit();
@@ -128,9 +107,15 @@ public class ManagingStaffMenu {
                 msf.addReply();
                 break;
             case 9:
+                msf.deleteFeedback();
+                break;
+            case 10:
+                msf.restoreFeedback();
+                break;
+            case 11:
                 msf.editProfile();
                 break;
-             case 10:
+             case 12:
                 msf.restoreUser();
                 break;               
             default:
@@ -178,7 +163,7 @@ public class ManagingStaffMenu {
     public void runOrderMenu(){
         while (!exitOrder) {
             printOrderMenu();
-            int choice = getMenuChoice();
+            int choice = StaticFunction.getMenuChoice(4);
             performOrderAction(choice);
         }        
     }

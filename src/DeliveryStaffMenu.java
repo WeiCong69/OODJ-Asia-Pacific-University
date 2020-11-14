@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DeliveryStaffMenu {
+    
+    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+        DeliveryStaff ds = new DeliveryStaff(usr); 
 
     public static void main(String[] args) {
         DeliveryStaffMenu menu= new DeliveryStaffMenu();
@@ -35,7 +37,7 @@ public class DeliveryStaffMenu {
         System.out.println("MANAGE Feedback");
         System.out.println("-------------------"); 
         System.out.println("3) Add Feedback");
-        System.out.println("4) View Feedback");
+        System.out.println("4) View Feedback History");
         System.out.println("-------------------"); 
         System.out.println("0) Exit Program");
     }
@@ -51,11 +53,10 @@ public class DeliveryStaffMenu {
             case 2:
                 break;
             case 3:
-                DeliveryStaff ds = new DeliveryStaff();
                 ds.addFeedback();
                 break;
             case 4:
-                System.out.println("Thank you for using our application.");
+                ds.viewPersonalFeedback();
                 break;
             default:
                 System.out.println("Please enter the numbers in this menu only");

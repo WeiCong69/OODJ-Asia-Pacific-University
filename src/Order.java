@@ -1,7 +1,8 @@
-
+import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Order {
+public class Order{
 
     public Integer getCustid() {
         return custid;
@@ -45,6 +46,17 @@ public class Order {
     public String toString()
     {
         return null;
+    }
+    
+    private final ArrayList<SParcel> parcel; 
+      
+    Order (ArrayList<SParcel> parcel) 
+    { 
+        this.parcel = parcel; 
+    } 
+      
+    public ArrayList<SParcel> getTotalParcel(){
+       return parcel;   
     }
     
     public static void main(String[] args) {

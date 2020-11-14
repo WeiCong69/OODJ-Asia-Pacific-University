@@ -13,6 +13,10 @@ import java.util.logging.Logger;
 //kadhar anjing
 // kaddhar puki
 public class ManagingStaff extends User{
+    
+    public String orderid = null;
+    public int items = 1;
+    
     public static Scanner x;
     ArrayList<String> order = new ArrayList<>();
     ArrayList<String> parcel = new ArrayList<>();
@@ -645,8 +649,12 @@ public class ManagingStaff extends User{
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
         int choice1 = -1;
+        if (items == 1){
+        orderid = StaticFunction.randomnumbers();
+        }
         String id = StaticFunction.randomnumbers();
         String Address = StaticFunction.getUserInput("Enter address");
+        String CustName = StaticFunction.getUserInput("Enter customer name");
         int Weight = Integer.parseInt(StaticFunction.getUserInput("Enter weight"));
         
         do { 
@@ -684,12 +692,22 @@ public class ManagingStaff extends User{
         
         // to check if theres duplicated username. Make user reenter the username if duplicate is found.
             FileWriter file = null;
-            boolean found = false;            
+            
+            FileWriter file1 = null;
+            
+            boolean found = false;
+            
             try{
             String temp;            
             File myfile = new File("Parcel.txt");
             Scanner sc = new Scanner(myfile);            
-            file = new FileWriter("Parcel.txt", true);            
+            file = new FileWriter("Parcel.txt", true);
+
+            String temp1;
+            File myfile1 = new File("Order.txt");
+            Scanner sc1 = new Scanner(myfile1);            
+            file1 = new FileWriter("Order.txt", true); 
+            
             while (sc.hasNext() && !found){
                 temp = sc.nextLine();
                 String []tempArr = temp.split(",");
@@ -699,11 +717,15 @@ public class ManagingStaff extends User{
                         id = StaticFunction.randomnumbers();                        
                     } 
                 }  
-            }       
+            } 
                     PrintWriter pw = new PrintWriter(file);
+                    
+                    PrintWriter pw1 = new PrintWriter(file1);
             
                     if (Integer.toString(deliverysize).equals("1")){
-                        SParcel sp = new SParcel(Integer.parseInt(id),
+                        SParcel sp = new SParcel(
+                                Integer.parseInt(orderid),
+                                Integer.parseInt(id),
                                 Address,
                                 Weight,
                                 Integer.toString(deliverytype), 
@@ -717,6 +739,9 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                pw1.printf(bk.orderid + ",");
+                                pw1.printf("Pending" + ",");
+                                pw1.println(bk.id);
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -731,7 +756,9 @@ public class ManagingStaff extends User{
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
-                        SParcel sp = new SParcel(Integer.parseInt(id),
+                        SParcel sp = new SParcel(
+                                Integer.parseInt(orderid),
+                                Integer.parseInt(id),
                                 Address,
                                 Weight,
                                 Integer.toString(deliverytype), 
@@ -745,6 +772,9 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                pw1.printf(bk.orderid + ",");
+                                pw1.printf("Pending" + ",");
+                                pw1.println(bk.id);
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -757,19 +787,34 @@ public class ManagingStaff extends User{
                                     pw.println("Domestic");
                                 }
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
-                        } 
+                        }
                     }
-                    
                     file.close();
                     pw.close();
                     sc.close();
+                    
+                    file1.close();
+                    pw1.close();
+                    sc1.close();
+                    
+                    String confirmation=StaticFunction.getUserInput("Do you want to add another parcel to this order?\n0.Yes\n1.No\n2.New Order");
+                    if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+                        System.out.println("working");
+                        items = 2;
+                        addOrder();
+                    } else if(confirmation.equals("2") || confirmation.equals("new")|| confirmation.equals("new order")|| confirmation.equals("New Order")){
+                        System.out.println("working 1");
+                        items = 1;
+                        addOrder();
+                    } else {
+                        items = 1;
+                    }
                 } catch (IOException ex) {
-             Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }      
+                    Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid selection. Numbers only please.");
                     addOrder();
-                }
+        }
     }
-
-    }
+}

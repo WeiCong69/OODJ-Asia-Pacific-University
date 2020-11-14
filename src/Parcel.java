@@ -23,7 +23,8 @@ abstract class Parcel {
         this.deliverytype = deliverytype;
     }
 
-    public Parcel(Integer id, String address, double weight, String deliverytype, String deliverysize) {
+    public Parcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize) {
+        this.orderid = orderid;
         this.id = id;
         this.address = address;
         this.weight = weight;
@@ -43,6 +44,7 @@ abstract class Parcel {
         return id;
     }
     
+    Integer orderid;
     Integer id;
     String address;
     double weight;

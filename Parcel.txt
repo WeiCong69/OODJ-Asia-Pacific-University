@@ -1,4 +1,4 @@
-472444,1234566,1234566.0,Large Size,3703698.0,International
-395556,no 7 jalan angsana 5,45.0,Large Size,135.0,Pending,International
-710551,1234,1234.0,Large Size,3702.0,Pending,International
-917563,444,444.0,Large Size,888.0,Pending,Domesti
+395914,Testing 1,1234.0,Small Size,2468.0,Pending,International
+506409,Testing 2,1234.0,Large Size,2468.0,Pending,Domestic
+237422,Testing 3,1234.0,Small Size,2468.0,Pending,International
+38917,testing 4,1234.0,Large Size,2468.0,Pending,Domestic

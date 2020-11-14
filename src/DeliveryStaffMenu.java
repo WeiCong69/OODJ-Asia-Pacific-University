@@ -6,15 +6,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DeliveryStaffMenu {
+public class DeliveryStaffMenu implements Menu{
     
     User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
-        DeliveryStaff ds = new DeliveryStaff(usr); 
-
-    public static void main(String[] args) {
-        DeliveryStaffMenu menu= new DeliveryStaffMenu();
-        menu.runMenu();
-    }
+    DeliveryStaff ds = new DeliveryStaff(usr); 
     
     boolean exit;
     boolean exitOrder;
@@ -28,7 +23,7 @@ public class DeliveryStaffMenu {
         }        
     }
     
-    private void printMenu() {
+    public void printMenu() {
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE PARCEL");
         System.out.println("-------------------"); 

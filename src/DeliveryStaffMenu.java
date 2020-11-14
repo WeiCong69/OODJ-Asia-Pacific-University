@@ -18,7 +18,7 @@ public class DeliveryStaffMenu implements Menu{
         StaticFunction.printHeader();
         while (!exit) {
             printMenu();
-            int choice = StaticFunction.getMenuChoice(4);
+            int choice = StaticFunction.getMenuChoice(6);
             performAction(choice);
         }        
     }
@@ -29,28 +29,36 @@ public class DeliveryStaffMenu implements Menu{
         System.out.println("-------------------"); 
         System.out.println("1) Edit Parcel Status");
         System.out.println("2) View Parcel");
+        System.out.println("MANAGE USER");
+        System.out.println("-------------------");
+        System.out.println("3) Edit User Profile");        
         System.out.println("MANAGE Feedback");
         System.out.println("-------------------"); 
-        System.out.println("3) Add Feedback");
-        System.out.println("4) View Feedback History");
+        System.out.println("4) Add Feedback");
+        System.out.println("5) View Feedback History");
         System.out.println("-------------------"); 
         System.out.println("0) Exit Program");
     }
     
-    private void performAction(int choice) {
+    public void performAction(int choice) {
         switch (choice) {
             case 0:
                 System.out.println("Thank you for using our application.");
-                System.exit(0);
+                //System.exit(0);
+                Login login=new Login();
+                login.runLogin();
                 break;
             case 1: 
                break;
             case 2:
                 break;
             case 3:
+                ds.editProfile();
+                break;               
+            case 4:
                 ds.addFeedback();
                 break;
-            case 4:
+            case 5:
                 ds.viewPersonalFeedback();
                 break;
             default:

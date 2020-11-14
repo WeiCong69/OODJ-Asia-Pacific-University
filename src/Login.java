@@ -14,7 +14,13 @@ public class Login {
  
    
     public static void main(String[] args) {
-        StaticFunction.printHeader();
+        Login login = new Login();
+        login.runLogin();
+    }
+
+    
+    public void runLogin(){
+         StaticFunction.printHeader();
         System.out.println("-------------------");
         Username = StaticFunction.getUserInput("Please enter username\n0) Exit Application");
         if (Username.equals("0")){
@@ -67,8 +73,8 @@ public class Login {
             main(new String[0]);
             }
         }        
-        catch(FileNotFoundException ex){}
+        catch(FileNotFoundException ex){}       
     }
-        Login login = new Login();
-//        login.runMenu();
-    }
+ }
+    
+    

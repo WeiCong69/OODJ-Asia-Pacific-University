@@ -12,12 +12,24 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/DeliveryStaff.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/FrontDeskStaffMenu.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/User.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/Login.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/Order.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/ManagingStaff.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/ManagingStaffMenu.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/DeliveryStaffMenu.java</file>
+            <file>file:/C:/Users/Wei%20Cong/Documents/NetBeansProjects/OODJ%20Assignment/src/StaticFunction.java</file>
+=======
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/Order.java</file>
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/ManagingStaff.java</file>
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/Login.java</file>
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/Parcel.java</file>
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/StaticFunction.java</file>
             <file>file:/C:/Users/MERVYN/Documents/NetBeansProjects/Deepavali/OOBJ/src/SParcel.java</file>
+>>>>>>> ca958fdb59d6a2ed7583a4f640a45d8308177d31
         </group>
     </open-files>
 </project-private>

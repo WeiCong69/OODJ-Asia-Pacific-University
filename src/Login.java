@@ -12,49 +12,7 @@ public class Login {
     public static String Phone;
     public static String Name;
  
-//    public void runMenu(){
-//        StaticFunction.printHeader();
-//        while (!exit) {
-//            printMenu();
-//            int choice = StaticFunction.getMenuChoice(1);
-//            performAction(choice);
-//        }        
-//    }
-//    
-//    private void printMenu() {
-//        StaticFunction.displayHeader("Please select a service");
-//        System.out.println("1) Login");
-//        System.out.println("0) Exit Program");
-//    }
-//    
-//    private void performAction(int choice) {
-//        switch (choice) {
-//            case 0:
-//                System.out.println("Thank you for using our application.");
-//                System.exit(0);
-//                break;
-//            case 1:
-//               break;
-//            default:
-//                System.out.println("Please enter the numbers in this menu only");
-//        }
-//    }
-//    
-//    public void performOrderAction(int choice){
-//        switch (choice) {
-//            case 0:
-//                exitOrder=false;
-//                runMenu();
-//                break;
-//            case 1: 
-//                System.out.println("1");
-//               break;
-//            default:
-//                System.out.println("Unknown error has occured.");
-//        }
-//    }
-        
-    
+   
     public static void main(String[] args) {
         StaticFunction.printHeader();
         System.out.println("-------------------");
@@ -87,6 +45,7 @@ public class Login {
                 msm.runMenu();
             }
             else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Delivery.equals(tempArr[5])){
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();
@@ -94,6 +53,7 @@ public class Login {
                 msm.runMenu();
             }
             else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && FrontDesk.equals(tempArr[5])){
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();

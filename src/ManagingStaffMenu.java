@@ -1,38 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagingStaffMenu {
+public class ManagingStaffMenu implements Menu {
      boolean exit;
      boolean exitOrder;
         User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
         ManagingStaff msf = new ManagingStaff(usr);           
-
-    public static void main(String[] args) {
-
-//        Map<String, String> test2 = Map.ofEntries(
-//            entry("ID", "0"),
-//            entry("Pass", "0"),
-//            entry("Name","0"),
-//            entry("Address","0"),
-//            entry("Phone","0"),
-//            entry("Role","0")
-//        );
-//        for (String i : test2.keySet()) {
-//            System.out.println(i+"=>");
-//            System.out.println(test2.get(i));
-//          
-//        }
-
-//        for (int i = 0; i <list.size(); i++) {
-//            for (int j = 0; j < list.get(i).size(); j++) {
-//                System.out.println(list.get(i).get(j));                
-//            }
-//        }
-            ManagingStaffMenu menu= new ManagingStaffMenu();
-//                      menu.runMenu();
-
-            
-    }
     
     public void runMenu(){
         User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
@@ -47,7 +20,7 @@ public class ManagingStaffMenu {
         }        
     }
 
-        private void printMenu() {
+    public void printMenu() {
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");
@@ -72,8 +45,6 @@ public class ManagingStaffMenu {
         System.out.println("12) Restore User Account");
         System.out.println("0) Exit Program");
     }
-
-
     
     private void performAction(int choice) {
         switch (choice) {
@@ -122,36 +93,6 @@ public class ManagingStaffMenu {
                 System.out.println("Unknown error has occured.");
         }
     }
-
-
-    
-    private String askQuestion(String question, List<String> answers) {
-        String response = "";
-        Scanner keyboard = new Scanner(System.in);
-        boolean choices = ((answers == null) || answers.size() == 0) ? false : true;
-        boolean firstRun = true;
-        do {
-            if (!firstRun) {
-                System.out.println("Invalid selection. Please try again.");
-            }
-            System.out.print(question);
-            if (choices) {
-                System.out.print("(");
-                for (int i = 0; i < answers.size() - 1; ++i) {
-                    System.out.print(answers.get(i) + "/");
-                }
-                System.out.print(answers.get(answers.size() - 1));
-                System.out.print("): ");
-            }
-            response = keyboard.nextLine();
-            firstRun = false;
-            if (!choices) {
-                break;
-            }
-        } while (!answers.contains(response));
-        return response;
-    }
-
     public void printOrderMenu(){
                    System.out.println("1) Add New Parcel");
                    System.out.println("2) View List of Parcels");

@@ -1,5 +1,7 @@
-public class FrontDeskStaffMenu {
-    
+public class FrontDeskStaffMenu implements Menu {
+
+    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+    FrontDeskStaff msf = new FrontDeskStaff(usr);    
     public static void main(String[] args) {
         FrontDeskStaffMenu menu= new FrontDeskStaffMenu();
         menu.runMenu();
@@ -17,7 +19,7 @@ public class FrontDeskStaffMenu {
         }        
     }
     
-    private void printMenu() {
+    public void printMenu() {
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");

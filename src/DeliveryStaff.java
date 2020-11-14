@@ -32,13 +32,13 @@ public class DeliveryStaff extends User{
             System.out.println("3) Customer Related");            
             try {
                 choice = Integer.parseInt(keyboard.nextLine());
-                if (choice < 0 || choice > 4) {
+                if (choice < 0 || choice > 3) {
                     System.out.println("Choice outside of range. Please chose the role again.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }            
-        } while (choice < 0 || choice > 4);
+        } while (choice < 0 || choice > 3);
         
             FileWriter file = null;
             boolean found = false;            

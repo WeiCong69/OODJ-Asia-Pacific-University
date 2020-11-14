@@ -149,7 +149,7 @@ public class ManagingStaff extends User{
         String choice=StaticFunction.getUserInput("Please select a feedback");
         if(Integer.parseInt(choice)==list.size()){
             return;
-        } else {
+        } else if (Integer.parseInt(choice)>list.size()){
             System.out.println("Not valid selection");
             deleteFeedback();
         }
@@ -190,14 +190,15 @@ public class ManagingStaff extends User{
     }   
     
     public void restoreFeedback(){
+        String choice = null;
         try{        
         List<List<String>> list=StaticFunction.getFileData("DeletedFeedback.txt");
         StaticFunction.getSelectionList(list,0);
         System.out.println("List of feedback in Recycle Bin");
-        String choice=StaticFunction.getUserInput("Please select a feedback");
+        choice=StaticFunction.getUserInput("Please select a feedback");
         if(Integer.parseInt(choice)==list.size()){
             return;
-        } else {
+        } else if(Integer.parseInt(choice)>list.size()){
             System.out.println("Not valid selection");
             restoreFeedback();
         }        
@@ -373,6 +374,7 @@ public class ManagingStaff extends User{
                 PrintWriter pw = new PrintWriter(bw);
                 x = new Scanner(new File (filepath));
                 x.useDelimiter("[,\n]");
+                if(x.hasNext()){
                 while (x.hasNext()){
                     for(String i: list){
                         test2.put(i,x.next());
@@ -389,6 +391,7 @@ public class ManagingStaff extends User{
                     }else{
                          pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + test2.get("Reply") + "," + test2.get("Delivery Staff") + "," + test2.get("Managing Staff") + "\n");                       
                     }
+                }
                 }
                 x.close();
                 pw.flush();
@@ -509,27 +512,9 @@ public class ManagingStaff extends User{
             }
        System.out.println("Changes made successfully");
 
-    }   
+    }    
 
     public void viewFeedback(){
-        String username = Login.Username;
-        System.out.println(username);
-        Scanner keyboard = new Scanner(System.in);
-        ManagingStaffMenu menu= new ManagingStaffMenu();         
-        List<List<String>> list=StaticFunction.getFileData("Feedback.txt");
-        StaticFunction.getSelectionList(list,1);
-        String choice = StaticFunction.getUserInput("CHANGE THIS TO DONT ALLOW USER TO TYPE OTHER INPUT"); 
-        String[] index={"Subject","Content","Feedback Category"};        
-        for (int i = 1,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
-            System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
-}
-        String continueEditing = StaticFunction.getUserInput("\nDo you wish to view another feedback?\n0.Yes\n1.No");
-            if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
-                viewFeedback();
-}
-    }
-    
-    public void addReply(){
         
         List<List<String>> list=StaticFunction.getFileData("Feedback.txt");
         StaticFunction.getSelectionList(list,1);
@@ -538,35 +523,98 @@ public class ManagingStaff extends User{
         try {                    
             String choice = null;
             String choice1=null;
-            String[] index={"Subject","Content","Feedback Category"};
-            String[] col = {"ID","Subject","Content","Feedback Type"};
+//            String[] index={"Subject","Content","Feedback Type"};
+            String[] col = {"ID","Subject","Content","Feedback Type","Reply","Delivery Staff","Managing Staff"};
+            do{
+            if(counter==1){
+                choice=StaticFunction.getUserInput("Please select a feedback to view");
+                if(Integer.parseInt(choice)<list.size()){                          
+                   counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    ManagingStaffMenu msm = new ManagingStaffMenu();
+                    msm.runMenu();
+                }else {
+                    viewFeedback();
+                }
+            }
+            if(counter==2){
+                   for (int i = 1,j=0; i < list.get(Integer.parseInt(choice)).size()-1;) {
+                        System.out.printf("Subject:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i), 50) + "\n\n");
+                        System.out.printf("Content:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+1), 50) + "\n\n");
+                        System.out.printf("Feedback Type:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+2), 50) + "\n\n");
+                        System.out.printf("Reply:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+3), 50) + "\n\n");
+                        System.out.printf("Feedback By:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+4), 50) + "\n");
+                        break;
+//                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                   }
+                   String continueEditing = StaticFunction.getUserInput("\nDo you wish to view another feedback?\n0.Yes\n1.No");
+                    if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
+                    viewFeedback();
+                        counter++;
+                    } else {
+                        counter++;
+                    }
+            }
+        }while(counter<3);
+                           
+        } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please select again!");
+                viewFeedback();
+        } 
+    }
+    
+    public void addReply(){
+        
+        List<List<String>> list=StaticFunction.getNotReplyData("Feedback.txt");
+        StaticFunction.getIndiReply(list,1);
+        int counter=1;
+        int test=0;
+        try {                    
+            String choice = null;
+            String choice1=null;
+//            String[] index={"Subject","Content","Feedback Type"};
+            String[] col = {"ID","Subject","Content","Feedback Type","Reply","Delivery Staff","Managing Staff"};
             do{
             if(counter==1){
                 choice=StaticFunction.getUserInput("Please select a feedback to reply");
                 if(Integer.parseInt(choice)<list.size()){                          
                    counter++;
-                }else{
+                }else if(Integer.parseInt(choice)==list.size()){
+                    ManagingStaffMenu msm = new ManagingStaffMenu();
+                    msm.runMenu();
+                }else {
                     continue;
                 }
             }
             if(counter==2){
-                   for (int i = 4,j=0; i < list.get(Integer.parseInt(choice)).size(); i++,j++) {
-                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
-                   }                
-                choice1=StaticFunction.getUserInput("Please select a component to be changed:");
+                   for (int i = 1,j=0; i < list.get(Integer.parseInt(choice)).size()-1;) {
+                        System.out.printf("Subject:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i), 50) + "\n\n");
+                        System.out.printf("Content:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+1), 50) + "\n\n");
+                        System.out.printf("Feedback Type:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+2), 50) + "\n");
+                        break;
+//                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                   }
+                choice1 = "1";
                 test= Integer.parseInt(choice1)+2;
-                System.out.println(col.length);
                 if(test<col.length){
-                    String value=StaticFunction.getUserInput("Old information: "+index[Integer.parseInt(choice1)]+"= "+list.get(Integer.parseInt(choice)).get(test)+"\n");
+                    String value=StaticFunction.getUserInput("Please add a reply:");
                     String confirmation=StaticFunction.getUserInput("Are you sure you want to update this information?\n0.Yes\n1.No");
-                    
                     if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                        editUserFile(col,list.get(Integer.parseInt(choice)).get(0), index[Integer.parseInt(choice1)], value);
-                        String continueEditing=StaticFunction.getUserInput("Do you wish to continue editing details of this user?\n0.Yes\n1.No");
-                        
+                        editFeedbackFile(col,list.get(Integer.parseInt(choice)).get(0), choice1, value);
+                        String continueEditing=StaticFunction.getUserInput("Do you wish to reply another feedback?\n0.Yes\n1.No");
                         if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| confirmation.equals("yes")){
-                            list=StaticFunction.getFileData("User.txt");
-                            continue;
+                            addReply();
+                            break;
+//                            list=StaticFunction.getFileData("Feedback.txt");
+//                            continue;
                         }else{
                            counter++; 
                         }
@@ -580,9 +628,11 @@ public class ManagingStaff extends User{
         }while(counter<3);
                            
         } catch (NumberFormatException e) {
-            System.out.println(e);
-        } 
+                System.out.println("Invalid selection. Please select again!");
+                addReply();
+        }  
     }
+    
     public void editProfile(){
         int counter=1;
         String[] col = {"ID","Password","Full Name","Address","Phone","Role"};

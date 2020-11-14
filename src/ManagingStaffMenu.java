@@ -10,8 +10,8 @@ public class ManagingStaffMenu implements Menu {
     public void runMenu(){
         User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
         ManagingStaff msf = new ManagingStaff(usr);
-        System.out.println(msf.getLoginid());
-        System.out.println(msf.getPhone());          
+//        System.out.println(msf.getLoginid());
+//        System.out.println(msf.getPhone());          
         StaticFunction.printHeader();
         while (!exit) {
             printMenu();

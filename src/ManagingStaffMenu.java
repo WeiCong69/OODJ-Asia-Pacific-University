@@ -42,7 +42,7 @@ public class ManagingStaffMenu {
         StaticFunction.printHeader();
         while (!exit) {
             printMenu();
-            int choice = StaticFunction.getMenuChoice(10);
+            int choice = StaticFunction.getMenuChoice(12);
             performAction(choice);
         }        
     }
@@ -73,22 +73,7 @@ public class ManagingStaffMenu {
         System.out.println("0) Exit Program");
     }
 
-    private int getMenuChoice() {
-        Scanner keyboard = new Scanner(System.in);
-        int choice = -1;
-        do {
-            System.out.print("Enter your choice: ");
-            try {
-                choice = Integer.parseInt(keyboard.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Numbers only please.");
-            }
-            if (choice < 0 || choice > 9) {
-                System.out.println("Choice outside of range. Please chose again.");
-            }
-        } while (choice < 0 || choice > 9);
-        return choice;
-    }
+
     
     private void performAction(int choice) {
         switch (choice) {
@@ -178,7 +163,7 @@ public class ManagingStaffMenu {
     public void runOrderMenu(){
         while (!exitOrder) {
             printOrderMenu();
-            int choice = getMenuChoice();
+            int choice = StaticFunction.getMenuChoice(4);
             performOrderAction(choice);
         }        
     }

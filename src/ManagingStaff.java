@@ -52,10 +52,8 @@ public class ManagingStaff extends User{
 
 
 
-    public void editUser(){
-        
+    public void editUser(){       
         List<List<String>> list=StaticFunction.getFileData("User.txt");
-        StaticFunction.getSelectionList(list,0);
         int counter=1;
         int test=0;
         try {                    
@@ -65,18 +63,26 @@ public class ManagingStaff extends User{
             String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
             do{
             if(counter==1){
+                StaticFunction.getSelectionList(list,0);
                 choice=StaticFunction.getUserInput("Please select a user");
                 if(Integer.parseInt(choice)<list.size()){                          
                    counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    return;
                 }else{
-                    continue;
+                    continue;                    
                 }
             }
             if(counter==2){
-                   for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
+                for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
                        System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
-                   }                
+                }
+                System.out.println("3. Exit from editting profile");
                 choice1=StaticFunction.getUserInput("Please select a component to be changed:");
+                if(Integer.parseInt(choice1)==3){
+                    counter--;
+                    continue;
+                }
                 test= Integer.parseInt(choice1)+2;
                 System.out.println(col.length);
                 if(test<col.length){
@@ -584,14 +590,17 @@ public class ManagingStaff extends User{
                 System.out.println("1. Update Name");
                 System.out.println("2. Update Address");
                 System.out.println("3. Update Phone Number");
+                System.out.println("4. Exit");
                 choice=Integer.parseInt(StaticFunction.getUserInput("Please select a component"));
-                if(choice>0 || choice <3){
+                if(choice>-1 || choice <5){
                     switch(choice){
                         case 0:
                             String oldPass=StaticFunction.getUserInput("PLease enter old password:");
                             if(oldPass.equals(this.password)){
                                 String newPass=StaticFunction.getUserInput("Password Verified!Please key in new password");
                                 editUserFile(col,this.loginid,"Password",newPass);                            
+                            }else{
+                                System.out.println("Password does not match");
                             }
                             break;
                         case 1:
@@ -606,6 +615,9 @@ public class ManagingStaff extends User{
                             String newPhone=StaticFunction.getUserInput("Current Phone ->"+this.phone+"\nPlease enter new Phone Number.\n");
                             editUserFile(col,this.loginid,"Phone",newPhone);
                             break;
+                      case 4:
+                            System.out.println("Edit Profile exit sucessfully");
+                            return;
                       default:
                           System.out.println("Some error has occur.Please choose again");
                           continue;

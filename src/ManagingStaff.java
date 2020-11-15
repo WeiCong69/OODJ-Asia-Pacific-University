@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -696,7 +698,10 @@ public class ManagingStaff extends User{
     
     public void addOrder(){
         try{
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
         Scanner keyboard = new Scanner(System.in);
+        String assignto = null;
         int choice = -1;
         int choice1 = -1;
         if (items == 1){
@@ -790,8 +795,7 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 pw1.printf(bk.orderid + ",");
-                                pw1.printf("Pending" + ",");
-                                pw1.println(bk.id);
+                                pw1.println("Pending");
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -799,10 +803,13 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.println("International");
+                                    pw.printf("International" + ",");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.println("Domestic");
+                                    pw.printf("Domestic" + ",");
                                 }
+                                pw.printf(bk.orderid + ",");
+                                pw.printf(assignto + ",");
+                                pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
@@ -823,19 +830,21 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 pw1.printf(bk.orderid + ",");
-                                pw1.printf("Pending" + ",");
-                                pw1.println(bk.id);
+                                pw1.println("Pending");
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
-                                pw.printf(bk.parcelsize("Large") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
+                                pw.printf(bk.parcelsize("Small") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.println("International");
+                                    pw.printf("International" + ",");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.println("Domestic");
+                                    pw.printf("Domestic" + ",");
                                 }
+                                pw.printf(bk.orderid + ",");
+                                pw.printf(assignto + ",");
+                                pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     }
@@ -849,11 +858,11 @@ public class ManagingStaff extends User{
                     
                     String confirmation=StaticFunction.getUserInput("Do you want to add another parcel to this order?\n0.Yes\n1.No\n2.New Order");
                     if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                        System.out.println("working");
+//                        System.out.println("working");
                         items = 2;
                         addOrder();
                     } else if(confirmation.equals("2") || confirmation.equals("new")|| confirmation.equals("new order")|| confirmation.equals("New Order")){
-                        System.out.println("working 1");
+//                        System.out.println("working 1");
                         items = 1;
                         addOrder();
                     } else {

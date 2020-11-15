@@ -1,5 +1,8 @@
+import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ManagingStaffMenu implements Menu {
      boolean exit;
@@ -15,7 +18,7 @@ public class ManagingStaffMenu implements Menu {
         StaticFunction.printHeader();
         while (!exit) {
             printMenu();
-            int choice = StaticFunction.getMenuChoice(12);
+            int choice = StaticFunction.getMenuChoice(13);
             performAction(choice);
         }        
     }
@@ -43,6 +46,9 @@ public class ManagingStaffMenu implements Menu {
         System.out.println("-------------------"); 
         System.out.println("11) Edit Personal Profile");
         System.out.println("12) Restore User Account");
+        System.out.println("REPORT");
+        System.out.println("-------------------"); 
+        System.out.println("13) View Monthly Report");
         System.out.println("0) Exit Program");
     }
     
@@ -88,9 +94,18 @@ public class ManagingStaffMenu implements Menu {
             case 11:
                 msf.editProfile();
                 break;
-             case 12:
+            case 12:
                 msf.restoreUser();
-                break;               
+                break;
+            case 13:
+            {
+                try {
+                    msf.viewReport();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                break;
             default:
                 System.out.println("Unknown error has occured.");
         }

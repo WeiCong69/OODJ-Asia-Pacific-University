@@ -361,7 +361,7 @@ public class ManagingStaff extends User{
             File newFile = new File (tempFile);           
             //testing. to be replaced with data viewed
             //String ID,Password,Name,Address,Phone,Role;
-//            ID=Password=Name=Address=Phone=Role="";
+            //ID=Password=Name=Address=Phone=Role="";
             try {
                 FileWriter fw = new FileWriter(tempFile,true);
                 BufferedWriter bw = new BufferedWriter(fw);

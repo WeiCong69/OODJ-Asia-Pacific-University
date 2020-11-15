@@ -43,6 +43,14 @@ abstract class Parcel {
     public Integer getId() {
         return id;
     }
+
+    public Integer getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
+    }
     
     Integer orderid;
     Integer id;
@@ -50,6 +58,15 @@ abstract class Parcel {
     double weight;
     String deliverytype;
     String deliverysize;
+    String status;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public void setDeliverysize(String deliverysize) {
         this.deliverysize = deliverysize;

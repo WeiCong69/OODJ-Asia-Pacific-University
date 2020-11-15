@@ -48,8 +48,6 @@ public class SParcel extends Parcel{
         return null;
     }
     
-    public static void main(String[] args) {
-        
-    }
+
     
 }

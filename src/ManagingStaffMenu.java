@@ -111,7 +111,6 @@ public class ManagingStaffMenu implements Menu {
         }
     }
     public void printOrderMenu(){
-        //testing
                    System.out.println("1) Add New Parcel");
                    System.out.println("2) View List of Parcels");
                    System.out.println("3) Edit Parcel details");

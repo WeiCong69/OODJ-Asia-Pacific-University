@@ -8,11 +8,13 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class StaticFunction {
     //testing
@@ -242,7 +244,44 @@ public static String addLinebreaks(String input, int maxLineLength) {
     }
     return output.toString();
 }
-    
+
+public static void updataOrderStatus(){
+    FileWriter file = null;  
+    List <SParcel> parcel = new ArrayList<SParcel>();            
+    try{
+        String temp;            
+        File myfile = new File("Parcel.txt");
+        Scanner sc = new Scanner(myfile);            
+        file = new FileWriter("Parcel.txt", true);
+        while (sc.hasNext()){
+            temp = sc.nextLine();
+            List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+            //super(orderid =>7, id=>0, address=>1, weight=>2, deliverytype=>6, deliverysize=>3);
+            parcel.add(new SParcel(
+                        Integer.parseInt(items.get(7)),
+                        Integer.parseInt(items.get(0)),
+                        items.get(1),
+                        Double.parseDouble(items.get(2)),
+                        items.get(6),
+                        items.get(3),
+                        items.get(5)));                       
+            }
+        sc.close();
+        file.close();
+        Map < Integer, List < SParcel >> sortedParcel = parcel.stream().collect(
+        Collectors.groupingBy(SParcel::getOrderid));
+        for(Map.Entry< Integer, List < SParcel >> i: sortedParcel.entrySet()){
+              for(SParcel obj : i.getValue()){
+                System.out.println(i.getKey()+"=>"+obj.getStatus());  
+              }            
+        }        
+
+                   
+    } catch (IOException ex) {
+        System.out.println(ex.toString());
+    }    
+}
+   
     public static String getDate(int when){
         Date dt = new Date();
         Calendar c = Calendar.getInstance(); 
@@ -252,4 +291,5 @@ public static String addLinebreaks(String input, int maxLineLength) {
         SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy"); 
         return format1.format(dt);
     }
+
 }

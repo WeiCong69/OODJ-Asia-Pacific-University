@@ -366,7 +366,7 @@ public class ManagingStaff extends User{
             File newFile = new File (tempFile);           
             //testing. to be replaced with data viewed
             //String ID,Password,Name,Address,Phone,Role;
-//            ID=Password=Name=Address=Phone=Role="";
+            //ID=Password=Name=Address=Phone=Role="";
             try {
                 FileWriter fw = new FileWriter(tempFile,true);
                 BufferedWriter bw = new BufferedWriter(fw);
@@ -783,7 +783,8 @@ public class ManagingStaff extends User{
                                 Address,
                                 Weight,
                                 Integer.toString(deliverytype), 
-                                Integer.toString(deliverysize));
+                                Integer.toString(deliverysize),
+                                "Pending");
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);
@@ -800,7 +801,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.weight + ",");
                                 pw.printf(bk.parcelsize("Small") + ",");
                                 pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
-                                pw.printf("Pending" + ",");
+                                pw.printf(bk.getStatus()+ ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
                                 } else if (bk.deliverytype.equals("2")){
@@ -818,7 +819,8 @@ public class ManagingStaff extends User{
                                 Address,
                                 Weight,
                                 Integer.toString(deliverytype), 
-                                Integer.toString(deliverysize));
+                                Integer.toString(deliverysize),
+                                "pending");
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);

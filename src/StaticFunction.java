@@ -2,8 +2,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -239,5 +242,14 @@ public static String addLinebreaks(String input, int maxLineLength) {
     }
     return output.toString();
 }
-
+    
+    public static String getDate(int when){
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(dt); 
+        c.add(Calendar.MONTH, -when);
+        dt = c.getTime();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy"); 
+        return format1.format(dt);
+    }
 }

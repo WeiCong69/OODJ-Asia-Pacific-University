@@ -622,7 +622,6 @@ public class ManagingStaff extends User{
                 addReply();
         }  
     }
-<<<<<<< HEAD
 //    public void editProfile(){
 //        int counter=1;
 //        String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
@@ -683,69 +682,8 @@ public class ManagingStaff extends User{
 //            System.out.println(e);
 //        }        
 //    }
-=======
-    
-    public void editProfile(){
-        int counter=1;
-        String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
-        try {                    
-            int choice = 0;
-            String choice1=null;
-            do{
-            if(counter==1){
-                System.out.println("0. Update Password");
-                System.out.println("1. Update Name");
-                System.out.println("2. Update Address");
-                System.out.println("3. Update Phone Number");
-                System.out.println("4. Exit");
-                choice=Integer.parseInt(StaticFunction.getUserInput("Please select a component"));
-                if(choice>-1 || choice <5){
-                    switch(choice){
-                        case 0:
-                            String oldPass=StaticFunction.getUserInput("PLease enter old password:");
-                            if(oldPass.equals(this.password)){
-                                String newPass=StaticFunction.getUserInput("Password Verified!Please key in new password");
-                                editUserFile(col,this.loginid,"Password",newPass);                            
-                            }else{
-                                System.out.println("Password does not match");
-                            }
-                            break;
-                        case 1:
-                            String newName=StaticFunction.getUserInput("Current Name ->"+this.name+"\nPlease enter new Name.\n");
-                            editUserFile(col,this.loginid,"Full Name",newName);
-                            break;                            
-                        case 2:
-                            String newAddress=StaticFunction.getUserInput("Current Address ->"+this.address+"\nPlease enter new address.\n");
-                            editUserFile(col,this.loginid,"Address",newAddress);
-                            break;
-                      case 3:
-                            String newPhone=StaticFunction.getUserInput("Current Phone ->"+this.phone+"\nPlease enter new Phone Number.\n");
-                            editUserFile(col,this.loginid,"Phone",newPhone);
-                            break;
-                      case 4:
-                            System.out.println("Edit Profile exit sucessfully");
-                            return;
-                      default:
-                          System.out.println("Some error has occur.Please choose again");
-                          continue;
-                    };
-                    String confirmation=StaticFunction.getUserInput("Do you wish to continue updating your account details?\n0.Yes\n1.No");
-                    if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                        continue;
-                    }else{
-                        counter++;                        
-                    }                    
-                }else{
-                    continue;
-                }
-            }                         
-        }while(counter<2);
-                           
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }        
-    }
->>>>>>> ca958fdb59d6a2ed7583a4f640a45d8308177d31
+
+  
     
     public void addOrder(){
         try{

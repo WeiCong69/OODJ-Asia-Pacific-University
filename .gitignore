@@ -7,3 +7,10 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+Order.txt
+Feedback.txt
+Parcel.txt
+User.txt
+DeletedUser.txt
+DeletedFeedback.txt

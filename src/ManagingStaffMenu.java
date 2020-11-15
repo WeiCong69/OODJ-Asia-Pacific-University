@@ -50,7 +50,9 @@ public class ManagingStaffMenu implements Menu {
         switch (choice) {
             case 0:
                 System.out.println("Thank you for using our application.");
-                System.exit(0);
+                //System.exit(0);
+                Login login=new Login();
+                login.runLogin();
                 break;
             case 1: 
                 msf.addOrder();

@@ -263,15 +263,16 @@ public static void updataOrderStatus(){
                         items.get(1),
                         Double.parseDouble(items.get(2)),
                         items.get(6),
-                        items.get(3)));
-        }
+                        items.get(3),
+                        items.get(5)));                       
+            }
         sc.close();
         file.close();
         Map < Integer, List < SParcel >> sortedParcel = parcel.stream().collect(
         Collectors.groupingBy(SParcel::getOrderid));
         for(Map.Entry< Integer, List < SParcel >> i: sortedParcel.entrySet()){
               for(SParcel obj : i.getValue()){
-                System.out.println(i.getKey()+"=>"+obj.getId());  
+                System.out.println(i.getKey()+"=>"+obj.getStatus());  
               }            
         }        
 

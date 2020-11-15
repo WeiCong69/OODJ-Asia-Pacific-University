@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class SParcel extends Parcel{
 
-    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize) {
-        super(orderid, id, address, weight, deliverytype, deliverysize);
+    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize,String status) {
+        super(orderid, id, address, weight, deliverytype, deliverysize,status);
     }
     
     public String parcelsize(String Size){

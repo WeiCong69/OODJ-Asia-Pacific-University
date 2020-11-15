@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 public class DeliveryStaff extends User{
     
-    //testing
     public DeliveryStaff(User a) {
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }

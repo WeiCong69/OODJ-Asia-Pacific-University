@@ -3,14 +3,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//kadhhar babi
 
 public class ManagingStaff extends User{
     public String orderid = null;
@@ -704,7 +709,7 @@ public class ManagingStaff extends User{
         String id = StaticFunction.randomnumbers();
         String Address = StaticFunction.getUserInput("Enter address");
         String CustName = StaticFunction.getUserInput("Enter customer name");
-        int Weight = Integer.parseInt(StaticFunction.getUserInput("Enter weight"));
+        int Weight = Integer.parseInt(StaticFunction.getUserInput("Enter weight (KG)"));
         
         do { 
             System.out.println("Please select a delivery type:");
@@ -870,5 +875,149 @@ public class ManagingStaff extends User{
                     addOrder();
         }
     }
+    
+    public void viewReport() throws ParseException{
+        ManagingStaffMenu msm = new ManagingStaffMenu();
+        List<List<String>> list=StaticFunction.getFileData("Parcel.txt");
+//        StaticFunction.getSelectionList(list,0);
+        System.out.println("1) 1 Month");
+        System.out.println("2) 2 Month");
+        System.out.println("3) 3 Month");
+        System.out.println("4) 4 Month");
+        System.out.println("5) 5 Month");
+        System.out.println("6) 6 Month");
+        System.out.println("7) Exit Selection");
+        int counter=1;
+        int test=0;
+        try {                    
+            String choice = "";
+            String[] col = {"ParcelID","Address","Weight","Size","Price","ParcelStatus","DeliveryType","OrderID","AssignTo","Date"};
+            do{
+            if(counter==1){
+                choice=StaticFunction.getUserInput("Please select the duration of the report");
+                
+                try {
+                if (Integer.parseInt(choice) <= 0 || Integer.parseInt(choice) > 7) {
+                    System.out.println("Choice outside of range. Please choose again.");
+                } else if (Integer.parseInt(choice) == 7){
+                    msm.runMenu();
+                } else if (Integer.parseInt(choice) > 0 || Integer.parseInt(choice) < 7){
+                    String fileName = "Parcel.txt";
+                String filepath = fileName;
+                String tempFile = "Temp.txt";
+                
+                File oldFile = new File (filepath);
+                File newFile = new File (tempFile);
+                           
+                String ParcelID = "";
+                String Address = "";
+                String Weight = "";
+                String Size = "";
+                String Price = "";  
+                String ParcelStatus = "";
+                String DeliveryType = "";
+                String OrderID = "";
+                String AssignTo = "";
+                String Date = "";
+                String comparison = "";
+                
+            try {
+                
+                x = new Scanner(new File (filepath));
+                
+                double TotalPrice = 0;
+                
+                int count1 = 0;
+                int count2 = 0;
+                int count3 = 0;
+                int count4 = 0;
+                int count5 = 0;
+                int count6 = 0;
+                int count7 = 0;
+                
+                x.useDelimiter("[,\n]");
+                
+                while (x.hasNext()){
+                    ParcelID = x.next();
+                    Address = x.next(); 
+                    Weight = x.next();
+                    Size = x.next();
+                    Price = x.next();
+                    ParcelStatus = x.next();
+                    DeliveryType = x.next();
+                    OrderID = x.next();
+                    AssignTo = x.next();
+                    Date = x.next();
+                    
+                    for (int i=1; i<7; i++){
+                    if(choice.equals(String.valueOf(i))){   
+                    SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date d1 = sdformat.parse(Date); 
+                    Date d2 = sdformat.parse(StaticFunction.getDate(i));
+                    
+                        if (d1.compareTo(d2) > 0){
+                            TotalPrice = TotalPrice + Double.parseDouble(Price);
+                            if (DeliveryType.equals("International")){
+                                count1 = count1 + 1;
+                            }
+                            if (DeliveryType.equals("Domestic")){
+                                count2 = count2 + 1;
+                            }
+                            if (ParcelStatus.equals("Pending")){
+                                count3 = count3 + 1;
+                            }
+                            if (ParcelStatus.equals("On Delivery")){
+                                count4 = count4 + 1;
+                            }
+                            if (ParcelStatus.equals("Delivered")){
+                                count5 = count5 + 1;
+                            }
+                            if (Size.equals("Small")){
+                                count6 = count6 + 1;
+                            }
+                            if (Size.equals("Large")){
+                                count7 = count7 + 1;
+                            }
+                        }
+                    }
+                  }
+                }
+                System.out.println("Total Earn RM" + TotalPrice);
+                System.out.println("Total parcel for Domestic Delivery: " + count2);
+                System.out.println("Total parcel for International Delivery: " + count1);
+                System.out.println("Total parcel status in pending: " + count3);
+                System.out.println("Total parcel status in On Delivery: " + count4);
+                System.out.println("Total parcel status in Delivered: " + count5);
+                System.out.println("Total small parcel size: " + count6);
+                System.out.println("Total large parcel size: " + count7);
+                x.close();
+                    }catch(IOException e)
+                    {
+                        System.out.println(e);
+                        x.close();
+                    }
+                    String confirmation=StaticFunction.getUserInput("Do you want to view another report?\n0.Yes\n1.No");
+                    if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+//                        System.out.println("working");
+                        viewReport();
+                    } else {
+                        msm.runMenu();
+                    }
+                }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid selection. Numbers only please.");
+                }
+            }
+            
+            
+        }while(counter<3);
+                           
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+                System.out.println("Invalid selection. Please select again!");
+                viewReport();
+        } 
+    }
+    
 }
 

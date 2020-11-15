@@ -104,7 +104,6 @@ public class ManagingStaffMenu implements Menu {
     }
 
     public void runOrderMenu(){
-        //testing
         while (!exitOrder) {
             printOrderMenu();
             int choice = StaticFunction.getMenuChoice(4);

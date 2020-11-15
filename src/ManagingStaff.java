@@ -3,21 +3,33 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//kadhar babi
+//kadhar anjing
+// kaddhar puki
 public class ManagingStaff extends User{
+    
+    public String orderid = null;
+    public int items = 1;
+    
     public static Scanner x;
     ArrayList<String> order = new ArrayList<>();
     ArrayList<String> parcel = new ArrayList<>();
     ArrayList<String> feedback = new ArrayList<>();
     
     public ManagingStaff(User a) {
-
+//        this.name=a.name;
+//        this.password=a.password;
+//        this.name=a.name;
+//        this.address=a.address;
+//        this.phone=a.phone;
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }
 
@@ -289,65 +301,65 @@ public class ManagingStaff extends User{
 }
     
 
-//    public void editUserFile(String[] list,String id,String index,String newValue){
-//            LinkedHashMap<String, String> test2= new LinkedHashMap<String,String>();                
-//            String filepath = "User.txt";
-//            String tempFile = "Temp.txt";
-//            File oldFile = new File (filepath);
-//            File newFile = new File (tempFile);           
-//            //testing. to be replaced with data viewed
-//            //String ID,Password,Name,Address,Phone,Role;
-////            ID=Password=Name=Address=Phone=Role="";
-//            try {
-//                FileWriter fw = new FileWriter(tempFile,true);
-//                BufferedWriter bw = new BufferedWriter(fw);
-//                PrintWriter pw = new PrintWriter(bw);
-//                x = new Scanner(new File (filepath));
-//                x.useDelimiter("[,\n]");
-//                while (x.hasNext()){
-//                    for(String i: list){
-//                        test2.put(i,x.next());
-//                    }                    
-//                    if(test2.get("ID").equals(id)){
-//                        
-//                        System.out.println(test2.get("ID"));
-//                        switch(index){
-//                                case "Full Name":
-//                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ newValue +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
-//                                    break;
-//                                case "Address":
-//                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ newValue + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
-//                                   break;
-//                                case "Phone":
-//                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + newValue + ","+test2.get("Role") + "\n");                       
-//                                    break;
-//                                 case "Password":
-//                                    pw.printf(test2.get("ID") +","+ newValue +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
-//                                    break;
-//                                default:
-//                                    System.out.println("swithc case not working");
-//                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
-//                        }                                    
-//                    }else{
-//                         pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
-//                    }
-//                }
-//                x.close();
-//                pw.flush();
-//                pw.close();
+    public void editUserFile(String[] list,String id,String index,String newValue){
+            LinkedHashMap<String, String> test2= new LinkedHashMap<String,String>();                
+            String filepath = "User.txt";
+            String tempFile = "Temp.txt";
+            File oldFile = new File (filepath);
+            File newFile = new File (tempFile);           
+            //testing. to be replaced with data viewed
+            //String ID,Password,Name,Address,Phone,Role;
+//            ID=Password=Name=Address=Phone=Role="";
+            try {
+                FileWriter fw = new FileWriter(tempFile,true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                x = new Scanner(new File (filepath));
+                x.useDelimiter("[,\n]");
+                while (x.hasNext()){
+                    for(String i: list){
+                        test2.put(i,x.next());
+                    }                    
+                    if(test2.get("ID").equals(id)){
+                        
+                        System.out.println(test2.get("ID"));
+                        switch(index){
+                                case "Full Name":
+                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ newValue +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    break;
+                                case "Address":
+                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ newValue + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                   break;
+                                case "Phone":
+                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + newValue + ","+test2.get("Role") + "\n");                       
+                                    break;
+                                 case "Password":
+                                    pw.printf(test2.get("ID") +","+ newValue +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    break;
+                                default:
+                                    System.out.println("swithc case not working");
+                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                        }                                    
+                    }else{
+                         pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }catch(IOException e)
+            {
+                System.out.println(e);
+                x.close();
 //                oldFile.delete();
 //                File dump = new File(filepath);
 //                newFile.renameTo(dump);
-//            }catch(IOException e)
-//            {
-//                System.out.println(e);
-//                x.close();
-////                oldFile.delete();
-////                File dump = new File(filepath);
-////                newFile.renameTo(dump);
-//            }
-//            System.out.println("Changes made successfully");
-//    }
+            }
+            System.out.println("Changes made successfully");
+    }
     
     public void editFeedbackFile(String[] list,String id,String index,String newValue){
             LinkedHashMap<String, String> test2= new LinkedHashMap<String,String>();                
@@ -622,72 +634,74 @@ public class ManagingStaff extends User{
                 addReply();
         }  
     }
-//    public void editProfile(){
-//        int counter=1;
-//        String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
-//        try {                    
-//            int choice = 0;
-//            String choice1=null;
-//            do{
-//            if(counter==1){
-//                System.out.println("0. Update Password");
-//                System.out.println("1. Update Name");
-//                System.out.println("2. Update Address");
-//                System.out.println("3. Update Phone Number");
-//                System.out.println("4. Exit");
-//                choice=Integer.parseInt(StaticFunction.getUserInput("Please select a component"));
-//                if(choice>-1 || choice <5){
-//                    switch(choice){
-//                        case 0:
-//                            String oldPass=StaticFunction.getUserInput("PLease enter old password:");
-//                            if(oldPass.equals(this.password)){
-//                                String newPass=StaticFunction.getUserInput("Password Verified!Please key in new password");
-//                                editUserFile(col,this.loginid,"Password",newPass);                            
-//                            }else{
-//                                System.out.println("Password does not match");
-//                            }
-//                            break;
-//                        case 1:
-//                            String newName=StaticFunction.getUserInput("Current Name ->"+this.name+"\nPlease enter new Name.\n");
-//                            editUserFile(col,this.loginid,"Full Name",newName);
-//                            break;                            
-//                        case 2:
-//                            String newAddress=StaticFunction.getUserInput("Current Address ->"+this.address+"\nPlease enter new address.\n");
-//                            editUserFile(col,this.loginid,"Address",newAddress);
-//                            break;
-//                      case 3:
-//                            String newPhone=StaticFunction.getUserInput("Current Phone ->"+this.phone+"\nPlease enter new Phone Number.\n");
-//                            editUserFile(col,this.loginid,"Phone",newPhone);
-//                            break;
-//                      case 4:
-//                            System.out.println("Edit Profile exit sucessfully");
-//                            return;
-//                      default:
-//                          System.out.println("Some error has occur.Please choose again");
-//                          continue;
-//                    };
-//                    String confirmation=StaticFunction.getUserInput("Do you wish to continue updating your account details?\n0.Yes\n1.No");
-//                    if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-//                        continue;
-//                    }else{
-//                        counter++;                        
-//                    }                    
-//                }else{
-//                    continue;
-//                }
-//            }                         
-//        }while(counter<2);
-//                           
-//        } catch (NumberFormatException e) {
-//            System.out.println(e);
-//        }        
-//    }
-
-  
+    
+    public void editProfile(){
+        int counter=1;
+        String[] col = {"ID","Password","Full Name","Address","Phone","Role"};
+        try {                    
+            int choice = 0;
+            String choice1=null;
+            do{
+            if(counter==1){
+                System.out.println("0. Update Password");
+                System.out.println("1. Update Name");
+                System.out.println("2. Update Address");
+                System.out.println("3. Update Phone Number");
+                System.out.println("4. Exit");
+                choice=Integer.parseInt(StaticFunction.getUserInput("Please select a component"));
+                if(choice>-1 || choice <5){
+                    switch(choice){
+                        case 0:
+                            String oldPass=StaticFunction.getUserInput("PLease enter old password:");
+                            if(oldPass.equals(this.password)){
+                                String newPass=StaticFunction.getUserInput("Password Verified!Please key in new password");
+                                editUserFile(col,this.loginid,"Password",newPass);                            
+                            }else{
+                                System.out.println("Password does not match");
+                            }
+                            break;
+                        case 1:
+                            String newName=StaticFunction.getUserInput("Current Name ->"+this.name+"\nPlease enter new Name.\n");
+                            editUserFile(col,this.loginid,"Full Name",newName);
+                            break;                            
+                        case 2:
+                            String newAddress=StaticFunction.getUserInput("Current Address ->"+this.address+"\nPlease enter new address.\n");
+                            editUserFile(col,this.loginid,"Address",newAddress);
+                            break;
+                      case 3:
+                            String newPhone=StaticFunction.getUserInput("Current Phone ->"+this.phone+"\nPlease enter new Phone Number.\n");
+                            editUserFile(col,this.loginid,"Phone",newPhone);
+                            break;
+                      case 4:
+                            System.out.println("Edit Profile exit sucessfully");
+                            return;
+                      default:
+                          System.out.println("Some error has occur.Please choose again");
+                          continue;
+                    };
+                    String confirmation=StaticFunction.getUserInput("Do you wish to continue updating your account details?\n0.Yes\n1.No");
+                    if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+                        continue;
+                    }else{
+                        counter++;                        
+                    }                    
+                }else{
+                    continue;
+                }
+            }                         
+        }while(counter<2);
+                           
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }        
+    }
     
     public void addOrder(){
         try{
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
         Scanner keyboard = new Scanner(System.in);
+        String assignto = null;
         int choice = -1;
         int choice1 = -1;
         if (items == 1){
@@ -781,8 +795,7 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 pw1.printf(bk.orderid + ",");
-                                pw1.printf("Pending" + ",");
-                                pw1.println(bk.id);
+                                pw1.println("Pending");
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -790,10 +803,13 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.println("International");
+                                    pw.printf("International" + ",");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.println("Domestic");
+                                    pw.printf("Domestic" + ",");
                                 }
+                                pw.printf(bk.orderid + ",");
+                                pw.printf(assignto + ",");
+                                pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
@@ -814,19 +830,21 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 pw1.printf(bk.orderid + ",");
-                                pw1.printf("Pending" + ",");
-                                pw1.println(bk.id);
+                                pw1.println("Pending");
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
-                                pw.printf(bk.parcelsize("Large") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
+                                pw.printf(bk.parcelsize("Small") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.println("International");
+                                    pw.printf("International" + ",");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.println("Domestic");
+                                    pw.printf("Domestic" + ",");
                                 }
+                                pw.printf(bk.orderid + ",");
+                                pw.printf(assignto + ",");
+                                pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
                         }
                     }
@@ -840,11 +858,11 @@ public class ManagingStaff extends User{
                     
                     String confirmation=StaticFunction.getUserInput("Do you want to add another parcel to this order?\n0.Yes\n1.No\n2.New Order");
                     if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                        System.out.println("working");
+//                        System.out.println("working");
                         items = 2;
                         addOrder();
                     } else if(confirmation.equals("2") || confirmation.equals("new")|| confirmation.equals("new order")|| confirmation.equals("New Order")){
-                        System.out.println("working 1");
+//                        System.out.println("working 1");
                         items = 1;
                         addOrder();
                     } else {

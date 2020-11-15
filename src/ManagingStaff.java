@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//kadhar babi
-//kadhar anjing
-// kaddhar puki
+
 public class ManagingStaff extends User{
     
     public String orderid = null;

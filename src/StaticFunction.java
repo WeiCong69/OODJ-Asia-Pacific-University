@@ -219,7 +219,7 @@ public static void writeToFile(String[] params,String FileName){
             file = new FileWriter(FileName, true);            
             // to write user details onto the text file.
                     PrintWriter pw = new PrintWriter(file); 
-                    pw.printf(String.valueOf(write));
+                    pw.println(String.valueOf(write));
                     file.close();
                     pw.close();
                     sc.close();

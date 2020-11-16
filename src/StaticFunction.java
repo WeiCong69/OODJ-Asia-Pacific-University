@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -17,9 +19,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StaticFunction {
-    //testing
-    //sadljbasjdsba
-    
+    public static Scanner x;
     public static String getUserInput(String question){
         //get username from user
         Scanner keyboard = new Scanner(System.in);
@@ -245,7 +245,7 @@ public static String addLinebreaks(String input, int maxLineLength) {
     return output.toString();
 }
 
-public static void updataOrderStatus(){
+public static void updateOrderStatus(){
     FileWriter file = null;  
     List <SParcel> parcel = new ArrayList<SParcel>();            
     try{
@@ -271,12 +271,27 @@ public static void updataOrderStatus(){
         Map < Integer, List < SParcel >> sortedParcel = parcel.stream().collect(
         Collectors.groupingBy(SParcel::getOrderid));
         for(Map.Entry< Integer, List < SParcel >> i: sortedParcel.entrySet()){
-//              for(SParcel obj : i.getValue()){
-//                System.out.println(i.getKey()+"=>"+obj.getStatus());  
-//              } 
-            if(i.getValue().stream().map(SParcel::getStatus).filter("Delivered"::equals).findFirst().isPresent()){
-                System.out.println("yes");
+            for (int j = 0; j <i.getValue().size(); j++) {
+                  SParcel obj = i.getValue().get(j);
+                  //System.out.println(i.getValue().size());
+                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("on Delivery") ){
+                      break;
+                  }else{
+                      if(j==i.getValue().size()-1){
+                          editOrderFile(obj.getOrderid(),"Delivered");
+                      }
+                  }                
             }
+//            for(SParcel obj : i.getValue()){
+//                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("on delivery") ){
+//                      continue;
+//                  }else{
+//                      System.out.println("no");
+//                  }
+//              } 
+//            if(i.getValue().stream().map(SParcel::getStatus).filter("Delivered"::equals).findFirst().isPresent()){
+//                System.out.println("yes");
+//            }
         }        
 
                    
@@ -284,7 +299,45 @@ public static void updataOrderStatus(){
         System.out.println(ex.toString());
     }    
 }
-   
+
+    public static void editOrderFile(int id,String status){    
+            String filepath = "Order.txt";
+            String tempFile = "Temp.txt";
+            File oldFile = new File (filepath);
+            File newFile = new File (tempFile);           
+            try {
+                FileWriter fw = new FileWriter(tempFile,true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                x = new Scanner(new File (filepath));
+                //x.useDelimiter("[,\n]");
+                while (x.hasNext()){
+                    String temp = x.next();
+                    List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                    //System.out.println(parcels.size());
+                    if(Integer.parseInt(parcels.get(0))==id){
+                       pw.printf(id+","+status+"\n");                                         
+                    }else{
+                       pw.printf(parcels.get(0)+","+parcels.get(1)+"\n");                                                                 
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }catch(IOException e)
+            {
+                System.out.println(e);
+                x.close();
+//                oldFile.delete();
+//                File dump = new File(filepath);
+//                newFile.renameTo(dump);
+            }
+            System.out.println("Changes made successfully");
+    }    
+
     public static String getDate(int when){
         Date dt = new Date();
         Calendar c = Calendar.getInstance(); 

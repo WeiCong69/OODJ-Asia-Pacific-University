@@ -16,7 +16,7 @@ public class Login {
     public static void main(String[] args) {
         Login login = new Login();
         login.runLogin();
-//        StaticFunction.updataOrderStatus();
+        StaticFunction.updateOrderStatus();
     }
 
     

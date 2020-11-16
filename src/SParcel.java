@@ -45,7 +45,7 @@ public class SParcel extends Parcel{
     @Override
     public String toString()
     {
-        return null;
+       return  this.orderid+","+this.status;
     }
     
 

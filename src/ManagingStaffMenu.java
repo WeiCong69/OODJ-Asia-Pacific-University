@@ -28,14 +28,13 @@ public class ManagingStaffMenu implements Menu {
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");
         System.out.println("1) Make an Order");
-        System.out.println("2) Edit Order Details");
-        System.out.println("3) View Order Details"); 
+        System.out.println("2) View Order Details"); 
         System.out.println("MANAGE USER");
         System.out.println("-------------------");
-        System.out.println("4) Register New User");
-        System.out.println("5) Edit User Details");
-        System.out.println("6) Delete User Account");
-        System.out.println("10) Restore Deleted User Account");
+        System.out.println("3) Register New User");
+        System.out.println("4) Edit User Details");
+        System.out.println("5) Delete User Account");
+        System.out.println("6) Restore Deleted User Account");
         System.out.println("MANAGE FEEDBACK");
         System.out.println("-------------------");        
         System.out.println("7) View Feedback");
@@ -64,20 +63,19 @@ public class ManagingStaffMenu implements Menu {
                 msf.addOrder();
                break;
             case 2:
-                //makeADeposit();
+                msf.viewOrderParcel();
                 break;
             case 3:
-                //makeAWithdrawal();
-                break;
-            case 4:
                 msf.registerNewUser();
                 //listBalances();
                 break;
-            case 5:
+            case 4:
                 msf.editUser();
                 break;
-            case 6:
+            case 5:
                 msf.deleteUser1();
+                break;
+            case 6:
                 break;
             case 7:
                 msf.viewFeedback();

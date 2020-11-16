@@ -271,9 +271,12 @@ public static void updataOrderStatus(){
         Map < Integer, List < SParcel >> sortedParcel = parcel.stream().collect(
         Collectors.groupingBy(SParcel::getOrderid));
         for(Map.Entry< Integer, List < SParcel >> i: sortedParcel.entrySet()){
-              for(SParcel obj : i.getValue()){
-                System.out.println(i.getKey()+"=>"+obj.getStatus());  
-              }            
+//              for(SParcel obj : i.getValue()){
+//                System.out.println(i.getKey()+"=>"+obj.getStatus());  
+//              } 
+            if(i.getValue().stream().map(SParcel::getStatus).filter("Delivered"::equals).findFirst().isPresent()){
+                System.out.println("yes");
+            }
         }        
 
                    

@@ -145,6 +145,16 @@ public static void getSelectionList(List<List<String>> a,int index){
     }
     System.out.println(exit+". Exit selection");
 } 
+
+public static void getSelectionListOrder(List<List<String>> a,int index,int index2){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+//            for (int j = 0; j < a.get(i).size(); j++) {
+                System.out.println(i+". "+a.get(i).get(index));                
+//            }
+    }
+    System.out.println(exit+". Exit selection");
+} 
     
     public static String randomnumbers(){
         String val = "";
@@ -274,7 +284,7 @@ public static void updateOrderStatus(){
             for (int j = 0; j <i.getValue().size(); j++) {
                   SParcel obj = i.getValue().get(j);
                   //System.out.println(i.getValue().size());
-                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("on Delivery") ){
+                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("On Delivery") ){
                       break;
                   }else{
                       if(j==i.getValue().size()-1){

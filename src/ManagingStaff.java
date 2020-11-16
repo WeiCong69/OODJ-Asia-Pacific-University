@@ -778,13 +778,13 @@ public class ManagingStaff extends User{
             
                     if (Integer.toString(deliverysize).equals("1")){
                         SParcel sp = new SParcel(
-                                Integer.parseInt(orderid),
                                 Integer.parseInt(id),
                                 Address,
                                 Weight,
-                                Integer.toString(deliverytype), 
                                 Integer.toString(deliverysize),
-                                "Pending");
+                                "Pending",
+                                Integer.toString(deliverytype),
+                                Integer.parseInt(orderid));
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);
@@ -794,8 +794,10 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                if (items == 1){
                                 pw1.printf(bk.orderid + ",");
                                 pw1.println("Pending");
+                                }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -810,17 +812,17 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.orderid + ",");
                                 pw.printf(assignto + ",");
                                 pw.println(dtf.format(now));
-                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
                         SParcel sp = new SParcel(
-                                Integer.parseInt(orderid),
                                 Integer.parseInt(id),
                                 Address,
                                 Weight,
-                                Integer.toString(deliverytype), 
                                 Integer.toString(deliverysize),
-                                "pending");
+                                "Pending",
+                                Integer.toString(deliverytype),
+                                Integer.parseInt(orderid));
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);
@@ -830,13 +832,15 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                if (items == 1){
                                 pw1.printf(bk.orderid + ",");
                                 pw1.println("Pending");
+                                }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
-                                pw.printf(bk.parcelsize("Small") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
+                                pw.printf(bk.parcelsize("Large") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -984,7 +988,7 @@ public class ManagingStaff extends User{
                     }
                   }
                 }
-                System.out.println("Total Earn RM" + TotalPrice);
+                System.out.println("Total Earn RM " + TotalPrice);
                 System.out.println("Total parcel for Domestic Delivery: " + count2);
                 System.out.println("Total parcel for International Delivery: " + count1);
                 System.out.println("Total parcel status in pending: " + count3);
@@ -1018,6 +1022,59 @@ public class ManagingStaff extends User{
             System.out.println(e);
                 System.out.println("Invalid selection. Please select again!");
                 viewReport();
+        } 
+    }
+    
+    public void viewOrderParcel(){
+        List<List<String>> list=StaticFunction.getFileData("Order.txt");
+        StaticFunction.getSelectionListOrder(list,0,1);
+        int counter=1;
+        int test=0;
+        try {                    
+            String choice = null;
+            String choice1=null;
+//            String[] index={"Subject","Content","Feedback Type"};
+            String[] col = {"ParcelID","Address","Weight","Size","Price","ParcelStatus","DeliveryType","OrderID","AssignTo","Date"};
+            do{
+            if(counter==1){
+                choice=StaticFunction.getUserInput("Please select an order to view");
+                if(Integer.parseInt(choice)<list.size()){                          
+                   counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    ManagingStaffMenu msm = new ManagingStaffMenu();
+                    msm.runMenu();
+                }else {
+                    viewOrderParcel();
+                }
+            }
+            if(counter==2){
+                   for (int i = 1,j=0; i < list.get(Integer.parseInt(choice)).size()-1;) {
+                        System.out.printf("Subject:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i), 50) + "\n\n");
+                        System.out.printf("Content:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+1), 50) + "\n\n");
+                        System.out.printf("Feedback Type:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+2), 50) + "\n\n");
+                        System.out.printf("Reply:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+3), 50) + "\n\n");
+                        System.out.printf("Feedback By:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list.get(Integer.parseInt(choice)).get(i+4), 50) + "\n");
+                        break;
+//                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                   }
+                   String continueEditing = StaticFunction.getUserInput("\nDo you wish to view another feedback?\n0.Yes\n1.No");
+                    if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
+                    viewFeedback();
+                        counter++;
+                    } else {
+                        counter++;
+                    }
+            }
+        }while(counter<3);
+                           
+        } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please select again!");
+                viewFeedback();
         } 
     }
     

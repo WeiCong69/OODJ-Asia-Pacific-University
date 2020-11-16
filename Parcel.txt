@@ -1,4 +1,6 @@
-663494,1234,1234.0,Small Size,2468.0,Pending,International,668333,null,15/11/2020
-912983,1234,1234.0,Small Size,1234.0,Pending,Domestic,668333,null,15/11/2020
-96023,12345,12345.0,Small Size,24690.0,Pending,International,524132,null,15/09/2020
-989538,123123,123.0,Small Size,123.0,Pending,Domestic,425332,null,15/09/2020
+663494,1234,1234.0,Small Size,2468.0,Delivered,International,668333,null,15/11/2020
+916408,123,123.0,Large Size,369.0,Pending,International,429203,null,17/11/2020
+466930,123,123.0,Small Size,246.0,Pending,International,429203,null,17/11/2020
+730273,123,123.0,Large Size,369.0,Pending,International,448376,null,17/11/2020
+944514,123,123.0,Large Size,369.0,Pending,International,687915,null,17/11/2020
+813503,123,123.0,Large Size,246.0,Pending,Domestic,687915,null,17/11/2020

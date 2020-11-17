@@ -14,9 +14,10 @@ public class Login {
  
    
     public static void main(String[] args) {
-        Login login = new Login();
-        login.runLogin();
-        StaticFunction.updateOrderStatus();
+//        Login login = new Login();
+//        login.runLogin();
+        //StaticFunction.updateOrderStatus();
+        StaticFunction.returnAssignedParcelsCount();
     }
 
     

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -348,4 +348,30 @@ public static void updateOrderStatus(){
         return format1.format(dt);
     }
 
+    public static void returnAssignedParcelsCount() {
+
+    ArrayList<String> seussCountActivities = new ArrayList<String>() { {
+        add("findow");
+        add("Balloons");
+        add("Elephants");
+        add("Boom Bands");
+        add("findow");
+        add("Hakken-Kraks");
+        add("Hakken-Kraks");
+        add("Hakken-Kraks");
+        add("Elephants");
+    }};
+
+    Map<String, Integer> seussCount = new HashMap<String,Integer>();
+    for(String t: seussCountActivities) {
+       Integer i = seussCount.get(t);
+       if (i ==  null) {
+           i = 0;
+       }
+       seussCount.put(t, i + 1);
+    }
+    for (Map.Entry<String, Integer> entry : seussCount.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+    }
+}
 }

@@ -33,6 +33,16 @@ abstract class Parcel {
         this.status=status;
     }
     
+    public Parcel(Integer id, String address, double weight, String deliverysize, String status, String deliverytype, Integer orderid) {
+        this.id = id;
+        this.address = address;
+        this.weight = weight;
+        this.deliverysize = deliverysize;
+        this.status = status;
+        this.deliverytype = deliverytype;
+        this.orderid = orderid;
+    }
+    
     public abstract String parcelsize(String Size);
     
     public abstract String parcelprice(String Type, String Size, String Weight);
@@ -53,13 +63,16 @@ abstract class Parcel {
         this.orderid = orderid;
     }
     
-    Integer orderid;
     Integer id;
     String address;
     double weight;
-    String deliverytype;
     String deliverysize;
+    String Price;
     String status;
+    String deliverytype;
+    Integer orderid;
+    String assign;
+    String date;
 
     public void setStatus(String status) {
         this.status = status;

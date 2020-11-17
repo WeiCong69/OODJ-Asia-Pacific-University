@@ -3,18 +3,22 @@ import java.util.ArrayList;
 
 public class SParcel extends Parcel{
 
-    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize,String status) {
-        super(orderid, id, address, weight, deliverytype, deliverysize,status);
+    public SParcel(Integer id, String address, double weight, String deliverysize, String status, String deliverytype, Integer orderid) {
+        super(id, address, weight, deliverysize, status, deliverytype, orderid);
     }
     
+    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize, String status) {
+        super(orderid, id, address, weight, deliverytype, deliverysize, status);
+    }
+
     public String parcelsize(String Size){
-        String size = null;
+        String size1 = "";
         if (Size.equals("Small")){
-            size = "Small Size";
+            size1 = "Small Size";
         }else if (Size.equals("Large")){
-            size = "Large Size";
+            size1 = "Large Size";
         }
-        return size;
+        return size1;
     }
     
     public String parcelprice(String Type, String Size, String Weight){
@@ -45,7 +49,7 @@ public class SParcel extends Parcel{
     @Override
     public String toString()
     {
-       return  this.orderid+","+this.status;
+        return null;
     }
     
 

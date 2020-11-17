@@ -136,6 +136,31 @@ public static List getNotReplyData(String fileName){
                 return tempArr;
 } 
 
+public static List getIndiOrderData(String fileName, String id){
+            FileWriter file = null;
+            ArrayList<List<String>> tempArr = new ArrayList<List<String>>();            
+            try{
+            String temp;            
+            File myfile = new File(fileName);
+            Scanner sc = new Scanner(myfile);            
+            file = new FileWriter(fileName, true);
+            while (sc.hasNext()){
+                temp = sc.nextLine();
+                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                if (items.get(7).equals(id)){
+                tempArr.add(items);
+                }
+            }                              
+                   sc.close();
+                   file.close();
+                      return tempArr;
+                } catch (IOException ex) {
+                    System.out.println(ex.toString());
+         }
+
+                return tempArr;
+} 
+
 public static void getSelectionList(List<List<String>> a,int index){        
     int exit=a.size();
     for (int i = 0; i <a.size(); i++) {
@@ -144,6 +169,18 @@ public static void getSelectionList(List<List<String>> a,int index){
 //            }
     }
     System.out.println(exit+". Exit selection");
+} 
+
+public static void getSelectionListOrder(List<List<String>> a,int index,int index2){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+                System.out.println(i+". " + a.get(i).get(index) + " - " + a.get(i).get(index2));
+    }
+    System.out.println(exit+". Exit selection");
+}
+
+public static String getOrderSelection(List<List<String>> a,int index){
+    return a.get(index).get(0);
 } 
     
     public static String randomnumbers(){
@@ -180,6 +217,16 @@ public static void getReplyList(List<List<String>> a,int index){
     }
     System.out.println(exit+". Exit selection");
 } 
+
+public static void getIndiOrder(List<List<String>> a,int index, int index1, String id){        
+    int exit=a.size();
+    for (int i = 0; i <a.size(); i++) {
+        if (a.get(i).get(7).equals(id)){
+                System.out.println(i+". " + a.get(i).get(index) + " - " + a.get(i).get(index1));
+        }
+    }
+    System.out.println(exit+". Exit selection");
+}
 
 public static void getIndiFeedback(List<List<String>> a,int index){        
     int exit=a.size();
@@ -274,7 +321,7 @@ public static void updateOrderStatus(){
             for (int j = 0; j <i.getValue().size(); j++) {
                   SParcel obj = i.getValue().get(j);
                   //System.out.println(i.getValue().size());
-                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("on Delivery") ){
+                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("On Delivery") ){
                       break;
                   }else{
                       if(j==i.getValue().size()-1){

@@ -746,10 +746,10 @@ public class ManagingStaff extends User{
         
         // to check if theres duplicated username. Make user reenter the username if duplicate is found.
             FileWriter file = null;
-            
             FileWriter file1 = null;
             
             boolean found = false;
+            boolean found1 = false;
             
             try{
             String temp;            
@@ -772,19 +772,31 @@ public class ManagingStaff extends User{
                     } 
                 }  
             } 
+            
+            while (sc1.hasNext() && !found1){
+                temp1 = sc1.nextLine();
+                String []tempArr1 = temp1.split(",");
+                if(orderid.equals(tempArr1[0])){
+                    found1 = true;
+                    while(id.equals(tempArr1[0])){
+                        orderid = StaticFunction.randomnumbers();                        
+                    } 
+                }  
+            } 
+            
                     PrintWriter pw = new PrintWriter(file);
                     
                     PrintWriter pw1 = new PrintWriter(file1);
             
                     if (Integer.toString(deliverysize).equals("1")){
                         SParcel sp = new SParcel(
-                                Integer.parseInt(orderid),
                                 Integer.parseInt(id),
                                 Address,
                                 Weight,
-                                Integer.toString(deliverytype), 
                                 Integer.toString(deliverysize),
-                                "Pending");
+                                "Pending",
+                                Integer.toString(deliverytype),
+                                Integer.parseInt(orderid));
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);
@@ -794,8 +806,10 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                if (items == 1){
                                 pw1.printf(bk.orderid + ",");
                                 pw1.println("Pending");
+                                }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
@@ -810,17 +824,17 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.orderid + ",");
                                 pw.printf(assignto + ",");
                                 pw.println(dtf.format(now));
-                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
                         SParcel sp = new SParcel(
-                                Integer.parseInt(orderid),
                                 Integer.parseInt(id),
                                 Address,
                                 Weight,
-                                Integer.toString(deliverytype), 
                                 Integer.toString(deliverysize),
-                                "pending");
+                                "Pending",
+                                Integer.toString(deliverytype),
+                                Integer.parseInt(orderid));
                     
                         ArrayList<SParcel> parcel = new ArrayList<SParcel>();
                         parcel.add(sp);
@@ -830,13 +844,15 @@ public class ManagingStaff extends User{
                         ArrayList<SParcel> TotalParcelInOrder = order.getTotalParcel();
 
                             for(Parcel bk : TotalParcelInOrder){
+                                if (items == 1){
                                 pw1.printf(bk.orderid + ",");
                                 pw1.println("Pending");
+                                }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
                                 pw.printf(bk.weight + ",");
-                                pw.printf(bk.parcelsize("Small") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
+                                pw.printf(bk.parcelsize("Large") + ",");
+                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -984,7 +1000,7 @@ public class ManagingStaff extends User{
                     }
                   }
                 }
-                System.out.println("Total Earn RM" + TotalPrice);
+                System.out.println("Total Earn RM " + TotalPrice);
                 System.out.println("Total parcel for Domestic Delivery: " + count2);
                 System.out.println("Total parcel for International Delivery: " + count1);
                 System.out.println("Total parcel status in pending: " + count3);
@@ -1018,6 +1034,87 @@ public class ManagingStaff extends User{
             System.out.println(e);
                 System.out.println("Invalid selection. Please select again!");
                 viewReport();
+        } 
+    }
+    
+    public void viewOrderParcel(){
+        String halo = "";
+        List<List<String>> list=StaticFunction.getFileData("Order.txt");
+        StaticFunction.getSelectionListOrder(list,0,1);
+        int counter=1;
+        try {                    
+            String choice = null;
+            String choicee = null;
+            String[] col = {"OrderId", "OrderStatus"};
+            do{
+            if(counter==1){
+                choice=StaticFunction.getUserInput("Please select an order to view");
+                if(Integer.parseInt(choice)<list.size()){                          
+                   counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    ManagingStaffMenu msm = new ManagingStaffMenu();
+                    msm.runMenu();
+                }else {
+                    viewOrderParcel();
+                }
+                
+                for (int i=0; i<list.size(); i++){
+                    if (Integer.parseInt(choice) == i){    
+                        halo = StaticFunction.getOrderSelection(list, i);
+                    }
+                }
+                
+            }
+            
+            List<List<String>> list1=StaticFunction.getIndiOrderData("Parcel.txt", halo);
+            if(counter==2){
+            StaticFunction.getIndiOrder(list1,0,1,halo);
+                String[] col1 = {"ParcelID","Address","Weight","Size","Price","ParcelStatus","DeliveryType","OrderID","AssignTo","Date"};
+                    choicee=StaticFunction.getUserInput("Please select a parcel related to the order to view");
+                    if(Integer.parseInt(choicee)<list1.size()){                          
+                       counter++;
+                    }else if(Integer.parseInt(choicee)==list1.size()){
+                        ManagingStaffMenu msm = new ManagingStaffMenu();
+                        msm.runMenu();
+                    }else {
+                        viewOrderParcel();
+                    }
+            }
+            
+            if(counter==3){
+                   for (int i = 1; i < list1.get(Integer.parseInt(choicee)).size();) {
+                        System.out.printf("Address:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i), 50) + "\n\n");
+                        System.out.printf("Weight:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+1), 50) + " KG" +"\n\n");
+                        System.out.printf("Parcel Size:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+2), 50) + "\n\n");
+                        System.out.printf("Price:\n");
+                        System.out.printf("RM " + StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+3), 50) + "\n\n");
+                        System.out.printf("Parcel Status:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+4), 50) + "\n\n");
+                        System.out.printf("Delivery Type:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+5), 50) + "\n\n");
+                        System.out.printf("Assign to Delivery Staff:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+7), 50) + "\n\n");
+                        System.out.printf("Date:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+8), 50) + "\n");
+                        break;
+//                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                   }
+                   String continueEditing = StaticFunction.getUserInput("\nWhat do you wish to do?\n0.View other order\n1.Edit Parcel\n2.Delete Parcel");
+                    if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
+                    viewOrderParcel();
+                        counter++;
+                    } else {
+                        counter++;
+                    }
+            }
+        }while(counter<4);
+                           
+        } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please select again!");
+                viewFeedback();
         } 
     }
     

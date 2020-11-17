@@ -1,6 +1,5 @@
-663494,1234,1234.0,Small Size,2468.0,Delivered,International,668333,null,15/11/2020
-916408,123,123.0,Large Size,369.0,Pending,International,429203,null,17/11/2020
-466930,123,123.0,Small Size,246.0,Pending,International,429203,null,17/11/2020
-730273,123,123.0,Large Size,369.0,Pending,International,448376,null,17/11/2020
-944514,123,123.0,Large Size,369.0,Pending,International,687915,null,17/11/2020
-813503,123,123.0,Large Size,246.0,Pending,Domestic,687915,null,17/11/2020
+798776,123,123.0,Small Size,246.0,Pending,International,766273,null,17/11/2020
+552608,123,123.0,Large Size,246.0,Pending,Domestic,766273,null,17/11/2020
+946537,123,123.0,Small Size,246.0,Pending,International,955480,null,17/11/2020
+618079,123,123.0,Small Size,246.0,Pending,International,537350,null,17/11/2020
+513632,123,123.0,Large Size,246.0,Pending,Domestic,537350,null,17/11/2020

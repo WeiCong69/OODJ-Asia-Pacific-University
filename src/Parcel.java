@@ -68,6 +68,30 @@ abstract class Parcel {
     double weight;
     String deliverysize;
     String Price;
+
+    public void setPrice(String Price) {
+        this.Price = Price;
+    }
+
+    public void setAssign(String assign) {
+        this.assign = assign;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public String getAssign() {
+        return assign;
+    }
+
+    public String getDate() {
+        return date;
+    }
     String status;
     String deliverytype;
     Integer orderid;

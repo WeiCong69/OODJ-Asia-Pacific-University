@@ -67,15 +67,7 @@ public static List getFileData(String fileName){
                 temp = sc.nextLine();
                 List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
                 tempArr.add(items);
-            }
-//                for (int i = 0; i < tempArr.size(); i++) {
-//                    for (int j = 0; j < tempArr.get(i).size(); j++) {
-//                        System.out.println(tempArr.get(i).get(j));
-//                    }
-//                }
-//                for (int i = 0; i < tempArr.size(); i++) {
-//                    System.out.println(tempArr.get(i));
-//                }                                
+            }                              
                    sc.close();
                    file.close();
                       return tempArr;
@@ -420,5 +412,85 @@ public static void updateOrderStatus(){
     for (Map.Entry<String, Integer> entry : seussCount.entrySet()) {
             System.out.println(entry.getKey() + " = " + entry.getValue());
     }
-}
+    }
+   public static void updateFileLine(String[] params,String fileName){
+                StringBuilder write = new StringBuilder();
+                for (int i = 0; i < params.length; i++) {
+                    if(i==0){
+                       write.append(String.valueOf(params[i]));               
+                    }else{
+                       write.append(",");
+                       write.append(String.valueOf(params[i]));               
+                    }
+                }
+                String tempFile = "Temp.txt";
+                File oldFile = new File (fileName);
+                File newFile = new File (tempFile);           
+                try {
+                    FileWriter fw = new FileWriter(tempFile,true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter pw = new PrintWriter(bw);
+                    x = new Scanner(new File (fileName));
+                    while (x.hasNext()){                  
+                        String temp = x.nextLine();
+                        System.out.println(temp);
+                        List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                        if(parcels.get(0).equals(params[0])){
+                           pw.printf(String.valueOf(write)+"\n");                                         
+                        }else{
+    pw.printf(parcels.get(0)+","+parcels.get(1)+","+parcels.get(2)+","+parcels.get(3)+","+parcels.get(4)+","+parcels.get(5)+
+            ","+parcels.get(6)+","+parcels.get(7)+","+parcels.get(8)+","+parcels.get(9)+"\n");                                                                 
+                        }
+                    }
+                    x.close();
+                    pw.flush();
+                    pw.close();
+                    oldFile.delete();
+                    File dump = new File(fileName);
+                    newFile.renameTo(dump);
+                }catch(IOException e)
+                {
+                    System.out.println(e);
+                    x.close();
+                }
+    }
+   public static void deleteFileLine(String id,String fileName){
+                String tempFile = "Temp.txt";
+                File oldFile = new File (fileName);
+                File newFile = new File (tempFile);           
+                try {
+                    FileWriter fw = new FileWriter(tempFile,true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter pw = new PrintWriter(bw);
+                    x = new Scanner(new File (fileName));
+                    while (x.hasNext()){                  
+                        String temp = x.nextLine();
+                        System.out.println(temp);
+                        List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                        if(!parcels.get(0).equals(id)){
+                            for(int i=0;i<parcels.size();i++){
+                                if(i==0){
+                                   pw.printf(parcels.get(i));
+                                }else{
+                                   pw.printf(",");
+                                   pw.printf(parcels.get(i));               
+                                }
+                            }
+                            pw.printf("\n");
+                        }
+                    }
+                    x.close();
+                    pw.flush();
+                    pw.close();
+                    oldFile.delete();
+                    File dump = new File(fileName);
+                    newFile.renameTo(dump);
+                }catch(IOException e)
+                {
+                    System.out.println(e);
+                    x.close();
+                }
+    }      
+
+
 }

@@ -1114,7 +1114,7 @@ public class ManagingStaff extends User{
                            
         } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Please select again!");
-                viewFeedback();
+                viewOrderParcel();
         } 
     }
     

@@ -135,4 +135,86 @@ public class DeliveryStaff extends User{
                 viewPersonalFeedback();
         } 
     }
+    
+    public void viewOrder(){
+        String halo = "";
+        List<List<String>> list=StaticFunction.getFileData("Order.txt");
+        StaticFunction.getSelectionListOrder(list,0,1);
+        int counter=1;
+        try {                    
+            String choice = null;
+            String choicee = null;
+            String[] col = {"OrderId", "OrderStatus"};
+            do{
+            if(counter==1){
+                choice=StaticFunction.getUserInput("Please select an order to view");
+                if(Integer.parseInt(choice)<list.size()){                          
+                   counter++;
+                }else if(Integer.parseInt(choice)==list.size()){
+                    DeliveryStaffMenu msm = new DeliveryStaffMenu();
+                    msm.runMenu();
+                }else {
+                    viewOrder();
+                }
+                
+                for (int i=0; i<list.size(); i++){
+                    if (Integer.parseInt(choice) == i){    
+                        halo = StaticFunction.getOrderSelection(list, i);
+                    }
+                }
+                
+            }
+            
+            List<List<String>> list1=StaticFunction.getIndiOrderData("Parcel.txt", halo);
+            if(counter==2){
+            StaticFunction.getIndiOrder(list1,0,1,halo);
+                String[] col1 = {"ParcelID","Address","Weight","Size","Price","ParcelStatus","DeliveryType","OrderID","AssignTo","Date"};
+                    choicee=StaticFunction.getUserInput("Please select a parcel related to the order to view");
+                    if(Integer.parseInt(choicee)<list1.size()){                          
+                       counter++;
+                    }else if(Integer.parseInt(choicee)==list1.size()){
+                        DeliveryStaffMenu msm = new DeliveryStaffMenu();
+                        msm.runMenu();
+                    }else {
+                        viewOrder();
+                    }
+            }
+            
+            if(counter==3){
+                   for (int i = 1; i < list1.get(Integer.parseInt(choicee)).size();) {
+                        System.out.printf("Address:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i), 50) + "\n\n");
+                        System.out.printf("Weight:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+1), 50) + " KG" +"\n\n");
+                        System.out.printf("Parcel Size:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+2), 50) + "\n\n");
+                        System.out.printf("Price:\n");
+                        System.out.printf("RM " + StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+3), 50) + "\n\n");
+                        System.out.printf("Parcel Status:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+4), 50) + "\n\n");
+                        System.out.printf("Delivery Type:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+5), 50) + "\n\n");
+                        System.out.printf("Assign to Delivery Staff:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+7), 50) + "\n\n");
+                        System.out.printf("Date:\n");
+                        System.out.printf(StaticFunction.addLinebreaks(list1.get(Integer.parseInt(choicee)).get(i+8), 50) + "\n");
+                        break;
+//                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                   }
+                   String continueEditing = StaticFunction.getUserInput("\nDo you want to view another order?\n0.Yes\n1.No");
+                    if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
+                        viewOrder();
+                    } else if(continueEditing.equals("1") || continueEditing.equals("No")|| continueEditing.equals("N")|| continueEditing.equals("no")){
+                        counter++;
+                    } else {
+                        counter++;
+                    }
+            }
+        }while(counter<4);
+                           
+        } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please select again!");
+                viewOrder();
+        } 
+    }
 }

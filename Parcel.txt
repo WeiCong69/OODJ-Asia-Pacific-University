@@ -1,2 +1,2 @@
-618079,123,123.0,Small Size,246.0,Pending,International,537350,null,17/11/2020
-513632,123,123.0,Large Size,246.0,Pending,Domestic,537350,null,17/11/2020
+773196,123.45,12.35,Large Size,24.7,Pending,Domestic,176257,null,18/11/2020
+286898,123.45,12.35,Large Size,24.7,Pending,Domestic,979775,null,18/11/2020

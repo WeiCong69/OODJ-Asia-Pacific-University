@@ -1,11 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class DeliveryStaffMenu implements Menu{
     
     User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
@@ -52,6 +44,7 @@ public class DeliveryStaffMenu implements Menu{
             case 1: 
                break;
             case 2:
+                ds.viewOrder();
                 break;
             case 3:
                 ds.editProfile();

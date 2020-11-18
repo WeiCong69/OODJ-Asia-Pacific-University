@@ -22,7 +22,7 @@ public class SParcel extends Parcel{
         return size1;
     }
     
-    public String parcelprice(String Type, String Size, String Weight){
+    public double parcelprice(String Type, String Size, String Weight){
 //        return null;
         double Total = 0;
         if (Type.equals("1") && Size.equals("Small")){
@@ -34,7 +34,7 @@ public class SParcel extends Parcel{
         }else if (Type.equals("2") && Size.equals("Large")){
             Total = 2 * weight;
         }
-        return String.valueOf(Total);
+        return Total;
     }
 
     public void setPricerates(double pricerates) {

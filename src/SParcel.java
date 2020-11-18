@@ -86,9 +86,9 @@ public class SParcel extends Parcel{
                case 1:
                     String newWeight = StaticFunction.getUserInput("Please enter new weight");
                     setWeight(Double.parseDouble(newWeight));
-                    String newPrice= parcelprice(convertDeliveryType(this.deliverytype),convertParcelSize(size),newWeight);
-                    price=newPrice;
-                    String[] data1={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,newPrice,this.status,this.deliverytype,String.valueOf(this.orderid),deliveryGuy,date};
+                    Double newPrice= parcelprice(convertDeliveryType(this.deliverytype),convertParcelSize(size),newWeight);
+                    price=String.valueOf(newPrice);
+                    String[] data1={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,String.valueOf(newPrice),this.status,this.deliverytype,String.valueOf(this.orderid),deliveryGuy,date};
                     StaticFunction.updateFileLine(data1,"Parcel.txt");                 
                     break;
                case 2:
@@ -98,10 +98,10 @@ public class SParcel extends Parcel{
                         if(newSize==0)tempSize="Small";
                         if(newSize==1)tempSize="Large";
                         newPrice= parcelprice(convertDeliveryType(this.deliverytype),convertParcelSize(tempSize),String.valueOf(this.weight));
-                        price=newPrice;
+                        price=String.valueOf(newPrice);
                         size=parcelsize(tempSize);
                         System.out.println(tempSize);
-                        String[] data2={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,newPrice,this.status,this.deliverytype,String.valueOf(this.orderid),deliveryGuy,date};
+                        String[] data2={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,String.valueOf(newPrice),this.status,this.deliverytype,String.valueOf(this.orderid),deliveryGuy,date};
                         StaticFunction.updateFileLine(data2,"Parcel.txt");                
                     }
                     break;
@@ -112,10 +112,10 @@ public class SParcel extends Parcel{
                         if(newType==1)tempType="International";
                         if(newType==2)tempType="Domestic";                     
                         newPrice= parcelprice(String.valueOf(newType),convertParcelSize(size),String.valueOf(this.weight));
-                        System.out.println(newPrice);
-                        price=newPrice;
+                        //System.out.println(newPrice);
+                        price=String.valueOf(newPrice);
                         setDeliverytype(tempType);
-                        String[] data3={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,newPrice,this.status,tempType,String.valueOf(this.orderid),deliveryGuy,date};
+                        String[] data3={String.valueOf(this.id),this.address,String.valueOf(this.weight),size,String.valueOf(newPrice),this.status,tempType,String.valueOf(this.orderid),deliveryGuy,date};
                         StaticFunction.updateFileLine(data3,"Parcel.txt");                     
                     }
                     break;

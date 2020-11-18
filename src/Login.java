@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 public class Login {
     
@@ -14,20 +17,28 @@ public class Login {
  
    
     public static void main(String[] args) {
-//        Login login = new Login();
-//        login.runLogin();
+        Login login = new Login();
+        login.runLogin();
         //StaticFunction.updateOrderStatus();
-        StaticFunction.returnAssignedParcelsCount();
+//        StaticFunction.returnAssignedParcelsCount();
     }
 
     
     public void runLogin(){
          StaticFunction.printHeader();
         System.out.println("-------------------");
-        Username = StaticFunction.getUserInput("Please enter username\n0) Exit Application");
-        if (Username.equals("0")){
+        Username = StaticFunction.getUserInput("Please enter username\n0) Reset Password\n1) Exit Application");
+        if (Username.equals("1")){
             System.out.println("Thank you for using our application.");
             System.exit(0);
+        } else if(Username.equals("0")){
+            JavaEmail je = new JavaEmail();
+             try {
+                 je.run();
+                 runLogin();
+             } catch (MessagingException ex) {
+                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+             }
         }
         System.out.println("-------------------");
         Password = StaticFunction.getUserInput("Please enter password");

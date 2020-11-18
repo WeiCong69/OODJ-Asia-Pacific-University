@@ -1,7 +1,8 @@
 public class FrontDeskStaffMenu implements Menu {
 
     User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
-    FrontDeskStaff msf = new FrontDeskStaff(usr);    
+    FrontDeskStaff msf = new FrontDeskStaff(usr);
+    ManagingStaff ms = new ManagingStaff(usr);
     
     boolean exit;
     boolean exitOrder;
@@ -42,10 +43,10 @@ public class FrontDeskStaffMenu implements Menu {
                 login.runLogin();
                 break;
             case 1: 
-                String val = StaticFunction.randomnumbers();
-                System.out.println(val);
+                ms.addOrder();
                break;
             case 2:
+                ms.viewOrderParcel();
                 break;
             case 3:
                 msf.editProfile();

@@ -696,6 +696,8 @@ public class ManagingStaff extends User{
     
     
     public void addOrder(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df1 = new DecimalFormat("#.#");
         try{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -709,7 +711,7 @@ public class ManagingStaff extends User{
         String id = StaticFunction.randomnumbers();
         String Address = StaticFunction.getUserInput("Enter address");
         String CustName = StaticFunction.getUserInput("Enter customer name");
-        int Weight = Integer.parseInt(StaticFunction.getUserInput("Enter weight (KG)"));
+        double Weight = Double.valueOf(StaticFunction.getUserInput("Enter weight (KG)"));
         
         do { 
             System.out.println("Please select a delivery type:");
@@ -792,7 +794,7 @@ public class ManagingStaff extends User{
                         SParcel sp = new SParcel(
                                 Integer.parseInt(id),
                                 Address,
-                                Weight,
+                                Double.valueOf(Weight),
                                 Integer.toString(deliverysize),
                                 "Pending",
                                 Integer.toString(deliverytype),
@@ -812,9 +814,9 @@ public class ManagingStaff extends User{
                                 }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
-                                pw.printf(bk.weight + ",");
+                                pw.printf(df.format(bk.weight) + ",");
                                 pw.printf(bk.parcelsize("Small") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)) + ",");
+                                pw.printf(df1.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))) + ",");
                                 pw.printf(bk.getStatus()+ ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -830,7 +832,7 @@ public class ManagingStaff extends User{
                         SParcel sp = new SParcel(
                                 Integer.parseInt(id),
                                 Address,
-                                Weight,
+                                Double.valueOf(Weight),
                                 Integer.toString(deliverysize),
                                 "Pending",
                                 Integer.toString(deliverytype),
@@ -850,9 +852,9 @@ public class ManagingStaff extends User{
                                 }
                                 pw.printf(bk.id + ",");
                                 pw.printf(bk.address + ",");
-                                pw.printf(bk.weight + ",");
+                                pw.printf(df.format(bk.weight) + ",");
                                 pw.printf(bk.parcelsize("Large") + ",");
-                                pw.printf(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)) + ",");
+                                pw.printf(df1.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -862,7 +864,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.orderid + ",");
                                 pw.printf(assignto + ",");
                                 pw.println(dtf.format(now));
-                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight)));
+                                System.out.println("The price will be RM" + df1.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + "0");
                         }
                     }
                     file.close();

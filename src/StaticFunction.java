@@ -557,15 +557,13 @@ public static void updateOrderStatus(){
    }
    
    public static boolean checkEmailvalidity(String emailaddress){
-    boolean a = true;
-    String email_regex = "[A-Z]+[a-zA-Z_]+@\b([a-zA-Z]+.){2}\b?.[a-zA-Z]+";
-    boolean check = emailaddress.matches(email_regex);
-    if (check == true){
-        a = true;
-    } else if (check == false){
-        a = false;
-    }
-    return a;
+    boolean check = true;
+    String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$";
+    check = emailaddress.matches(emailRegex);
+    return check;
     }
 
 }

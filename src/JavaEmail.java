@@ -33,8 +33,24 @@ public class JavaEmail {
 	}
 
 	public void createEmailMessage() throws AddressException,MessagingException {
+            int count = 0;
+            
                 try{
-		String[] toEmails = { StaticFunction.getUserInput("Please enter your email") };
+                    String[] toEmails = { StaticFunction.getUserInput("Please enter your email") };
+                    
+                    do{
+                        boolean checkingdone = StaticFunction.checkEmailvalidity(toEmails[0]);
+                
+                        if (!checkingdone){
+                            System.out.println("Wrong email format inserted!");
+                            toEmails[0] = StaticFunction.getUserInput("Please enter your email");
+                        } else {
+                            count = 1;
+                        }
+                        
+                    }while(count == 0);
+                
+                
                 
 		String emailSubject = "Reset Password";
 		String emailBody = "This is an email to reset your password";

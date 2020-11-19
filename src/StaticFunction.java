@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -332,7 +333,6 @@ public static void updateOrderStatus(){
 //                System.out.println("yes");
 //            }
         }        
-
                    
     } catch (IOException ex) {
         System.out.println(ex.toString());
@@ -412,7 +412,7 @@ public static void updateOrderStatus(){
     for (Map.Entry<String, Integer> entry : seussCount.entrySet()) {
             System.out.println(entry.getKey() + " = " + entry.getValue());
     }
-    }
+}
    public static void updateFileLine(String[] params,String fileName){
                 StringBuilder write = new StringBuilder();
                 for (int i = 0; i < params.length; i++) {
@@ -433,7 +433,7 @@ public static void updateOrderStatus(){
                     x = new Scanner(new File (fileName));
                     while (x.hasNext()){                  
                         String temp = x.nextLine();
-                        System.out.println(temp);
+                        //System.out.println(temp);
                         List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
                         if(parcels.get(0).equals(params[0])){
                            pw.printf(String.valueOf(write)+"\n");                                         
@@ -492,5 +492,68 @@ public static void updateOrderStatus(){
                 }
     }      
 
+   public static void removeEmptyOrder(){
+//       List<List<String>> order=StaticFunction.getFileData("Order.txt");
+//       List<String> orderID=new ArrayList<String>();
+//       for(List<String> i: order){
+//           orderID.add(i.get(0));
+//       }
+       List<List<String>> parcelFromFile=StaticFunction.getFileData("Parcel.txt");       
+       List <SParcel> parcel = new ArrayList<SParcel>();       
+       for(List<String> i: parcelFromFile){
+           SParcel a=new SParcel(i);
+           parcel.add(a);
+       }
+       //group by order id
+       List<String> tobeRemoved=new ArrayList<String>();
+       Map < Integer, List < SParcel >> orderidList = parcel.stream().collect(
+        Collectors.groupingBy(SParcel::getOrderid));
+        for(Map.Entry< Integer, List < SParcel >> i: orderidList.entrySet()){
+                tobeRemoved.add(String.valueOf(i.getKey()));
+        }
+//                
+////       for(List<String> i: order){
+////           if(!orderID.contains(i.get(0))){
+////                order.removeIf( name -> name.equals(i));                
+////           }
+////       }
+//       orderID.removeAll(tobeRemoved);
+           System.out.println(tobeRemoved);
+//       System.out.println(order);
+            String filepath = "Order.txt";
+            String tempFile = "Temp.txt";
+            File oldFile = new File (filepath);
+            File newFile = new File (tempFile);           
+            try {
+                FileWriter fw = new FileWriter(tempFile,true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                x = new Scanner(new File (filepath));
+                //x.useDelimiter("[,\n]");
+                while (x.hasNext()){
+                    String temp = x.next();
+                    List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                    //System.out.println(parcels.size());
+                    if(tobeRemoved.contains(parcels.get(0))){
+                       pw.printf(parcels.get(0)+","+parcels.get(1)+"\n");                                                                 
+                    }else{
+                    }
+                }
+                x.close();
+                pw.flush();
+                pw.close();
+                oldFile.delete();
+                File dump = new File(filepath);
+                newFile.renameTo(dump);
+            }catch(IOException e)
+            {
+                System.out.println(e);
+                x.close();
+//                oldFile.delete();
+//                File dump = new File(filepath);
+//                newFile.renameTo(dump);
+            }
+            System.out.println("Changes made successfully");
+   }
 
 }

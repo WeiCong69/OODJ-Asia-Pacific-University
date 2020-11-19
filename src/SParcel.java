@@ -1,5 +1,5 @@
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SParcel extends Parcel{
 
@@ -11,7 +11,12 @@ public class SParcel extends Parcel{
     public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize, String status) {
         super(orderid, id, address, weight, deliverytype, deliverysize, status);
     }
-
+    
+    //initialise Sparcel using list( according to text file)
+    public SParcel(List<String> a) {        
+        super(Integer.parseInt(a.get(0)),a.get(1),Double.parseDouble(a.get(2)),a.get(3),a.get(4),a.get(5),a.get(6),Integer.parseInt(a.get(7)),a.get(8),a.get(9));
+    }
+    
     public String parcelsize(String Size){
         String size1 = "";
         if (Size.equals("Small")){
@@ -150,5 +155,14 @@ public class SParcel extends Parcel{
         }else{
             return "Large";
         }
-    }    
+    }
+    public String[] toArray(){
+      String[] itemsArray ={
+                            String.valueOf(this.id),this.address,String.valueOf(this.weight),this.Price,
+                            this.deliverysize,this.status,
+                            this.deliverytype,String.valueOf(this.orderid),
+                            this.assign,this.date
+                            };
+      return itemsArray;
+    }
 }

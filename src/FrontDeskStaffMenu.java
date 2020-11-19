@@ -1,7 +1,7 @@
 public class FrontDeskStaffMenu implements Menu {
 
     User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
-    FrontDeskStaff msf = new FrontDeskStaff(usr);
+    FrontDeskStaff fds = new FrontDeskStaff(usr);
     ManagingStaff ms = new ManagingStaff(usr);
     
     boolean exit;
@@ -27,9 +27,7 @@ public class FrontDeskStaffMenu implements Menu {
         System.out.println("3) Edit User Profile");
         System.out.println("MANAGE PARCEL");
         System.out.println("-------------------");        
-        System.out.println("4) Add Parcel");
-        System.out.println("5) Delete Parcel");
-        System.out.println("6) View Parcel");
+        System.out.println("4)Update Parcel Status");
         System.out.println("-------------------"); 
         System.out.println("0) Exit Program");
     }
@@ -38,7 +36,6 @@ public class FrontDeskStaffMenu implements Menu {
         switch (choice) {
             case 0:
                 System.out.println("Thank you for using our application.");
-                //System.exit(0);
                 Login login=new Login();
                 login.runLogin();
                 break;
@@ -49,9 +46,10 @@ public class FrontDeskStaffMenu implements Menu {
                 ms.viewOrderParcel();
                 break;
             case 3:
-                msf.editProfile();
+                usr.editProfile();
                 break;
             case 4:
+                fds.editParcel();
                 break;
             case 5:
                 break;

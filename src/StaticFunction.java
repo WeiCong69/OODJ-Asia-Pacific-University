@@ -490,7 +490,7 @@ public static void updateOrderStatus(){
                     System.out.println(e);
                     x.close();
                 }
-    }      
+    }
 
    public static void removeEmptyOrder(){
 //       List<List<String>> order=StaticFunction.getFileData("Order.txt");
@@ -555,5 +555,15 @@ public static void updateOrderStatus(){
             }
             System.out.println("Changes made successfully");
    }
+   
+   public static boolean checkEmailvalidity(String emailaddress){
+    boolean check = true;
+    String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$";
+    check = emailaddress.matches(emailRegex);
+    return check;
+    }
 
 }

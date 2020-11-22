@@ -17,14 +17,16 @@ public class Login {
  
    
     public static void main(String[] args) {
+        StaticFunction.removeEmptyOrder();
         Login login = new Login();
         login.runLogin();
-        StaticFunction.removeEmptyOrder();
     }
 
     
     public void runLogin(){
+
          StaticFunction.printHeader();
+
         System.out.println("-------------------");
         Username = StaticFunction.getUserInput("Please enter username\n0) Reset Password\n1) Exit Application");
         if (Username.equals("1")){

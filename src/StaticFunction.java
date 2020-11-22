@@ -465,7 +465,7 @@ public static void updateOrderStatus(){
                     x = new Scanner(new File (fileName));
                     while (x.hasNext()){                  
                         String temp = x.nextLine();
-                        System.out.println(temp);
+                        //System.out.println(temp);
                         List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
                         if(!parcels.get(0).equals(id)){
                             for(int i=0;i<parcels.size();i++){

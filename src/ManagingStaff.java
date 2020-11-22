@@ -1001,6 +1001,8 @@ public class ManagingStaff extends User{
                                                    
                     }else if(Integer.parseInt(action)==2){
                         StaticFunction.deleteFileLine(list1.get(Integer.parseInt(choicee)).get(0),"Parcel.txt");
+                        counter=2;
+                        continue;
                     }else{
                         continue;
                     }                

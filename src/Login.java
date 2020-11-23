@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
+import java.util.Arrays;
 
 public class Login {
     
@@ -359,6 +360,9 @@ public class Login {
         String Managing = "Managing Staff";
         String Delivery = "Delivery Staff";
         String FrontDesk = "Front Desk Staff";
+        
+        Password = StaticFunction.getSecurePassword(Password);
+        
         boolean found = false;
         
         try{
@@ -369,6 +373,7 @@ public class Login {
         while(sc.hasNext() && !found){
             temp = sc.nextLine();
             String []tempArr = temp.split(","); //"," see from the file to seperate username and password to match with the textfield input
+            
             if(Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Managing.equals(tempArr[5])){
                 Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);

@@ -69,7 +69,7 @@ public static List getFileData(String fileName){
                 List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
                 tempArr.add(items);
             }                              
-                   sc.close();
+                    sc.close();
                    file.close();
                       return tempArr;
                 } catch (IOException ex) {

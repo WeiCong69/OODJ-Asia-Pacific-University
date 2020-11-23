@@ -2,11 +2,3 @@
 955480,Pending
 537350,Pending
 702407,Pending
-339949,Pending
-509407,Pending
-395033,Pending
-676312,Pending
-520653,Pending
-536309,Pending
-176257,Pending
-979775,Pending

@@ -3,3 +3,4 @@ kaddhar,12,Anjing,1,1,Managing Staff
 daniel,123,anjing,kepong,29999,Managing Staff
 12,12,12,12,12,Delivery Staff
 123,123,123,123,123,Front Desk Staff
+Charlotte,charlotte Washington,charlotte Washington,charlotte Washington,0123221256,Managing Staff

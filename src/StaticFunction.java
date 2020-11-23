@@ -521,7 +521,7 @@ public static void updateOrderStatus(){
 ////           }
 ////       }
 //       orderID.removeAll(tobeRemoved);
-           System.out.println(tobeRemoved);
+//           System.out.println(tobeRemoved);
 //       System.out.println(order);
             String filepath = "Order.txt";
             String tempFile = "Temp.txt";
@@ -556,7 +556,7 @@ public static void updateOrderStatus(){
 //                File dump = new File(filepath);
 //                newFile.renameTo(dump);
             }
-            System.out.println("Changes made successfully");
+//            System.out.println("Changes made successfully");
    }
    
    public static boolean checkEmailvalidity(String emailaddress){

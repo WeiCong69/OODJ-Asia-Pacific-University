@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.NoSuchProviderException;
 //kadhhar babi
 
 public class ManagingStaff extends User{
@@ -165,6 +167,8 @@ public class ManagingStaff extends User{
                     list.get(Integer.parseInt(choice)).get(5).toString(),
                     list.get(Integer.parseInt(choice)).get(6).toString()};
                 StaticFunction.writeToFile(params,"DeletedFeedback.txt");
+            } else {
+                deleteFeedback();
             }
     } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
@@ -189,18 +193,28 @@ public class ManagingStaff extends User{
     }   
     
     public void restoreFeedback(){
+        try{
+            
+        int counter = 1;
         String choice = null;
-        try{        
+        
         List<List<String>> list=StaticFunction.getFileData("DeletedFeedback.txt");
+        
+        if (counter == 1){
         StaticFunction.getSelectionList(list,0);
         System.out.println("List of feedback in Recycle Bin");
-        choice=StaticFunction.getUserInput("Please select a feedback");
-        if(Integer.parseInt(choice)==list.size()){
-            return;
-        } else if(Integer.parseInt(choice)>list.size()){
-            System.out.println("Not valid selection");
-            restoreFeedback();
-        }        
+        choice = StaticFunction.getUserInput("Please select a feedback");
+            if(Integer.parseInt(choice)==list.size()){
+                return;
+            } else if(Integer.parseInt(choice)>list.size()){
+                System.out.println("Not valid selection");
+                restoreFeedback();
+            } else if(Integer.parseInt(choice)>=0 && Integer.parseInt(choice)<list.size()){
+                counter = 2;
+            }
+        }
+        
+        if (counter == 2){
         String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this feedback"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
@@ -214,17 +228,24 @@ public class ManagingStaff extends User{
                     list.get(Integer.parseInt(choice)).get(5).toString(),
                     list.get(Integer.parseInt(choice)).get(6).toString()};
                 StaticFunction.writeToFile(params,"Feedback.txt");
+            } else {
+                restoreFeedback();
             }
-    } catch (NumberFormatException e) {
+        }
+     } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
-     } 
+     }
     }
     
-    public void registerNewUser(){
+    public void registerNewUser() {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
+        
         String Username = StaticFunction.getUserInput("Please Enter a new username. This will be used as login ID");
         String Password = StaticFunction.getUserInput("Enter new Password");
+        
+        Password = StaticFunction.getSecurePassword(Password);
+        
         String realName = StaticFunction.getUserInput("Enter Full Name as per IC");
         String Address = StaticFunction.getUserInput("Enter new Address");
         String Phone = StaticFunction.getUserInput("Enter new Phone");
@@ -242,14 +263,14 @@ public class ManagingStaff extends User{
             System.out.println("3) Front Desk Staff");            
             try {
                 choice = Integer.parseInt(keyboard.nextLine());
-                if (choice < 0 || choice > 4) {
+                if (choice < 0 || choice > 3) {
                     System.out.println("Choice outside of range. Please chose the role again.");
                     //registerNewUser();
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }            
-        } while (choice < 0 || choice > 4);
+        } while (choice < 0 || choice > 3);
         
         // to check if theres duplicated username. Make user reenter the username if duplicate is found.
             FileWriter file = null;

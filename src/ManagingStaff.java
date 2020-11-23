@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.NoSuchProviderException;
 //kadhhar babi
 
 public class ManagingStaff extends User{
@@ -235,11 +237,15 @@ public class ManagingStaff extends User{
      }
     }
     
-    public void registerNewUser(){
+    public void registerNewUser() {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
+        
         String Username = StaticFunction.getUserInput("Please Enter a new username. This will be used as login ID");
         String Password = StaticFunction.getUserInput("Enter new Password");
+        
+        Password = StaticFunction.getSecurePassword(Password);
+        
         String realName = StaticFunction.getUserInput("Enter Full Name as per IC");
         String Address = StaticFunction.getUserInput("Enter new Address");
         String Phone = StaticFunction.getUserInput("Enter new Phone");

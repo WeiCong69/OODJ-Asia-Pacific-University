@@ -1,8 +1,10 @@
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.NoSuchProviderException;
 
 public class ManagingStaffMenu implements Menu {
      boolean exit;
@@ -67,7 +69,6 @@ public class ManagingStaffMenu implements Menu {
                 break;
             case 3:
                 msf.registerNewUser();
-                //listBalances();
                 break;
             case 4:
                 msf.editUser();

@@ -49,7 +49,6 @@ public class Login {
         String FrontDesk = "Front Desk Staff";
         
         Password = StaticFunction.getSecurePassword(Password);
-        System.out.println(Password);
         
         boolean found = false;
         

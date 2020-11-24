@@ -387,7 +387,7 @@ public static void updateOrderStatus(){
 //                File dump = new File(filepath);
 //                newFile.renameTo(dump);
             }
-            System.out.println("Changes made successfully");
+//            System.out.println("Changes made successfully");
     }    
 
     public static String getDate(int when){

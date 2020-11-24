@@ -151,10 +151,9 @@ public class ManagingStaff extends User{
         if(Integer.parseInt(choice)==list.size()){
             return;
         } else if (Integer.parseInt(choice)>list.size()){
-            System.out.println("Not valid selection");
-            deleteFeedback();
+            return;
         }
-        String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this feedback"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this feedback --> "+list.get(Integer.parseInt(choice)).get(1).toString()+" ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 deleteFeedback1(list.get(Integer.parseInt(choice)).get(0).toString(),"Feedback.txt");
@@ -514,8 +513,8 @@ public class ManagingStaff extends User{
                    }
                    String continueEditing = StaticFunction.getUserInput("\nDo you wish to view another feedback?\n0.Yes\n1.No");
                     if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| continueEditing.equals("yes")){
-                    viewFeedback();
                         counter++;
+                        viewFeedback();
                     } else {
                         counter++;
                     }
@@ -595,7 +594,7 @@ public class ManagingStaff extends User{
     
     public void addOrder(){
         DecimalFormat df = new DecimalFormat("#.##");
-        DecimalFormat df1 = new DecimalFormat("#.#");
+        DecimalFormat df2 = new DecimalFormat("#.00");
         try{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -714,7 +713,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.address + ",");
                                 pw.printf(df.format(bk.weight) + ",");
                                 pw.printf(bk.parcelsize("Small") + ",");
-                                pw.printf(df1.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))) + ",");
+                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))) + ",");
                                 pw.printf(bk.getStatus()+ ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -724,7 +723,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.orderid + ",");
                                 pw.printf(assignto + ",");
                                 pw.println(dtf.format(now));
-                                System.out.println("The price will be RM" + bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight)));
+                                System.out.println("The price will be RM" + df2.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))));
                         }
                     } else if (Integer.toString(deliverysize).equals("2")){
                         SParcel sp = new SParcel(
@@ -752,7 +751,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.address + ",");
                                 pw.printf(df.format(bk.weight) + ",");
                                 pw.printf(bk.parcelsize("Large") + ",");
-                                pw.printf(df1.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + ",");
+                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + ",");
                                 pw.printf("Pending" + ",");
                                 if (bk.deliverytype.equals("1")){
                                     pw.printf("International" + ",");
@@ -762,7 +761,7 @@ public class ManagingStaff extends User{
                                 pw.printf(bk.orderid + ",");
                                 pw.printf(assignto + ",");
                                 pw.println(dtf.format(now));
-                                System.out.println("The price will be RM" + df1.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + "0");
+                                System.out.println("The price will be RM" + df2.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))));
                         }
                     }
                     file.close();

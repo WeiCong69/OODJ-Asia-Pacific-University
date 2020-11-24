@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -1035,6 +1036,54 @@ public class ManagingStaff extends User{
                 viewOrderParcel();
         } 
     }
-    
+
+  public void autoAssginParcel(){
+       List<List<String>> data=StaticFunction.getFileData("User.txt");
+       List<String> dsf= new ArrayList<String>();
+       for (int i = 0; i <data.size(); i++) {
+          if(data.get(i).get(5).equals("Delivery Staff"))
+              dsf.add(data.get(i).get(0));
+       }
+       int randomNum = ThreadLocalRandom.current().nextInt(0, dsf.size());
+       System.out.println(dsf);
+       System.out.println(randomNum);
+       data=StaticFunction.getFileData("Parcel.txt");
+       for (int i = 0; i <data.size(); i++,randomNum++) {
+        if(data.get(i).get(8).equals("null")){
+              if(randomNum==dsf.size())randomNum=0;
+              data.get(i).set(8,dsf.get(randomNum));
+              System.out.println(data.get(i));
+              String[] itemsArray = new String[data.get(i).size()];
+              itemsArray = data.get(i).toArray(itemsArray);              
+              StaticFunction.updateFileLine(itemsArray,"Parcel.txt");             
+        }
+       }      
+  }
+  
+  public void exportData() throws IOException{
+    String action = StaticFunction.getUserInput("Select the data you wish to export.\n0.User Report\n1.Feedback Report\n2.Order Report\n3.Parcel Report.\n4.Exit");
+    switch(action){
+        case "0":
+            StaticFunction.UserReport();
+            break;
+        case "1":
+            StaticFunction.FeedbackReport();
+            break;
+        case "2":
+            StaticFunction.OrderReport();
+            break;
+        case "3":
+            StaticFunction.ParcelReport();
+        default:
+            System.out.println("Error(code:69) has ocurred.Please reselect yr option");
+            exportData();
+    }
+    String confirmation=StaticFunction.getUserInput("Do you want to export another report?\n0.Yes\n1.No");
+        if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
+             exportData();
+        } else {
+            return;
+        }    
+  }
 }
 

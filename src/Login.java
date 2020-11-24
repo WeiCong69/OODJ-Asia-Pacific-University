@@ -1,11 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
-import java.util.Arrays;
+
 
 public class Login {
     
@@ -20,7 +19,7 @@ public class Login {
     public static void main(String[] args) {
         StaticFunction.removeEmptyOrder();
         Login login = new Login();
-        login.runLogin();
+        login.runLogin();     
     }
 
     
@@ -379,6 +378,7 @@ public class Login {
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();
+                User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone);
                 ManagingStaffMenu msm = new ManagingStaffMenu();
                 msm.runMenu();
             }

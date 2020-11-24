@@ -10,6 +10,8 @@ public class FrontDeskStaffMenu implements Menu {
     public void runMenu(){
         StaticFunction.printHeader();
         while (!exit) {
+            StaticFunction.removeEmptyOrder();
+            StaticFunction.updateOrderStatus();
             printMenu();
             int choice = StaticFunction.getMenuChoice(7);
             performAction(choice);

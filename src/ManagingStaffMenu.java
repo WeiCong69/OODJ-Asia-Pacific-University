@@ -1,10 +1,7 @@
-import java.security.NoSuchAlgorithmException;
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.NoSuchProviderException;
 
 public class ManagingStaffMenu implements Menu {
      boolean exit;
@@ -19,8 +16,9 @@ public class ManagingStaffMenu implements Menu {
 //        System.out.println(msf.getPhone());          
         StaticFunction.printHeader();
         while (!exit) {
+            StaticFunction.removeEmptyOrder();
             printMenu();
-            int choice = StaticFunction.getMenuChoice(13);
+            int choice = StaticFunction.getMenuChoice(14);
             performAction(choice);
         }        
     }
@@ -30,26 +28,28 @@ public class ManagingStaffMenu implements Menu {
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");
         System.out.println("1) Make an Order");
-        System.out.println("2) View Order Details"); 
+        System.out.println("2) View Order Details");
+        System.out.println("3) Assign Parcels"); 
         System.out.println("MANAGE USER");
         System.out.println("-------------------");
-        System.out.println("3) Register New User");
-        System.out.println("4) Edit User Details");
-        System.out.println("5) Delete User Account");
-        System.out.println("6) Restore Deleted User Account");
+        System.out.println("4) Register New User");
+        System.out.println("5) Edit User Details");
+        System.out.println("6) Delete User Account");
+        System.out.println("7) Restore Deleted User Account");
         System.out.println("MANAGE FEEDBACK");
         System.out.println("-------------------");        
-        System.out.println("7) View Feedback");
-        System.out.println("8) Reply to Feedback");
-        System.out.println("9) Delete Feedback");
-        System.out.println("10) Restore Feedback");
+        System.out.println("8) View Feedback");
+        System.out.println("9) Reply to Feedback");
+        System.out.println("10) Delete Feedback");
+        System.out.println("11) Restore Feedback");
         System.out.println("MANAGE PROFILE");
         System.out.println("-------------------"); 
-        System.out.println("11) Edit Personal Profile");
-        System.out.println("12) Restore User Account");
+        System.out.println("12) Edit Personal Profile");
+//        System.out.println("12) Restore User Account");
         System.out.println("REPORT");
         System.out.println("-------------------"); 
         System.out.println("13) View Monthly Report");
+        System.out.println("14) Export Data to Excel Sheet");
         System.out.println("0) Exit Program");
     }
     
@@ -67,34 +67,35 @@ public class ManagingStaffMenu implements Menu {
             case 2:
                 msf.viewOrderParcel();
                 break;
-            case 3:
+            case 3:                
+                msf.autoAssginParcel();
+                break;                
+            case 4:
                 msf.registerNewUser();
                 break;
-            case 4:
+            case 5:
                 msf.editUser();
                 break;
-            case 5:
+            case 6:
                 msf.deleteUser1();
                 break;
-            case 6:
-                break;
             case 7:
-                msf.viewFeedback();
+                msf.restoreUser();
                 break;
             case 8:
-                msf.addReply();
+                msf.viewFeedback();
                 break;
             case 9:
-                msf.deleteFeedback();
+                msf.addReply();
                 break;
             case 10:
-                msf.restoreFeedback();
+                msf.deleteFeedback();
                 break;
             case 11:
-                msf.editProfile();
+                msf.restoreFeedback();
                 break;
             case 12:
-                msf.restoreUser();
+                msf.editProfile();
                 break;
             case 13:
             {
@@ -105,6 +106,16 @@ public class ManagingStaffMenu implements Menu {
                 }
             }
                 break;
+            case 14:
+            {
+                try {
+                    msf.exportData();
+                } catch (IOException ex) {
+                    Logger.getLogger(ManagingStaffMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                break;                
+                
             default:
                 System.out.println("Unknown error has occured.");
         }

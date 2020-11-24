@@ -1,11 +1,14 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.max;
+import static java.lang.Integer.min;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +19,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.mail.NoSuchProviderException;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class StaticFunction {
     public static Scanner x;
@@ -390,32 +400,6 @@ public static void updateOrderStatus(){
         return format1.format(dt);
     }
 
-    public static void returnAssignedParcelsCount() {
-
-    ArrayList<String> seussCountActivities = new ArrayList<String>() { {
-        add("findow");
-        add("Balloons");
-        add("Elephants");
-        add("Boom Bands");
-        add("findow");
-        add("Hakken-Kraks");
-        add("Hakken-Kraks");
-        add("Hakken-Kraks");
-        add("Elephants");
-    }};
-
-    Map<String, Integer> seussCount = new HashMap<String,Integer>();
-    for(String t: seussCountActivities) {
-       Integer i = seussCount.get(t);
-       if (i ==  null) {
-           i = 0;
-       }
-       seussCount.put(t, i + 1);
-    }
-    for (Map.Entry<String, Integer> entry : seussCount.entrySet()) {
-            System.out.println(entry.getKey() + " = " + entry.getValue());
-    }
-}
    public static void updateFileLine(String[] params,String fileName){
                 StringBuilder write = new StringBuilder();
                 for (int i = 0; i < params.length; i++) {
@@ -441,8 +425,15 @@ public static void updateOrderStatus(){
                         if(parcels.get(0).equals(params[0])){
                            pw.printf(String.valueOf(write)+"\n");                                         
                         }else{
-    pw.printf(parcels.get(0)+","+parcels.get(1)+","+parcels.get(2)+","+parcels.get(3)+","+parcels.get(4)+","+parcels.get(5)+
-            ","+parcels.get(6)+","+parcels.get(7)+","+parcels.get(8)+","+parcels.get(9)+"\n");                                                                 
+                            for (int j = 0; j < parcels.size(); j++) {
+                                if(j==parcels.size()-1){
+                                    pw.printf(parcels.get(j)+"\n");
+                                }else{
+                                    pw.printf(parcels.get(j)+",");                                    
+                                }                                
+                            }
+//    pw.printf(parcels.get(0)+","+parcels.get(1)+","+parcels.get(2)+","+parcels.get(3)+","+parcels.get(4)+","+parcels.get(5)+
+//            ","+parcels.get(6)+","+parcels.get(7)+","+parcels.get(8)+","+parcels.get(9)+"\n");                                                                 
                         }
                     }
                     x.close();
@@ -596,4 +587,188 @@ public static void updateOrderStatus(){
         return generatedPassword;
     }
 
+@SuppressWarnings("unchecked")    
+public static void UserReport() throws FileNotFoundException, IOException{
+       BasicConfigurator.configure();
+
+      //Create blank workbook
+      XSSFWorkbook workbook = new XSSFWorkbook();
+      
+      //Create a blank sheet
+      XSSFSheet spreadsheet = workbook.createSheet( " User Report ");
+      
+      //Create row object
+      XSSFRow row;
+      List<List<String>> data=StaticFunction.getFileData("User.txt"); 
+      Map < String, Object[] > empinfo = new TreeMap < String, Object[] >();
+      empinfo.put( "1", new Object[] {
+         "Username", "Full Name", "Address","Phone Number","Role" });
+
+      for (int i = 0,index=2; i <data.size(); i++,index++) {
+        empinfo.put( String.valueOf(index), new Object[] {
+           data.get(i).get(0), data.get(i).get(2), data.get(i).get(3),data.get(i).get(4),data.get(i).get(5) });        
+      }
+
+      //Iterate over data and write to sheet
+      Set < String > keyid = empinfo.keySet();
+      int rowid = 0;
+      
+      for (String key : keyid) {
+         row = spreadsheet.createRow(rowid++);
+         Object [] objectArr = empinfo.get(key);
+         int cellid = 0;
+         
+         for (Object obj : objectArr){
+            Cell cell = row.createCell(cellid++);
+            cell.setCellValue((String)obj);
+         }
+      }
+      //Write the workbook in file system
+      FileOutputStream out = new FileOutputStream(
+         new File("UserReport.xlsx"));
+      
+      workbook.write(out);
+      out.close();
+      System.out.println("UserReport.xlsx written successfully");    
+}
+
+@SuppressWarnings("unchecked")    
+public static void ParcelReport() throws FileNotFoundException, IOException{
+       BasicConfigurator.configure();
+
+      //Create blank workbook
+      XSSFWorkbook workbook = new XSSFWorkbook();
+      
+      //Create a blank sheet
+      XSSFSheet spreadsheet = workbook.createSheet( " Parcel Report ");
+      
+      //Create row object
+      XSSFRow row;
+      List<List<String>> data=StaticFunction.getFileData("Parcel.txt"); 
+      Map < String, Object[] > empinfo = new TreeMap < String, Object[] >();
+      empinfo.put( "1", new Object[] {
+         "Parcel ID", "Address", "Weight(kg)","Size","Price(RM)","Status","Delivery Type","Order ID","Assigned To","Date" });
+
+      for (int i = 0,index=2; i <data.size(); i++,index++) {
+        empinfo.put( String.valueOf(index), new Object[] {
+           data.get(i).get(0), data.get(i).get(1), data.get(i).get(2),data.get(i).get(3),data.get(i).get(4),
+           data.get(i).get(5), data.get(i).get(6), data.get(i).get(7),data.get(i).get(8),data.get(i).get(9),
+        });        
+      }
+
+      //Iterate over data and write to sheet
+      Set < String > keyid = empinfo.keySet();
+      int rowid = 0;
+      
+      for (String key : keyid) {
+         row = spreadsheet.createRow(rowid++);
+         Object [] objectArr = empinfo.get(key);
+         int cellid = 0;
+         
+         for (Object obj : objectArr){
+            Cell cell = row.createCell(cellid++);
+            cell.setCellValue((String)obj);
+         }
+      }
+      //Write the workbook in file system
+      FileOutputStream out = new FileOutputStream(
+         new File("ParcelReport.xlsx"));
+      
+      workbook.write(out);
+      out.close();
+      System.out.println("ParcelReport.xlsx written successfully");    
+}
+
+@SuppressWarnings("unchecked")    
+public static void FeedbackReport() throws FileNotFoundException, IOException{
+       BasicConfigurator.configure();
+
+      //Create blank workbook
+      XSSFWorkbook workbook = new XSSFWorkbook();
+      
+      //Create a blank sheet
+      XSSFSheet spreadsheet = workbook.createSheet( " Feedback Report ");
+      
+      //Create row object
+      XSSFRow row;
+      List<List<String>> data=StaticFunction.getFileData("Feedback.txt"); 
+      Map < String, Object[] > empinfo = new TreeMap < String, Object[] >();
+      empinfo.put( "1", new Object[] {
+         "Feedback ID", "Subject", "Content","Feedback Type","Reply","Delivery Staff","Managing Staff"});
+
+      for (int i = 0,index=2; i <data.size(); i++,index++) {
+        empinfo.put( String.valueOf(index), new Object[] {
+           data.get(i).get(0), data.get(i).get(1), data.get(i).get(2),data.get(i).get(3),
+           data.get(i).get(4),data.get(i).get(5), data.get(i).get(6)
+        });        
+      }
+
+      //Iterate over data and write to sheet
+      Set < String > keyid = empinfo.keySet();
+      int rowid = 0;
+      
+      for (String key : keyid) {
+         row = spreadsheet.createRow(rowid++);
+         Object [] objectArr = empinfo.get(key);
+         int cellid = 0;
+         
+         for (Object obj : objectArr){
+            Cell cell = row.createCell(cellid++);
+            cell.setCellValue((String)obj);
+         }
+      }
+      //Write the workbook in file system
+      FileOutputStream out = new FileOutputStream(
+         new File("FeedbackReport.xlsx"));
+      
+      workbook.write(out);
+      out.close();
+      System.out.println("FeedbackReport.xlsx written successfully");    
+}
+
+@SuppressWarnings("unchecked")    
+public static void OrderReport() throws FileNotFoundException, IOException{
+       BasicConfigurator.configure();
+
+      //Create blank workbook
+      XSSFWorkbook workbook = new XSSFWorkbook();
+      
+      //Create a blank sheet
+      XSSFSheet spreadsheet = workbook.createSheet( " Order Report ");
+      
+      //Create row object
+      XSSFRow row;
+      List<List<String>> data=StaticFunction.getFileData("Feedback.txt"); 
+      Map < String, Object[] > empinfo = new TreeMap < String, Object[] >();
+      empinfo.put( "1", new Object[] {
+         "Order ID", "Status"});
+
+      for (int i = 0,index=2; i <data.size(); i++,index++) {
+        empinfo.put( String.valueOf(index), new Object[] {
+           data.get(i).get(0), data.get(i).get(1)
+        });        
+      }
+
+      //Iterate over data and write to sheet
+      Set < String > keyid = empinfo.keySet();
+      int rowid = 0;
+      
+      for (String key : keyid) {
+         row = spreadsheet.createRow(rowid++);
+         Object [] objectArr = empinfo.get(key);
+         int cellid = 0;
+         
+         for (Object obj : objectArr){
+            Cell cell = row.createCell(cellid++);
+            cell.setCellValue((String)obj);
+         }
+      }
+      //Write the workbook in file system
+      FileOutputStream out = new FileOutputStream(
+         new File("FeedbackReport.xlsx"));
+      
+      workbook.write(out);
+      out.close();
+      System.out.println("FeedbackReport.xlsx written successfully");    
+}
 }

@@ -17,6 +17,7 @@ public class ManagingStaffMenu implements Menu {
         StaticFunction.printHeader();
         while (!exit) {
             StaticFunction.removeEmptyOrder();
+            StaticFunction.updateOrderStatus();
             printMenu();
             int choice = StaticFunction.getMenuChoice(14);
             performAction(choice);

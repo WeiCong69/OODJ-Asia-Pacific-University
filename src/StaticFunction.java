@@ -51,8 +51,8 @@ public class StaticFunction {
     
     public static void printHeader() {
         System.out.println("+-----------------------------------+");
-        System.out.println("|      Welcome to Kaddhar's         |");
-        System.out.println("|        Courieer System            |");
+        System.out.println("|            Welcome to             |");
+        System.out.println("|          Courier System           |");
         System.out.println("+-----------------------------------+");
     }
     
@@ -387,7 +387,7 @@ public static void updateOrderStatus(){
 //                File dump = new File(filepath);
 //                newFile.renameTo(dump);
             }
-            System.out.println("Changes made successfully");
+//            System.out.println("Changes made successfully");
     }    
 
     public static String getDate(int when){

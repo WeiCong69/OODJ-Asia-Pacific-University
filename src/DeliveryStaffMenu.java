@@ -7,8 +7,11 @@ public class DeliveryStaffMenu implements Menu{
     boolean exitOrder;
     
     public void runMenu(){
-        StaticFunction.printHeader();
+            StaticFunction.removeEmptyOrder();
+            StaticFunction.updateOrderStatus();
         while (!exit) {
+            StaticFunction.removeEmptyOrder();
+            StaticFunction.updateOrderStatus();
             printMenu();
             int choice = StaticFunction.getMenuChoice(6);
             performAction(choice);

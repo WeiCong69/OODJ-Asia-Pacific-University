@@ -586,7 +586,29 @@ public static void updateOrderStatus(){
         }
         return generatedPassword;
     }
-
+   
+  public static void autoAssginParcel(){
+      List<List<String>> data=StaticFunction.getFileData("User.txt"); 
+       List<String> dsf= new ArrayList<String>();
+       for (int i = 0; i <data.size(); i++) {
+          if(data.get(i).get(5).equals("Delivery Staff"))
+              dsf.add(data.get(i).get(0));
+      }
+       int randomNum = ThreadLocalRandom.current().nextInt(0, dsf.size());
+       System.out.println(dsf);
+       System.out.println(randomNum);
+       data=StaticFunction.getFileData("Parcel.txt");
+       for (int i = 0; i <data.size(); i++,randomNum++) {
+        if(data.get(i).get(8).equals("null"))
+              if(randomNum==data.size()-1)randomNum=0;
+              data.get(i).set(8,dsf.get(randomNum));
+              System.out.println(data.get(i));
+              String[] itemsArray = new String[data.get(i).size()];
+              itemsArray = data.get(i).toArray(itemsArray);              
+              StaticFunction.updateFileLine(itemsArray,"Parcel.txt");             
+         }
+   }
+  
 @SuppressWarnings("unchecked")    
 public static void UserReport() throws FileNotFoundException, IOException{
        BasicConfigurator.configure();

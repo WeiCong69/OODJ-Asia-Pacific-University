@@ -44,7 +44,8 @@ public class DeliveryStaffMenu implements Menu{
                 Login login=new Login();
                 login.runLogin();
                 break;
-            case 1: 
+            case 1:
+               ds.editParcel();
                break;
             case 2:
                 ds.viewOrder();

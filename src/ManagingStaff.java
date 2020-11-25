@@ -108,7 +108,8 @@ public class ManagingStaff extends User{
         String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this user("+list.get(Integer.parseInt(choice)).get(0)+") ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
-                deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"User.txt");
+                StaticFunction.deleteFileLine(list.get(Integer.parseInt(choice)).get(0).toString(),"User.txt");
+                //deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"User.txt");
                 String[] params={list.get(Integer.parseInt(choice)).get(0).toString(),list.get(Integer.parseInt(choice)).get(1).toString(),list.get(Integer.parseInt(choice)).get(2).toString(),list.get(Integer.parseInt(choice)).get(3).toString(),list.get(Integer.parseInt(choice)).get(4).toString(),list.get(Integer.parseInt(choice)).get(5).toString()};
                 StaticFunction.writeToFile(params,"DeletedUser.txt");
             }
@@ -147,8 +148,9 @@ public class ManagingStaff extends User{
 
     public void restoreUser(){         
         List<List<String>> list=StaticFunction.getFileData("DeletedUser.txt");
+        System.out.println("\n");
+        System.out.println("List of Users in Recycle Bin");
         StaticFunction.getSelectionList(list,0);
-        System.out.println("Lis of Users in Recycle Bin");
         String choice=StaticFunction.getUserInput("Please select a user");
         if(Integer.parseInt(choice)==list.size()){
             return;
@@ -156,7 +158,8 @@ public class ManagingStaff extends User{
         String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this user("+list.get(Integer.parseInt(choice)).get(0)+" )?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
-                deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedUser.txt");
+                StaticFunction.deleteFileLine(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedUser.txt");
+                //deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedUser.txt");
                 String[] params={list.get(Integer.parseInt(choice)).get(0).toString(),list.get(Integer.parseInt(choice)).get(1).toString(),list.get(Integer.parseInt(choice)).get(2).toString(),list.get(Integer.parseInt(choice)).get(3).toString(),list.get(Integer.parseInt(choice)).get(4).toString(),list.get(Integer.parseInt(choice)).get(5).toString()};
                 StaticFunction.writeToFile(params,"User.txt");
             }
@@ -252,7 +255,7 @@ public class ManagingStaff extends User{
             file = new FileWriter("User.txt", true);            
             while (sc.hasNext() && !found){
                 temp = sc.nextLine();
-                String []tempArr = temp.split(",");
+                String []tempArr = temp.split("#####");
                 if(Username.equals(tempArr[0])){
                     found = true;
                     System.out.println("Same username found");
@@ -264,11 +267,11 @@ public class ManagingStaff extends User{
             // to write user details onto the text file.
                     User usr = new User(Username,Password,realName,Address,Phone);
                     PrintWriter pw = new PrintWriter(file);            
-                    pw.printf(usr.getLoginid() + ",");
-                    pw.printf(usr.getPassword() + ",");
-                    pw.printf(usr.getName() + ",");
-                    pw.printf(usr.getAddress() + ",");
-                    pw.printf(usr.getPhone() + ",");
+                    pw.printf(usr.getLoginid() + "#####");
+                    pw.printf(usr.getPassword() + "#####");
+                    pw.printf(usr.getName() + "#####");
+                    pw.printf(usr.getAddress() + "#####");
+                    pw.printf(usr.getPhone() + "#####");
                     if (Integer.toString(choice).equals("1")){
                         pw.println("Managing Staff");
                     } else if (Integer.toString(choice).equals("2")){
@@ -339,58 +342,7 @@ public class ManagingStaff extends User{
             }
             System.out.println("Changes made successfully");
     }
-    
-    private void deleteUser(String id,String fileName){
-                String filepath = fileName;
-                String tempFile = "Temp.txt";
-                
-                File oldFile = new File (filepath);
-                File newFile = new File (tempFile);
-                           
-                String ID = "";
-                String Password = "";
-                String Name = "";
-                String Address = "";
-                String Phone = "";  
-                String Role = "";
-                
-        try {
-                
-                FileWriter fw = new FileWriter(tempFile,true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter pw = new PrintWriter(bw);
-                x = new Scanner(new File (filepath));
-                x.useDelimiter("[,\n]");
-                
-                while (x.hasNext()){
-                    ID = x.next();
-                    Password = x.next();
-                    Name = x.next();
-                    Address = x.next();
-                    Phone = x.next();
-                    Role = x.next();
-                    if(!ID.equals(id)){
-                        pw.printf(ID + "," + Password + "," + Name + "," + Address + "," + Phone + "," + Role + "\n");
-                    }
-                }
-                x.close();
-                pw.flush();
-                pw.close();               
-                oldFile.delete();
-                File dump = new File(filepath);
-                newFile.renameTo(dump);
-            }catch(IOException e)
-            {
-                System.out.println(e);
-                x.close();
-                oldFile.delete();
-                File dump = new File(filepath);
-                newFile.renameTo(dump);
-            }
-       System.out.println("Changes made successfully");
-
-    }   
-    
+         
     private void deleteFeedback1(String id,String fileName){
                 String filepath = fileName;
                 String tempFile = "Temp.txt";

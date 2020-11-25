@@ -152,23 +152,23 @@ public class User {
                         //System.out.println(test2.get("ID"));
                         switch(index){
                                 case "Full Name":
-                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ newValue +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Password") +"#####"+ newValue +"#####"+ test2.get("Address") + "#####" + test2.get("Phone") + "#####"+test2.get("Role") + "\n");                       
                                     break;
                                 case "Address":
-                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ newValue + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Password") +"#####"+ test2.get("Full Name") +"#####"+ newValue + "#####" + test2.get("Phone") + "#####"+test2.get("Role") + "\n");                       
                                    break;
                                 case "Phone":
-                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + newValue + ","+test2.get("Role") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Password") +"#####"+ test2.get("Full Name") +"#####"+ test2.get("Address") + "#####" + newValue + "#####"+test2.get("Role") + "\n");                       
                                     break;
                                  case "Password":
-                                    pw.printf(test2.get("ID") +","+ newValue +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ newValue +"#####"+ test2.get("Full Name") +"#####"+ test2.get("Address") + "#####" + test2.get("Phone") + "#####"+test2.get("Role") + "\n");                       
                                     break;
                                 default:
                                     System.out.println("switch case not working");
-                                    pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Password") +"#####"+ test2.get("Full Name") +"#####"+ test2.get("Address") + "#####" + test2.get("Phone") + "#####"+test2.get("Role") + "\n");                       
                         }                                    
                     }else{
-                         pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ test2.get("Full Name") +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       
+                         pw.printf(test2.get("ID") +"#####"+ test2.get("Password") +"#####"+ test2.get("Full Name") +"#####"+ test2.get("Address") + "#####" + test2.get("Phone") + "#####"+test2.get("Role") + "\n");                       
                     }
                 }
                 x.close();

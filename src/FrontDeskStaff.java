@@ -9,7 +9,7 @@ public class FrontDeskStaff extends User {
     public FrontDeskStaff(User a) {
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }
-        
+
     public void viewOrderParcel(){
         String halo = "";
         List<List<String>> list=StaticFunction.getFileData("Order.txt");
@@ -110,5 +110,6 @@ public class FrontDeskStaff extends User {
         } 
     }
     
+
 
 }

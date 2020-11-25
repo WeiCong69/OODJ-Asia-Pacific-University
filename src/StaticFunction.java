@@ -79,7 +79,7 @@ public static List getFileData(String fileName){
             file = new FileWriter(fileName, true);
             while (sc.hasNext()){
                 temp = sc.nextLine();
-                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                List<String> items = Arrays.asList(temp.split("\\s*#####\\s*"));
                 tempArr.add(items);
             }                              
                     sc.close();
@@ -102,7 +102,7 @@ public static List getFeedbackFileData(String fileName){
             file = new FileWriter(fileName, true);
             while (sc.hasNext()){
                 temp = sc.nextLine();
-                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                List<String> items = Arrays.asList(temp.split("\\s*#####\\s*"));
                 if (items.get(5).equals(Login.Username)){
                 tempArr.add(items);
                 }
@@ -127,7 +127,7 @@ public static List getNotReplyData(String fileName){
             file = new FileWriter(fileName, true);
             while (sc.hasNext()){
                 temp = sc.nextLine();
-                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                List<String> items = Arrays.asList(temp.split("\\s*#####\\s*"));
                 if (items.get(4).equals("Waiting Reply")){
                 tempArr.add(items);
                 }
@@ -152,7 +152,7 @@ public static List getIndiOrderData(String fileName, String id){
             file = new FileWriter(fileName, true);
             while (sc.hasNext()){
                 temp = sc.nextLine();
-                List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+                List<String> items = Arrays.asList(temp.split("\\s*#####\\s*"));
                 if (items.get(7).equals(id)){
                 tempArr.add(items);
                 }
@@ -260,7 +260,7 @@ public static void writeToFile(String[] params,String FileName){
                 if(i==0){
                    write.append(String.valueOf(params[i]));               
                 }else{
-                   write.append(",");
+                   write.append("#####");
                    write.append(String.valueOf(params[i]));               
                 }
             }
@@ -308,7 +308,7 @@ public static void updateOrderStatus(){
         file = new FileWriter("Parcel.txt", true);
         while (sc.hasNext()){
             temp = sc.nextLine();
-            List<String> items = Arrays.asList(temp.split("\\s*,\\s*"));
+            List<String> items = Arrays.asList(temp.split("\\s*#####\\s*"));
             //super(orderid =>7, id=>0, address=>1, weight=>2, deliverytype=>6, deliverysize=>3);
             parcel.add(new SParcel(
                         Integer.parseInt(items.get(7)),
@@ -365,12 +365,12 @@ public static void updateOrderStatus(){
                 //x.useDelimiter("[,\n]");
                 while (x.hasNext()){
                     String temp = x.next();
-                    List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                    List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
                     //System.out.println(parcels.size());
                     if(Integer.parseInt(parcels.get(0))==id){
-                       pw.printf(id+","+status+"\n");                                         
+                       pw.printf(id+"#####"+status+"\n");                                         
                     }else{
-                       pw.printf(parcels.get(0)+","+parcels.get(1)+"\n");                                                                 
+                       pw.printf(parcels.get(0)+"#####"+parcels.get(1)+"\n");                                                                 
                     }
                 }
                 x.close();
@@ -406,7 +406,7 @@ public static void updateOrderStatus(){
                     if(i==0){
                        write.append(String.valueOf(params[i]));               
                     }else{
-                       write.append(",");
+                       write.append("#####");
                        write.append(String.valueOf(params[i]));               
                     }
                 }
@@ -421,7 +421,7 @@ public static void updateOrderStatus(){
                     while (x.hasNext()){                  
                         String temp = x.nextLine();
                         //System.out.println(temp);
-                        List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                        List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
                         if(parcels.get(0).equals(params[0])){
                            pw.printf(String.valueOf(write)+"\n");                                         
                         }else{
@@ -429,7 +429,7 @@ public static void updateOrderStatus(){
                                 if(j==parcels.size()-1){
                                     pw.printf(parcels.get(j)+"\n");
                                 }else{
-                                    pw.printf(parcels.get(j)+",");                                    
+                                    pw.printf(parcels.get(j)+"#####");                                    
                                 }                                
                             }
 //    pw.printf(parcels.get(0)+","+parcels.get(1)+","+parcels.get(2)+","+parcels.get(3)+","+parcels.get(4)+","+parcels.get(5)+
@@ -460,13 +460,13 @@ public static void updateOrderStatus(){
                     while (x.hasNext()){                  
                         String temp = x.nextLine();
                         //System.out.println(temp);
-                        List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                        List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
                         if(!parcels.get(0).equals(id)){
                             for(int i=0;i<parcels.size();i++){
                                 if(i==0){
                                    pw.printf(parcels.get(i));
                                 }else{
-                                   pw.printf(",");
+                                   pw.printf("#####");
                                    pw.printf(parcels.get(i));               
                                 }
                             }
@@ -526,10 +526,10 @@ public static void updateOrderStatus(){
                 //x.useDelimiter("[,\n]");
                 while (x.hasNext()){
                     String temp = x.next();
-                    List<String> parcels = Arrays.asList(temp.split("\\s*,\\s*"));
+                    List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
                     //System.out.println(parcels.size());
                     if(tobeRemoved.contains(parcels.get(0))){
-                       pw.printf(parcels.get(0)+","+parcels.get(1)+"\n");                                                                 
+                       pw.printf(parcels.get(0)+"#####"+parcels.get(1)+"\n");                                                                 
                     }else{
                     }
                 }

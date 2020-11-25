@@ -332,7 +332,7 @@ public class ManagingStaff extends User{
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 x = new Scanner(new File (filepath));
-                x.useDelimiter("[,\n]");
+                x.useDelimiter("[#####\n]");
                 if(x.hasNext()){
                 while (x.hasNext()){
                     for(String i: list){
@@ -341,14 +341,14 @@ public class ManagingStaff extends User{
                     if(test2.get("ID").equals(id)){
                         switch(index){
                                 case "1":
-                                    pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + newValue + "," + test2.get("Delivery Staff") + "," + this.loginid + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + newValue + "#####" + test2.get("Delivery Staff") + "#####" + this.loginid + "\n");                       
                                 break;
                                 default:
                                     System.out.println("switch case not working");
-                                    pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + test2.get("Reply") + "," + test2.get("Delivery Staff") + "," + test2.get("Managing Staff") + "\n");                       
+                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + test2.get("Reply") + "#####" + test2.get("Delivery Staff") + "#####" + test2.get("Managing Staff") + "\n");                       
                         }                                    
                     }else{
-                         pw.printf(test2.get("ID") +","+ test2.get("Subject") +","+ test2.get("Content") +","+ test2.get("Feedback Type") + "," + test2.get("Reply") + "," + test2.get("Delivery Staff") + "," + test2.get("Managing Staff") + "\n");                       
+                         pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + test2.get("Reply") + "#####" + test2.get("Delivery Staff") + "#####" + test2.get("Managing Staff") + "\n");                       
                     }
                 }
                 }
@@ -441,7 +441,7 @@ public class ManagingStaff extends User{
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 x = new Scanner(new File (filepath));
-                x.useDelimiter("[,\n]");
+                x.useDelimiter("[#####\n]");
                 
                 while (x.hasNext()){
                     ID = x.next();
@@ -452,7 +452,7 @@ public class ManagingStaff extends User{
                     Delivery = x.next();
                     Managing = x.next();
                     if(!ID.equals(id)){
-                        pw.printf(ID + "," + Subject + "," + Content + "," + FeedbackType + "," + Reply + "," + Delivery +  "," + Managing + "\n");
+                        pw.printf(ID + "#####" + Subject + "#####" + Content + "#####" + FeedbackType + "#####" + Reply + "#####" + Delivery +  "#####" + Managing + "\n");
                     }
                 }
                 x.close();
@@ -663,7 +663,7 @@ public class ManagingStaff extends User{
             
             while (sc.hasNext() && !found){
                 temp = sc.nextLine();
-                String []tempArr = temp.split(",");
+                String []tempArr = temp.split("#####");
                 if(id.equals(tempArr[0])){
                     found = true;
                     while(id.equals(tempArr[0])){
@@ -674,7 +674,7 @@ public class ManagingStaff extends User{
             
             while (sc1.hasNext() && !found1){
                 temp1 = sc1.nextLine();
-                String []tempArr1 = temp1.split(",");
+                String []tempArr1 = temp1.split("#####");
                 if(orderid.equals(tempArr1[0])){
                     found1 = true;
                     while(id.equals(tempArr1[0])){
@@ -706,22 +706,22 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 if (items == 1){
-                                pw1.printf(bk.orderid + ",");
+                                pw1.printf(bk.orderid + "#####");
                                 pw1.println("Pending");
                                 }
-                                pw.printf(bk.id + ",");
-                                pw.printf(bk.address + ",");
-                                pw.printf(df.format(bk.weight) + ",");
-                                pw.printf(bk.parcelsize("Small") + ",");
-                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))) + ",");
-                                pw.printf(bk.getStatus()+ ",");
+                                pw.printf(bk.id + "#####");
+                                pw.printf(bk.address + "#####");
+                                pw.printf(df.format(bk.weight) + "#####");
+                                pw.printf(bk.parcelsize("Small") + "#####");
+                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))) + "#####");
+                                pw.printf(bk.getStatus()+ "#####");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.printf("International" + ",");
+                                    pw.printf("International" + "#####");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.printf("Domestic" + ",");
+                                    pw.printf("Domestic" + "#####");
                                 }
-                                pw.printf(bk.orderid + ",");
-                                pw.printf(assignto + ",");
+                                pw.printf(bk.orderid + "#####");
+                                pw.printf(assignto + "#####");
                                 pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + df2.format(bk.parcelprice(bk.deliverytype, "Small", String.valueOf(bk.weight))));
                         }
@@ -744,22 +744,22 @@ public class ManagingStaff extends User{
 
                             for(Parcel bk : TotalParcelInOrder){
                                 if (items == 1){
-                                pw1.printf(bk.orderid + ",");
+                                pw1.printf(bk.orderid + "#####");
                                 pw1.println("Pending");
                                 }
-                                pw.printf(bk.id + ",");
-                                pw.printf(bk.address + ",");
-                                pw.printf(df.format(bk.weight) + ",");
-                                pw.printf(bk.parcelsize("Large") + ",");
-                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + ",");
-                                pw.printf("Pending" + ",");
+                                pw.printf(bk.id + "#####");
+                                pw.printf(bk.address + "#####");
+                                pw.printf(df.format(bk.weight) + "#####");
+                                pw.printf(bk.parcelsize("Large") + "#####");
+                                pw.printf(df2.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))) + "#####");
+                                pw.printf("Pending" + "#####");
                                 if (bk.deliverytype.equals("1")){
-                                    pw.printf("International" + ",");
+                                    pw.printf("International" + "#####");
                                 } else if (bk.deliverytype.equals("2")){
-                                    pw.printf("Domestic" + ",");
+                                    pw.printf("Domestic" + "#####");
                                 }
-                                pw.printf(bk.orderid + ",");
-                                pw.printf(assignto + ",");
+                                pw.printf(bk.orderid + "#####");
+                                pw.printf(assignto + "#####");
                                 pw.println(dtf.format(now));
                                 System.out.println("The price will be RM" + df2.format(bk.parcelprice(bk.deliverytype, "Large", String.valueOf(bk.weight))));
                         }

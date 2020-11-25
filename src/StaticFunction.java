@@ -586,6 +586,7 @@ public static void updateOrderStatus(){
         }
         return generatedPassword;
     }
+
    
   public static void autoAssginParcel(){
       List<List<String>> data=StaticFunction.getFileData("User.txt"); 
@@ -609,6 +610,7 @@ public static void updateOrderStatus(){
          }
    }
   
+
 @SuppressWarnings("unchecked")    
 public static void UserReport() throws FileNotFoundException, IOException{
        BasicConfigurator.configure();

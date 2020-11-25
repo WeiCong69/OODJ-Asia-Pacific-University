@@ -25,6 +25,7 @@ public class ManagingStaffMenu implements Menu {
     }
 
     public void printMenu() {
+        System.out.println("Welcome to Managing Staff Menu");
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");

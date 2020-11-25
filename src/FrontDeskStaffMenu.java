@@ -19,6 +19,7 @@ public class FrontDeskStaffMenu implements Menu {
     }
     
     public void printMenu() {
+        System.out.println("Welcome to Front Desk Staff Menu");
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE ORDER");
         System.out.println("-------------------");

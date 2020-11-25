@@ -20,6 +20,7 @@ public class DeliveryStaffMenu implements Menu{
     
     public void printMenu() {
         //master code
+        System.out.println("Welcome to Delivery Staff Menu");
         StaticFunction.displayHeader("Please select a service");
         System.out.println("MANAGE PARCEL");
         System.out.println("-------------------"); 

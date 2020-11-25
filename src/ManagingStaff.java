@@ -23,40 +23,11 @@ public class ManagingStaff extends User{
     public String orderid = null;
     public int items = 1;
     public static Scanner x;
-    ArrayList<String> order = new ArrayList<>();
-    ArrayList<String> parcel = new ArrayList<>();
-    ArrayList<String> feedback = new ArrayList<>();
     
     public ManagingStaff(User a) {
 
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }
-
-    public ArrayList<String> getOrder() {
-        return order;
-    }
-
-    public ArrayList<String> getParcel() {
-        return parcel;
-    }
-
-    public ArrayList<String> getFeedback() {
-        return feedback;
-    }
-
-    public void setOrder(ArrayList<String> order) {
-        this.order = order;
-    }
-
-    public void setParcel(ArrayList<String> parcel) {
-        this.parcel = parcel;
-    }
-
-    public void setFeedback(ArrayList<String> feedback) {
-        this.feedback = feedback;
-    }
-
-
 
     public void editUser(){       
         List<List<String>> list=StaticFunction.getFileData("User.txt");
@@ -80,8 +51,8 @@ public class ManagingStaff extends User{
                 }
             }
             if(counter==2){
-                for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {
-                       System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
+                for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {     
+                     System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
                 }
                 System.out.println("3. Exit from editting profile");
                 choice1=StaticFunction.getUserInput("Please select a component to be changed:");
@@ -134,7 +105,7 @@ public class ManagingStaff extends User{
         if(Integer.parseInt(choice)==list.size()){
             return;
         }
-        String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this user"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this user("+list.get(Integer.parseInt(choice)).get(0)+") ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"User.txt");
@@ -182,7 +153,7 @@ public class ManagingStaff extends User{
         if(Integer.parseInt(choice)==list.size()){
             return;
         }        
-        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this user"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this user("+list.get(Integer.parseInt(choice)).get(0)+" )?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 deleteUser(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedUser.txt");
@@ -1004,7 +975,7 @@ public class ManagingStaff extends User{
                 counter++;
             }
             if(counter==4){
-                   String action = StaticFunction.getUserInput("\nWhat do you wish to do?\n0.View other order\n1.Edit Parcel\n2.Delete Parcel");
+                   String action = StaticFunction.getUserInput("\nWhat do you wish to do?\n0.View other order\n1.Edit Parcel\n2.Delete Parcel\n3.Exit");
                     if(Integer.parseInt(action)==0){
                     viewOrderParcel();
                         counter++;
@@ -1023,6 +994,8 @@ public class ManagingStaff extends User{
                         StaticFunction.deleteFileLine(list1.get(Integer.parseInt(choicee)).get(0),"Parcel.txt");
                         counter=2;
                         continue;
+                    }else if(Integer.parseInt(action)==3){
+                        return;
                     }else{
                         continue;
                     }                
@@ -1047,14 +1020,16 @@ public class ManagingStaff extends User{
        System.out.println(dsf);
        System.out.println(randomNum);
        data=StaticFunction.getFileData("Parcel.txt");
-       for (int i = 0; i <data.size(); i++,randomNum++) {
+       for (int i = 0; i <data.size(); i++) {
         if(data.get(i).get(8).equals("null")){
-              if(randomNum==dsf.size())randomNum=0;
+              if(randomNum>=dsf.size())randomNum=0;
+              System.out.println(randomNum);              
               data.get(i).set(8,dsf.get(randomNum));
               System.out.println(data.get(i));
               String[] itemsArray = new String[data.get(i).size()];
               itemsArray = data.get(i).toArray(itemsArray);              
-              StaticFunction.updateFileLine(itemsArray,"Parcel.txt");             
+              StaticFunction.updateFileLine(itemsArray,"Parcel.txt");
+              randomNum++;
         }
        }      
   }
@@ -1073,6 +1048,9 @@ public class ManagingStaff extends User{
             break;
         case "3":
             StaticFunction.ParcelReport();
+            break;
+        case "4":
+            return;
         default:
             System.out.println("Error(code:69) has ocurred.Please reselect yr option");
             exportData();

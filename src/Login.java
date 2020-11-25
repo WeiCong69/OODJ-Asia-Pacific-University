@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,10 @@ public class Login {
     public static String Name;
     
     public static void main(String[] args) {
+//      String temp="cong######81dc9bdb52d04dc20036dbd8313ed055######cong babe######puj######6969######Managing Staff";
+//      List<String> parcel = Arrays.asList(temp.split("\\s*######\\s*"));
+//        System.out.println(parcel);
+
         StaticFunction.removeEmptyOrder();
         Login login = new Login();
         login.runLogin();     

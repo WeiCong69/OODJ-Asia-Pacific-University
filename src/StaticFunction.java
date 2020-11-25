@@ -586,7 +586,7 @@ public static void updateOrderStatus(){
         }
         return generatedPassword;
     }
-    
+
 @SuppressWarnings("unchecked")    
 public static void UserReport() throws FileNotFoundException, IOException{
        BasicConfigurator.configure();

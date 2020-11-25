@@ -65,6 +65,12 @@ public class User {
             int choice = 0;
             do{
             if(counter==1){
+                System.out.printf("Name:\n");
+                System.out.printf(StaticFunction.addLinebreaks(this.name, 50) + "\n\n");
+                System.out.printf("Address:\n");
+                System.out.printf(StaticFunction.addLinebreaks(this.address+"kg", 50)+"\n\n");
+                System.out.printf("Phone Number:\n");
+                System.out.printf(StaticFunction.addLinebreaks(this.phone, 50) + "\n\n");                
                 System.out.println("0. Update Password");
                 System.out.println("1. Update Name");
                 System.out.println("2. Update Address");
@@ -119,7 +125,8 @@ public class User {
         }while(counter<2);
                            
         } catch (NumberFormatException e) {
-            System.out.println(e);
+             editProfile();
+             System.out.println("Some error has occur.Please choose again");             
         }        
     }
     
@@ -142,7 +149,7 @@ public class User {
                         }
                     }                    
                     if(test2.get("ID").equals(id)){                       
-                        System.out.println(test2.get("ID"));
+                        //System.out.println(test2.get("ID"));
                         switch(index){
                                 case "Full Name":
                                     pw.printf(test2.get("ID") +","+ test2.get("Password") +","+ newValue +","+ test2.get("Address") + "," + test2.get("Phone") + ","+test2.get("Role") + "\n");                       

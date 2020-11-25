@@ -10,5 +10,4 @@ public class FrontDeskStaff extends User {
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }
     
-
 }

@@ -71,18 +71,18 @@ public class DeliveryStaff extends User{
             // to write user details onto the text file.
                     Feedback fdk = new Feedback(ID,subject,content,reply);
                     PrintWriter pw = new PrintWriter(file);            
-                    pw.printf(fdk.getId() + ",");
-                    pw.printf(fdk.getSubject() + ",");
-                    pw.printf(fdk.getContent() + ",");
+                    pw.printf(fdk.getId() + "#####");
+                    pw.printf(fdk.getSubject() + "#####");
+                    pw.printf(fdk.getContent() + "#####");
                     if (Integer.toString(choice).equals("1")){
-                        pw.printf("System Bug" + ",");
+                        pw.printf("System Bug" + "#####");
                     } else if (Integer.toString(choice).equals("2")){
-                        pw.printf("Parcel Related" + ",");
+                        pw.printf("Parcel Related" + "#####");
                     } else if (Integer.toString(choice).equals("3")){
-                        pw.printf("Customer Related" + ",");
+                        pw.printf("Customer Related" + "#####");
                     }
-                    pw.printf(fdk.getReply() + ",");
-                    pw.printf(Login.Username + ",");
+                    pw.printf(fdk.getReply() + "#####");
+                    pw.printf(Login.Username + "#####");
                     pw.println("Nobody");
                     file.close();
                     pw.close();            

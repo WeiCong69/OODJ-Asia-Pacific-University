@@ -143,7 +143,7 @@ public class ManagingStaff extends User{
         }
         String confirmation=StaticFunction.getUserInput("Are you sure you want to delete this feedback --> "+list.get(Integer.parseInt(choice)).get(1).toString()+" ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
+//                System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 deleteFeedback1(list.get(Integer.parseInt(choice)).get(0).toString(),"Feedback.txt");
                 String[] params={
                     list.get(Integer.parseInt(choice)).get(0).toString(),
@@ -171,7 +171,7 @@ public class ManagingStaff extends User{
         if(Integer.parseInt(choice)==list.size()){
             return;
         }        
-        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this user("+list.get(Integer.parseInt(choice)).get(0)+" )?\n0.Yes\n1.No");
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this user("+list.get(Integer.parseInt(choice)).get(0).toString()+" )?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 StaticFunction.deleteFileLine(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedUser.txt");
@@ -190,7 +190,7 @@ public class ManagingStaff extends User{
         List<List<String>> list=StaticFunction.getFileData("DeletedFeedback.txt");
         
         if (counter == 1){
-        StaticFunction.getSelectionList(list,0);
+        StaticFunction.getSelectionList(list,1);
         System.out.println("List of feedback in Recycle Bin");
         choice = StaticFunction.getUserInput("Please select a feedback");
             if(Integer.parseInt(choice)==list.size()){
@@ -204,7 +204,7 @@ public class ManagingStaff extends User{
         }
         
         if (counter == 2){
-        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this feedback"+list.get(Integer.parseInt(choice))+" ?\n0.Yes\n1.No");
+        String confirmation=StaticFunction.getUserInput("Are you sure you want to restore this feedback --> "+list.get(Integer.parseInt(choice)).get(1)+" ?\n0.Yes\n1.No");
             if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
                 System.out.println(list.get(Integer.parseInt(choice)).get(0).toString());
                 deleteFeedback1(list.get(Integer.parseInt(choice)).get(0).toString(),"DeletedFeedback.txt");

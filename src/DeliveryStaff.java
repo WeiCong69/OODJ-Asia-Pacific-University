@@ -14,10 +14,20 @@ public class DeliveryStaff extends User{
     public DeliveryStaff(User a) {
         super(a.loginid,a.password,a.name,a.address,a.phone);
     }
-    
+        
+    ArrayList<Feedback> feedback = new ArrayList<Feedback>();    
     List<SParcel> parcel = new ArrayList<SParcel>();
-    ArrayList<String> feedback = new ArrayList<>();
     
+    public List<SParcel> getParcel() {
+        return parcel;
+    }
+
+    public void setParcel(List<SParcel> parcel) {
+        this.parcel = parcel;
+    }
+    public void addParcel(SParcel parcel) {
+        this.parcel.add(parcel);
+    }
     public void addFeedback(){
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
@@ -156,7 +166,7 @@ public class DeliveryStaff extends User{
                 }else {
                     viewOrder();
                 }
-                
+                    
                 for (int i=0; i<list.size(); i++){
                     if (Integer.parseInt(choice) == i){    
                         halo = StaticFunction.getOrderSelection(list, i);
@@ -301,16 +311,7 @@ public class DeliveryStaff extends User{
         }while(counter<2);         
     }
 
-    public List<SParcel> getParcel() {
-        return parcel;
-    }
-
-    public void setParcel(List<SParcel> parcel) {
-        this.parcel = parcel;
-    }
-    public void addParcel(SParcel parcel) {
-        this.parcel.add(parcel);
-    }    
+    
     public void viewPendingParcel(){
         int counter=0;        
         List<SParcel> assignedParcels=new ArrayList<SParcel>() ;

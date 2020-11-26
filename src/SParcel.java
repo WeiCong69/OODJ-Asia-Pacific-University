@@ -43,21 +43,6 @@ public class SParcel extends Parcel{
         return Total;
     }
 
-    public void setPricerates(double pricerates) {
-        this.pricerates = pricerates;
-    }
-
-    public double getPricerates() {
-        return pricerates;
-    }
-    
-    private double pricerates;
-    
-    @Override
-    public String toString()
-    {
-        return null;
-    }
     
     public void editParcel(String size,String price,String deliveryGuy,String date){
         int counter=0;

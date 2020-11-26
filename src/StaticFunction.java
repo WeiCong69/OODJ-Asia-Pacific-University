@@ -335,16 +335,6 @@ public static void updateOrderStatus(){
                       }
                   }                
             }
-//            for(SParcel obj : i.getValue()){
-//                  if(obj.getStatus().equals("Pending") || obj.getStatus().equals("on delivery") ){
-//                      continue;
-//                  }else{
-//                      System.out.println("no");
-//                  }
-//              } 
-//            if(i.getValue().stream().map(SParcel::getStatus).filter("Delivered"::equals).findFirst().isPresent()){
-//                System.out.println("yes");
-//            }
         }        
                    
     } catch (IOException ex) {
@@ -487,11 +477,6 @@ public static void updateOrderStatus(){
     }
 
    public static void removeEmptyOrder(){
-//       List<List<String>> order=StaticFunction.getFileData("Order.txt");
-//       List<String> orderID=new ArrayList<String>();
-//       for(List<String> i: order){
-//           orderID.add(i.get(0));
-//       }
        List<List<String>> parcelFromFile=StaticFunction.getFileData("Parcel.txt");       
        List <SParcel> parcel = new ArrayList<SParcel>();       
        for(List<String> i: parcelFromFile){
@@ -505,15 +490,7 @@ public static void updateOrderStatus(){
         for(Map.Entry< Integer, List < SParcel >> i: orderidList.entrySet()){
                 tobeRemoved.add(String.valueOf(i.getKey()));
         }
-//                
-////       for(List<String> i: order){
-////           if(!orderID.contains(i.get(0))){
-////                order.removeIf( name -> name.equals(i));                
-////           }
-////       }
-//       orderID.removeAll(tobeRemoved);
-//           System.out.println(tobeRemoved);
-//       System.out.println(order);
+
             String filepath = "Order.txt";
             String tempFile = "Temp.txt";
             File oldFile = new File (filepath);

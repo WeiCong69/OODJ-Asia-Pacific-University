@@ -28,7 +28,7 @@ public class SParcel extends Parcel{
         }
         return Total;
     }
-
+    
     public SParcel(Integer id, String address, double weight, String deliverysize, String status, String deliverytype, Integer orderid) {
         super(id, address, weight, deliverysize, status, deliverytype, orderid);
         //follow text file

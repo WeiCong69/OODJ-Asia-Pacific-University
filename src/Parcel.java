@@ -143,6 +143,5 @@ abstract class Parcel {
         return deliverysize;
     }
     
-    public static void main(String[] args) {
-    }
+
 }

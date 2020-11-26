@@ -12,7 +12,7 @@ public class DeliveryStaff extends User{
     
     //testing
     public DeliveryStaff(User a) {
-        super(a.loginid,a.password,a.name,a.address,a.phone);
+        super(a.loginid,a.password,a.name,a.address,a.phone,a.role);
     }
         
     ArrayList<Feedback> feedback = new ArrayList<Feedback>();    

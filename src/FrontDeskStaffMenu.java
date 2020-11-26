@@ -25,10 +25,9 @@ public class FrontDeskStaffMenu implements Menu {
         System.out.println("-------------------");
         System.out.println("1) Make an Order");
         System.out.println("2) View Order Details");
-        System.out.println("3)Edit Order & Parcels");        
         System.out.println("MANAGE USER");
         System.out.println("-------------------");
-        System.out.println("4) Edit User Profile");
+        System.out.println("3) Edit User Profile");
 //        System.out.println("MANAGE PARCEL");
 //        System.out.println("-------------------");        
 //        System.out.println("-------------------"); 
@@ -46,15 +45,15 @@ public class FrontDeskStaffMenu implements Menu {
                 ms.addOrder();
                break;
             case 2:
-                fds.viewOrderParcel();
-                break;
-            case 4:
-                usr.editProfile();
+                ms.viewOrderParcel();
                 break;
             case 3:
-                ms.viewOrderParcel();
-                //fds.editParcel();
+                usr.editProfile();
                 break;
+//            case 3:
+//                ms.viewOrderParcel();
+                //fds.editParcel();
+//                break;
             case 5:
                 break;
             case 6:

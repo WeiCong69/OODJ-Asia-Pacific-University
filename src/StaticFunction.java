@@ -264,7 +264,7 @@ public static void writeToFile(String[] params,String FileName){
                    write.append(String.valueOf(params[i]));               
                 }
             }
-            System.out.println(write);
+//            System.out.println(write);
             FileWriter file = null;           
             try{           
             File myfile = new File(FileName);

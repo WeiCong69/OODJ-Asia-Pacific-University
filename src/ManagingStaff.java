@@ -775,10 +775,8 @@ public class ManagingStaff extends User{
                 String OrderID = "";
                 String AssignTo = "";
                 String Date = "";
-                String comparison = "";
                 
             try {
-                
                 x = new Scanner(new File (filepath));
                 
                 double TotalPrice = 0;
@@ -792,7 +790,6 @@ public class ManagingStaff extends User{
                 int count7 = 0;
                 
                 x.useDelimiter("[#####\n]");
-                
                 while (x.hasNext()){
                     ParcelID = x.next();
                     Address = x.next(); 
@@ -804,6 +801,7 @@ public class ManagingStaff extends User{
                     OrderID = x.next();
                     AssignTo = x.next();
                     Date = x.next();
+                    System.out.println(Address);
                     
                     for (int i=1; i<7; i++){
                     if(choice.equals(String.valueOf(i))){

@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -775,7 +774,7 @@ public class ManagingStaff extends User{
                 int count6 = 0;
                 int count7 = 0;
                 
-                x.useDelimiter("[,\n]");
+                x.useDelimiter("[#####\n]");
                 
                 while (x.hasNext()){
                     ParcelID = x.next();
@@ -790,10 +789,11 @@ public class ManagingStaff extends User{
                     Date = x.next();
                     
                     for (int i=1; i<7; i++){
-                    if(choice.equals(String.valueOf(i))){   
-                    SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
-                    Date d1 = sdformat.parse(Date); 
-                    Date d2 = sdformat.parse(StaticFunction.getDate(i));
+                    if(choice.equals(String.valueOf(i))){
+                    Date d1 = new SimpleDateFormat("dd/MM/yyyy").parse(Date);
+                    Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse(StaticFunction.getDate(i));
+                    System.out.println(d1);
+                    System.out.println(d2);
                     
                         if (d1.compareTo(d2) > 0){
                             TotalPrice = TotalPrice + Double.parseDouble(Price);

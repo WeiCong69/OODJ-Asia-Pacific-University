@@ -397,7 +397,7 @@ public class DeliveryStaff extends User{
     }
     public void editParcel(){ 
      try {
-       int choice=Integer.parseInt(StaticFunction.getUserInput("Please Select a category."
+       int choice=Integer.parseInt(StaticFunction.getUserInput("\nPlease Select a category."
                 + "\n0.Pending Parcles"
                 + "\n1.Delivered Parcels"
                 + "\n2.Exit"));

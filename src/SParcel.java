@@ -3,20 +3,6 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class SParcel extends Parcel{
-
-    public SParcel(Integer id, String address, double weight, String deliverysize, String status, String deliverytype, Integer orderid) {
-        super(id, address, weight, deliverysize, status, deliverytype, orderid);
-        //follow text file
-    }
-    
-    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize, String status) {
-        super(orderid, id, address, weight, deliverytype, deliverysize, status);
-    }
-    
-    //initialise Sparcel using list( according to text file)
-    public SParcel(List<String> a) {        
-        super(Integer.parseInt(a.get(0)),a.get(1),Double.parseDouble(a.get(2)),a.get(3),a.get(4),a.get(5),a.get(6),Integer.parseInt(a.get(7)),a.get(8),a.get(9));
-    }
     
     public String parcelsize(String Size){
         String size1 = "";
@@ -42,7 +28,36 @@ public class SParcel extends Parcel{
         }
         return Total;
     }
+    
+    public SParcel(Integer id, String address, double weight, String deliverysize, String status, String deliverytype, Integer orderid) {
+        super(id, address, weight, deliverysize, status, deliverytype, orderid);
+        //follow text file
+    }
+    
+    public SParcel(Integer orderid, Integer id, String address, double weight, String deliverytype, String deliverysize, String status) {
+        super(orderid, id, address, weight, deliverytype, deliverysize, status);
+    }
+    
+    //initialise Sparcel using list( according to text file)
+    public SParcel(List<String> a) {        
+        super(Integer.parseInt(a.get(0)),a.get(1),Double.parseDouble(a.get(2)),a.get(3),a.get(4),a.get(5),a.get(6),Integer.parseInt(a.get(7)),a.get(8),a.get(9));
+    }
 
+    public void setPricerates(double pricerates) {
+        this.pricerates = pricerates;
+    }
+
+    public double getPricerates() {
+        return pricerates;
+    }
+    
+    private double pricerates;
+    
+    @Override
+    public String toString()
+    {
+        return null;
+    }
     
     public void editParcel(String size,String price,String deliveryGuy,String date){
         int counter=0;

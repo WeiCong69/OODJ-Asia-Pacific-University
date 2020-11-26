@@ -9,6 +9,7 @@ public class DeliveryStaffMenu implements Menu{
     public void runMenu(){
             StaticFunction.removeEmptyOrder();
             StaticFunction.updateOrderStatus();
+            StaticFunction.printHeader();
         while (!exit) {
             StaticFunction.removeEmptyOrder();
             StaticFunction.updateOrderStatus();

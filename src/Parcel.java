@@ -9,6 +9,10 @@ abstract class Parcel {
      Integer orderid;
      String assign;
      String date;
+     
+    public abstract String parcelsize(String Size);
+    
+    public abstract double parcelprice(String Type, String Size, String Weight); 
     
     public String getAddress() {
         return address;
@@ -81,10 +85,6 @@ abstract class Parcel {
         this.deliverytype = deliverytype;
         this.orderid = orderid;
     }
-    
-    public abstract String parcelsize(String Size);
-    
-    public abstract double parcelprice(String Type, String Size, String Weight);
 
     public void setId(Integer id) {
         this.id = id;

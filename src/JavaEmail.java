@@ -74,7 +74,7 @@ public class JavaEmail {
 
 		String emailHost = "smtp.gmail.com";
 		String fromUser = "CourierSystemOODJ2020";//just the id alone without @gmail.com
-		String fromUserEmailPassword = "KaddharComel12629";
+		String fromUserEmailPassword = "Testing_oodj2020";
 
 		Transport transport = mailSession.getTransport("smtp");
 

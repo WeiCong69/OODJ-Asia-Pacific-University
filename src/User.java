@@ -9,7 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 public class User {
  public static Scanner x;
-   
+    
+    public void addOrder() {
+      System.out.println("Order is added");
+   }
+ 
     public void setPassword(String password) {
         this.password = password;
     }

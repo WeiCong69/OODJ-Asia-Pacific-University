@@ -1,6 +1,6 @@
 public class DeliveryStaffMenu implements Menu{
     
-    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone,Login.role); 
     DeliveryStaff ds = new DeliveryStaff(usr); 
     
     boolean exit;

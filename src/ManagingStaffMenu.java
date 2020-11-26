@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 public class ManagingStaffMenu implements Menu {
      boolean exit;
      boolean exitOrder;
-        User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+        User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone,Login.role); 
         ManagingStaff msf = new ManagingStaff(usr);           
     
     public void runMenu(){
-        User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+        User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone,Login.role); 
         ManagingStaff msf = new ManagingStaff(usr);
 //        System.out.println(msf.getLoginid());
 //        System.out.println(msf.getPhone());          

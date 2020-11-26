@@ -1,6 +1,6 @@
 public class FrontDeskStaffMenu implements Menu {
 
-    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone); 
+    User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone,Login.role); 
     FrontDeskStaff fds = new FrontDeskStaff(usr);
     ManagingStaff ms = new ManagingStaff(usr);
     

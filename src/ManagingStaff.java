@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -322,23 +323,45 @@ public class ManagingStaff extends User{
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 x = new Scanner(new File (filepath));
-                x.useDelimiter("[#####\n]");
+                
                 if(x.hasNext()){
                 while (x.hasNext()){
-                    for(String i: list){
-                        test2.put(i,x.next());
-                    }                    
-                    if(test2.get("ID").equals(id)){
+                    
+                    String temp = x.nextLine();
+                    List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
+                    
+//                    for(String i: list){
+//                        test2.put(i,x.next());
+//                    }                    
+                    if(parcels.get(0).equals(id)){
                         switch(index){
                                 case "1":
-                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + newValue + "#####" + test2.get("Delivery Staff") + "#####" + this.loginid + "\n");                       
+                                    pw.printf(parcels.get(0) +"#####"+ 
+                                            parcels.get(1) +"#####"+ 
+                                            parcels.get(2) +"#####"+ 
+                                            parcels.get(3) + "#####" + 
+                                            newValue + "#####" + 
+                                            parcels.get(5) + "#####" + 
+                                            this.loginid + "\n");                       
                                 break;
                                 default:
                                     System.out.println("switch case not working");
-                                    pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + test2.get("Reply") + "#####" + test2.get("Delivery Staff") + "#####" + test2.get("Managing Staff") + "\n");                       
+                                    pw.printf(parcels.get(0) +"#####"+ 
+                                            parcels.get(1) +"#####"+ 
+                                            parcels.get(2) +"#####"+ 
+                                            parcels.get(3) + "#####" + 
+                                            parcels.get(4) + "#####" + 
+                                            parcels.get(5) + "#####" + 
+                                            parcels.get(6) + "\n");                       
                         }                                    
                     }else{
-                         pw.printf(test2.get("ID") +"#####"+ test2.get("Subject") +"#####"+ test2.get("Content") +"#####"+ test2.get("Feedback Type") + "#####" + test2.get("Reply") + "#####" + test2.get("Delivery Staff") + "#####" + test2.get("Managing Staff") + "\n");                       
+                         pw.printf(parcels.get(0) +"#####"+ 
+                                            parcels.get(1) +"#####"+ 
+                                            parcels.get(2) +"#####"+ 
+                                            parcels.get(3) + "#####" + 
+                                            parcels.get(4) + "#####" + 
+                                            parcels.get(5) + "#####" + 
+                                            parcels.get(6) + "\n");                      
                     }
                 }
                 }
@@ -380,16 +403,17 @@ public class ManagingStaff extends User{
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
                 x = new Scanner(new File (filepath));
-                x.useDelimiter("[#####\n]");
                 
                 while (x.hasNext()){
-                    ID = x.next();
-                    Subject = x.next(); 
-                    Content = x.next();
-                    FeedbackType = x.next();
-                    Reply = x.next();
-                    Delivery = x.next();
-                    Managing = x.next();
+                    String temp = x.nextLine();
+                    List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
+                    ID = parcels.get(0);
+                    Subject = parcels.get(1); 
+                    Content = parcels.get(2);
+                    FeedbackType = parcels.get(3);
+                    Reply = parcels.get(4);
+                    Delivery = parcels.get(5);
+                    Managing = parcels.get(6);
                     if(!ID.equals(id)){
                         pw.printf(ID + "#####" + Subject + "#####" + Content + "#####" + FeedbackType + "#####" + Reply + "#####" + Delivery +  "#####" + Managing + "\n");
                     }
@@ -789,26 +813,27 @@ public class ManagingStaff extends User{
                 int count6 = 0;
                 int count7 = 0;
                 
-                x.useDelimiter("[#####\n]");
                 while (x.hasNext()){
-                    ParcelID = x.next();
-                    Address = x.next(); 
-                    Weight = x.next();
-                    Size = x.next();
-                    Price = x.next();
-                    ParcelStatus = x.next();
-                    DeliveryType = x.next();
-                    OrderID = x.next();
-                    AssignTo = x.next();
-                    Date = x.next();
-                    System.out.println(Address);
+                    
+                    String temp = x.nextLine();
+                    List<String> parcels = Arrays.asList(temp.split("\\s*#####\\s*"));
+                    
+                    ParcelID = parcels.get(0);
+                    Address = parcels.get(1); 
+                    Weight = parcels.get(2);
+                    Size = parcels.get(3);
+                    Price = parcels.get(4);
+                    ParcelStatus = parcels.get(5);
+                    DeliveryType = parcels.get(6);
+                    OrderID = parcels.get(7);
+                    AssignTo = parcels.get(8);
+                    Date = parcels.get(9);
                     
                     for (int i=1; i<7; i++){
                     if(choice.equals(String.valueOf(i))){
-                    Date d1 = new SimpleDateFormat("dd/MM/yyyy").parse(Date);
-                    Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse(StaticFunction.getDate(i));
-                    System.out.println(d1);
-                    System.out.println(d2);
+                    SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date d1 = sdformat.parse(Date); 
+                    Date d2 = sdformat.parse(StaticFunction.getDate(i));
                     
                         if (d1.compareTo(d2) > 0){
                             TotalPrice = TotalPrice + Double.parseDouble(Price);

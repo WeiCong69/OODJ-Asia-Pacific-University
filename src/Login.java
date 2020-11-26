@@ -17,6 +17,7 @@ public class Login {
     public static String Address;
     public static String Phone;
     public static String Name;
+    public static String role;
     
     public static void main(String[] args) {
 //      String temp="cong######81dc9bdb52d04dc20036dbd8313ed055######cong babe######puj######6969######Managing Staff";
@@ -65,16 +66,16 @@ public class Login {
             String []tempArr = temp.split("#####"); //"," see from the file to seperate username and password to match with the textfield input
             
             if(Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Managing.equals(tempArr[5])){
-                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];role=tempArr[5];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();
-                User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone);
+                User usr=new User(Login.Username,Login.Password,Login.Name,Login.Address,Login.Phone,role);
                 ManagingStaffMenu msm = new ManagingStaffMenu();
                 msm.runMenu();
             }
             else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && Delivery.equals(tempArr[5])){
-                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];role=tempArr[5];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();
@@ -82,7 +83,7 @@ public class Login {
                 msm.runMenu();
             }
             else if (Username.equals(tempArr[0]) && Password.equals(tempArr[1]) && FrontDesk.equals(tempArr[5])){
-                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];
+                Name=tempArr[2];Address=tempArr[3];Phone=tempArr[4];role=tempArr[5];
                 System.out.println("Login Successfully. Welcome Back " + Login.Username);
                 found = true;
                 sc.close();

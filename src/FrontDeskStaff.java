@@ -5,7 +5,7 @@ public class FrontDeskStaff extends User {
     
 
     public FrontDeskStaff(User a) {
-        super(a.loginid,a.password,a.name,a.address,a.phone);
+        super(a.loginid,a.password,a.name,a.address,a.phone,a.role);
     }
 
     public void viewOrderParcel(){

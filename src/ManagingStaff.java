@@ -25,7 +25,7 @@ public class ManagingStaff extends User{
     
     public ManagingStaff(User a) {
 
-        super(a.loginid,a.password,a.name,a.address,a.phone);
+        super(a.loginid,a.password,a.name,a.address,a.phone,a.role);
     }
 
     public void editUser(){       
@@ -50,6 +50,7 @@ public class ManagingStaff extends User{
                 }
             }
             if(counter==2){
+                
                 for (int i = 2,j=0; i < list.get(Integer.parseInt(choice)).size()-1; i++,j++) {     
                      System.out.println(j+". "+index[j]+"-> "+ list.get(Integer.parseInt(choice)).get(i));
                 }
@@ -59,15 +60,30 @@ public class ManagingStaff extends User{
                     counter--;
                     continue;
                 }
+                User usr= new User(list.get(Integer.parseInt(choice)));
                 test= Integer.parseInt(choice1)+2;
                 System.out.println(col.length);
                 if(test<col.length){
                     String value=StaticFunction.getUserInput("Old information: "+index[Integer.parseInt(choice1)]+"= "+list.get(Integer.parseInt(choice)).get(test)+"\n");
+                    switch(choice1){
+                        case "0":
+                            usr.setName(value);
+                            break;
+                        case "1":
+                            usr.setAddress(value);
+                            break;
+                        case "2":
+                            usr.setPhone(value);
+                            break;
+                        default:
+                            continue;
+                    }
                     String confirmation=StaticFunction.getUserInput("Are you sure you want to update this information?\n0.Yes\n1.No");
                     
                     if(confirmation.equals("0") || confirmation.equals("Yes")|| confirmation.equals("Y")|| confirmation.equals("yes")){
-                        
-                        editUserFile(col,list.get(Integer.parseInt(choice)).get(0), index[Integer.parseInt(choice1)], value);
+                         String[] array=usr.toArray();
+                         StaticFunction.updateFileLine(array, "User.txt");                
+                        //editUserFile(col,list.get(Integer.parseInt(choice)).get(0), index[Integer.parseInt(choice1)], value);
                         String continueEditing=StaticFunction.getUserInput("Do you wish to continue editing details of this user?\n0.Yes\n1.No");
                         
                         if(continueEditing.equals("0") || continueEditing.equals("Yes")|| continueEditing.equals("Y")|| confirmation.equals("yes")){
@@ -264,20 +280,21 @@ public class ManagingStaff extends User{
                 }  
             }
             // to write user details onto the text file.
-                    User usr = new User(Username,Password,realName,Address,Phone);
+                    if (Integer.toString(choice).equals("1")){
+                        String role="Managing Staff";
+                    } else if (Integer.toString(choice).equals("2")){
+                        role="Delivery Staff";
+                    } else if (Integer.toString(choice).equals("3")){
+                        role="Front Desk Staff";
+                    }            
+                    User usr = new User(Username,Password,realName,Address,Phone,role);
                     PrintWriter pw = new PrintWriter(file);            
                     pw.printf(usr.getLoginid() + "#####");
                     pw.printf(usr.getPassword() + "#####");
                     pw.printf(usr.getName() + "#####");
                     pw.printf(usr.getAddress() + "#####");
                     pw.printf(usr.getPhone() + "#####");
-                    if (Integer.toString(choice).equals("1")){
-                        pw.println("Managing Staff");
-                    } else if (Integer.toString(choice).equals("2")){
-                        pw.println("Delivery Staff");
-                    } else if (Integer.toString(choice).equals("3")){
-                        pw.println("Front Desk Staff");
-                    }
+                    pw.printf(usr.getRole()+"\n");
                     file.close();
                     pw.close();
                     sc.close();

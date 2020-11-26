@@ -45,7 +45,7 @@ public class FrontDeskStaffMenu implements Menu {
                 ms.addOrder();
                break;
             case 2:
-                ms.viewOrderParcel();
+                fds.viewOrderParcel();
                 break;
             case 3:
                 usr.editProfile();

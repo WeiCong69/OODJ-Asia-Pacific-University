@@ -29,7 +29,7 @@ public class DeliveryStaffMenu implements Menu{
         System.out.println("2) View Parcel");
         System.out.println("MANAGE USER");
         System.out.println("-------------------");
-        System.out.println("3) Edit User Profile");        
+        System.out.println("3) Edit Personal Profile");        
         System.out.println("MANAGE Feedback");
         System.out.println("-------------------"); 
         System.out.println("4) Add Feedback");

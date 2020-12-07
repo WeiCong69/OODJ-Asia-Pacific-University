@@ -18,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class ManagingStaff extends User{
     public String orderid = null;
     public int items = 1;

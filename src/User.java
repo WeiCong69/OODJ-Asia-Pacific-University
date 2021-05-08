@@ -115,7 +115,7 @@ public class User {
                             //editUserFile(col,this.loginid,"Full Name",newName);
                             setName(newName);
                             String[] array=toArray();
-                            System.out.println(Arrays.toString(array));
+                            //System.out.println(Arrays.toString(array));
                             StaticFunction.updateFileLine(array, "User.txt");                            
                             break;                            
                         case 2:

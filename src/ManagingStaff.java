@@ -18,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class ManagingStaff extends User{
     public String orderid = null;
     public int items = 1;
@@ -1032,16 +1031,16 @@ public class ManagingStaff extends User{
     String action = StaticFunction.getUserInput("Select the data you wish to export.\n0.User Report\n1.Feedback Report\n2.Order Report\n3.Parcel Report.\n4.Exit");
     switch(action){
         case "0":
-            StaticFunction.UserReport();
+            //StaticFunction.UserReport();
             break;
         case "1":
-            StaticFunction.FeedbackReport();
+            //StaticFunction.FeedbackReport();
             break;
         case "2":
-            StaticFunction.OrderReport();
+            //StaticFunction.OrderReport();
             break;
         case "3":
-            StaticFunction.ParcelReport();
+            //StaticFunction.ParcelReport();
             break;
         case "4":
             return;

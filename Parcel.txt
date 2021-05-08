@@ -1,6 +1,6 @@
-27105#####NO 28-1 JALAN BANGSAR UTAMA 1 BANGSAR UTAMA#####15#####Large Size#####45.00#####Pending#####International#####642917#####null#####06/12/2020
-391269#####NO 28-1 JALAN BANGSAR UTAMA 1 BANGSAR UTAMA#####2#####Small Size#####2.00#####Pending#####Domestic#####642917#####null#####06/12/2020
-161867#####43-A Jalan SS15/4C#####3#####Large Size#####6.00#####Pending#####Domestic#####100518#####null#####06/12/2020
-995769#####Jalan SS 2/63#####1#####Large Size#####3.00#####Pending#####International#####707071#####null#####06/12/2020
-606885#####Taman Puteri#####10#####Large Size#####20.00#####Pending#####Domestic#####772709#####null#####06/12/2020
-796000#####Taman Puteri#####2#####Small Size#####4.00#####Pending#####International#####772709#####null#####06/12/2020
+27105#####NO 28-1 JALAN BANGSAR UTAMA 1 BANGSAR UTAMA#####15#####Large Size#####45.00#####Pending#####International#####642917#####Donnie#####06/12/2020
+391269#####NO 28-1 JALAN BANGSAR UTAMA 1 BANGSAR UTAMA#####2#####Small Size#####2.00#####Pending#####Domestic#####642917#####mervyn00#####06/12/2020
+161867#####43-A Jalan SS15/4C#####3#####Large Size#####6.00#####Pending#####Domestic#####100518#####Tions1977#####06/12/2020
+995769#####Jalan SS 2/63#####1#####Large Size#####3.00#####Pending#####International#####707071#####Hatheyn#####06/12/2020
+606885#####Taman Puteri#####10#####Large Size#####20.00#####Pending#####Domestic#####772709#####Waihan#####06/12/2020
+796000#####Taman Puteri#####2#####Small Size#####4.00#####Pending#####International#####772709#####Donnie#####06/12/2020

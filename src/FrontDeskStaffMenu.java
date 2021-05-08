@@ -27,7 +27,7 @@ public class FrontDeskStaffMenu implements Menu {
         System.out.println("2) View Order Details");
         System.out.println("MANAGE USER");
         System.out.println("-------------------");
-        System.out.println("3) Edit User Profile");
+        System.out.println("3) Edit Personal Profile");
 //        System.out.println("MANAGE PARCEL");
 //        System.out.println("-------------------");        
 //        System.out.println("-------------------"); 

@@ -73,8 +73,8 @@
 //	public void sendEmail() throws AddressException, MessagingException {
 //
 //		String emailHost = "smtp.gmail.com";
-//		String fromUser = "CourierSystemOODJ2020";//just the id alone without @gmail.com
-//		String fromUserEmailPassword = "Testing_oodj2020";
+//		String fromUser = "Insert yr email here";//just the id alone without @gmail.com
+//		String fromUserEmailPassword = "Insert yr password here";
 //
 //		Transport transport = mailSession.getTransport("smtp");
 //

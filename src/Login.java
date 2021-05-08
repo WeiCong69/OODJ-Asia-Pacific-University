@@ -38,13 +38,13 @@ public class Login {
             System.out.println("Thank you for using our application.");
             System.exit(0);
         } else if(Username.equals("0")){
-            JavaEmail je = new JavaEmail();
-             try {
-                 je.run();
+//            JavaEmail je = new JavaEmail();
+//             try {
+//                 je.run();
                  runLogin();
-             } catch (MessagingException ex) {
-                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-             }
+//             } catch (MessagingException ex) {
+//                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//             }
         }
         System.out.println("-------------------");
         Password = StaticFunction.getUserInput("Please enter password");
